@@ -22,7 +22,7 @@ Java Virtual Machine  （java的运行）java二进制字节码的运行环境
 
 ---
 
-[![vp6p1U.png](https://s1.ax1x.com/2022/07/27/vp6p1U.png)](https://imgtu.com/i/vp6p1U)
+![image-20220807230659165](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807230659165.png)
 
 ---
 
@@ -42,7 +42,7 @@ eclipse    的     `Open J9`
 
 ---
 
-[![vp6t9f.png](https://s1.ax1x.com/2022/07/27/vp6t9f.png)](https://imgtu.com/i/vp6t9f)
+![image-20220807230745506](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807230745506.png)
 
 ---
 
@@ -54,7 +54,7 @@ eclipse    的     `Open J9`
 
 ---
 
-[![vp6qgO.png](https://s1.ax1x.com/2022/07/27/vp6qgO.png)](https://imgtu.com/i/vp6qgO)
+![image-20220807230805350](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807230805350.png)
 
 ---
 
@@ -110,7 +110,7 @@ Program Counter Register 程序计数器（寄存器）
 
 ---
 
-[![vpgAW6.png](https://s1.ax1x.com/2022/07/27/vpgAW6.png)](https://imgtu.com/i/vpgAW6)
+![image-20220807230827013](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807230827013.png)
 
 ---
 
@@ -126,7 +126,7 @@ PC的作用：
 
 ---
 
-[![vpg76O.png](https://s1.ax1x.com/2022/07/27/vpg76O.png)](https://imgtu.com/i/vpg76O)
+![image-20220807230859677](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807230859677.png)
 
 ---
 
@@ -168,7 +168,7 @@ Java Virtual Machine Stacks （Java 虚拟机栈）
 
 ---
 
-[![vp4LB8.png](https://s1.ax1x.com/2022/07/27/vp4LB8.png)](https://imgtu.com/i/vp4LB8)
+![image-20220807230926551](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807230926551.png)
 
 ---
 
@@ -182,7 +182,7 @@ Java Virtual Machine Stacks （Java 虚拟机栈）
 
 ---
 
-[![vp5Qu6.png](https://s1.ax1x.com/2022/07/27/vp5Qu6.png)](https://imgtu.com/i/vp5Qu6)
+![image-20220807231005986](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231005986.png)
 
 
 
@@ -248,7 +248,7 @@ Java Virtual Machine Stacks （Java 虚拟机栈）
 
 ---
 
-[![v9LiIP.png](https://s1.ax1x.com/2022/07/28/v9LiIP.png)](https://imgtu.com/i/v9LiIP)
+![image-20220807231033103](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231033103.png)
 
 ---
 
@@ -278,7 +278,7 @@ Java Virtual Machine Stacks （Java 虚拟机栈）
 
 ---
 
-[![v9Xf8f.png](https://s1.ax1x.com/2022/07/28/v9Xf8f.png)](https://imgtu.com/i/v9Xf8f)
+![image-20220807231052698](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231052698.png)
 
 ---
 
@@ -288,7 +288,7 @@ Java Virtual Machine Stacks （Java 虚拟机栈）
 
 ---
 
-[![v9XvxU.png](https://s1.ax1x.com/2022/07/28/v9XvxU.png)](https://imgtu.com/i/v9XvxU)
+![image-20220807231118982](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231118982.png)
 
 ---
 
@@ -338,7 +338,7 @@ java.lang.StackOverflowError
 
 ---
 
-![image-20220728211445100](http://fgcy-pic.zhamao.ml/image-20220728211445100.png)
+![image-20220807231252882](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231252882.png)
 
 ---
 
@@ -346,7 +346,7 @@ java.lang.StackOverflowError
 
 ---
 
-![image-20220728211734466](http://fgcy-pic.zhamao.ml/image-20220728211734466.png)
+![image-20220807231313227](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231313227.png)
 
 ---
 
@@ -356,7 +356,7 @@ java.lang.StackOverflowError
 
 ---
 
-![image-20220728211935684](http://fgcy-pic.zhamao.ml/image-20220728211935684.png)
+![image-20220807231332112](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231332112.png)
 
 ---
 
@@ -472,7 +472,7 @@ Exception in thread "main" com.fasterxml.jackson.databind.JsonMappingException: 
 
 ---
 
-![image-20220728213824984](http://fgcy-pic.zhamao.ml/image-20220728213824984.png)
+![image-20220807231359023](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231359023.png)
 
 ---
 
@@ -569,7 +569,7 @@ public class Demo1_3 {
 
 ---
 
-![image-20220728223924580](http://fgcy-pic.zhamao.ml/image-20220728223924580.png)
+![image-20220807231425559](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231425559.png)
 
 ---
 
@@ -609,7 +609,7 @@ public final native void wait(long timeout) throws InterruptedException;
 
 ---
 
-![image-20220728225327246](http://fgcy-pic.zhamao.ml/image-20220728225327246.png)
+![image-20220807231448187](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231448187.png)
 
 ---
 
@@ -680,7 +680,7 @@ java.lang.OutOfMemoryError: Java heap space   堆空间不足导致的内存溢�
 
 ----
 
-![image-20220728230908843](http://fgcy-pic.zhamao.ml/image-20220728230908843.png)
+![image-20220807231509013](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231509013.png)
 
 ---
 
@@ -690,7 +690,7 @@ java.lang.OutOfMemoryError: Java heap space   堆空间不足导致的内存溢�
 
 ---
 
-![image-20220728230934123](http://fgcy-pic.zhamao.ml/image-20220728230934123.png)
+![image-20220807231538365](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231538365.png)
 
 ---
 
@@ -976,7 +976,7 @@ public class Demo1_4 {
 
 ---
 
-![image-20220730101601389](http://fgcy-pic.zhamao.ml/image-20220730101601389.png)
+![image-20220807231559110](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231559110.png)
 
 ---
 
@@ -984,7 +984,7 @@ public class Demo1_4 {
 
 ---
 
-![image-20220730101631727](http://fgcy-pic.zhamao.ml/image-20220730101631727.png)
+![image-20220807231613467](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231613467.png)
 
 ---
 
@@ -992,7 +992,7 @@ public class Demo1_4 {
 
 ---
 
-![image-20220730101644886](http://fgcy-pic.zhamao.ml/image-20220730101644886.png)
+![image-20220807231628336](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231628336.png)
 
 ---
 
@@ -1012,7 +1012,7 @@ public class Demo1_4 {
 
 ---
 
-![image-20220730100933253](http://fgcy-pic.zhamao.ml/image-20220730100933253.png)
+![image-20220807231659765](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231659765.png)
 
 ---
 
@@ -1061,7 +1061,7 @@ class Student {
 
 ---
 
-![image-20220730103623810](http://fgcy-pic.zhamao.ml/image-20220730103623810.png)
+![image-20220807231720443](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231720443.png)
 
 ---
 
@@ -1073,7 +1073,7 @@ class Student {
 
 ---
 
-![image-20220730103951361](http://fgcy-pic.zhamao.ml/image-20220730103951361.png)
+![image-20220807231735587](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231735587.png)
 
 ---
 
@@ -1083,7 +1083,7 @@ class Student {
 
 ---
 
-![image-20220730103832890](http://fgcy-pic.zhamao.ml/image-20220730103832890.png)
+![image-20220807231801585](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231801585.png)
 
 ---
 
@@ -1103,7 +1103,7 @@ class Student {
 
 ---
 
-![image-20220730104807659](http://fgcy-pic.zhamao.ml/image-20220730104807659.png)
+![image-20220807231820879](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231820879.png)
 
 ---
 
@@ -1117,7 +1117,7 @@ class Student {
 
 ---
 
-![image-20220730104830054](http://fgcy-pic.zhamao.ml/image-20220730104830054.png)
+![image-20220807231834399](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231834399.png)
 
 ---
 
@@ -1127,19 +1127,7 @@ class Student {
 
 ---
 
-![image-20220730104858915](http://fgcy-pic.zhamao.ml/image-20220730104858915.png)
-
----
-
-
-
-
-
-
-
----
-
-![image-20220730104935009](http://fgcy-pic.zhamao.ml/image-20220730104935009.png)
+![image-20220807231852456](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231852456.png)
 
 ---
 
@@ -1151,15 +1139,7 @@ class Student {
 
 ---
 
-![image-20220730104953556](http://fgcy-pic.zhamao.ml/image-20220730104953556.png)
-
----
-
-
-
----
-
-![image-20220730105038175](http://fgcy-pic.zhamao.ml/image-20220730105038175.png)
+![image-20220807231909826](C:/Users/fgcy/AppData/Roaming/Typora/typora-user-images/image-20220807231909826.png)
 
 ---
 
@@ -1171,7 +1151,27 @@ class Student {
 
 ---
 
-![image-20220730105357683](http://fgcy-pic.zhamao.ml/image-20220730105357683.png)
+![image-20220807231934732](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231934732.png)
+
+---
+
+
+
+---
+
+![image-20220807231949437](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807231949437.png)
+
+---
+
+
+
+
+
+
+
+---
+
+![image-20220807232007594](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232007594.png)
 
 ---
 
@@ -1191,7 +1191,7 @@ class Student {
 
 ---
 
-![image-20220730105948752](http://fgcy-pic.zhamao.ml/image-20220730105948752.png)
+![image-20220807232028513](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232028513.png)
 
 ---
 
@@ -1227,7 +1227,7 @@ JDK1.7以前，方法区（永久代）存在于堆中，而字符串常量池�
 
 ---
 
-![image-20220730111421869](http://fgcy-pic.zhamao.ml/image-20220730111421869.png)
+![image-20220807232047685](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232047685.png)
 
 ---
 
@@ -1241,7 +1241,7 @@ FullGC需要等待到，老年代的空间不足时才会触发；触发时机�
 
 JDK1.8及其后续版本，方法区位于物理内存中；而不是位于堆中，但此时`字符串常量池`位于堆中；
 
-![image-20220730111438844](http://fgcy-pic.zhamao.ml/image-20220730111438844.png)
+![image-20220807232106759](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232106759.png)
 
 ---
 
@@ -1295,7 +1295,7 @@ public class Demo1_8 extends ClassLoader {
 
 ---
 
-![image-20220731004653878](http://fgcy-pic.zhamao.ml/image-20220731004653878.png)
+![image-20220807232129808](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232129808.png)
 
 ---
 
@@ -1347,7 +1347,7 @@ public class Demo1_8 extends ClassLoader { // 可以用来加载类的二进制�
 
 ---
 
-![image-20220730115526725](http://fgcy-pic.zhamao.ml/image-20220730115526725.png)
+![image-20220807232149242](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232149242.png)
 
 ---
 
@@ -1773,7 +1773,7 @@ public class TestString {
 
 ---
 
-![image-20220730171415309](http://fgcy-pic.zhamao.ml/image-20220730171415309.png)
+![image-20220807232224773](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232224773.png)
 
 ---
 
@@ -1781,7 +1781,7 @@ public class TestString {
 
 ---
 
-![image-20220730171503918](http://fgcy-pic.zhamao.ml/image-20220730171503918.png)
+![image-20220807232254313](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232254313.png)
 
 ---
 
@@ -1789,7 +1789,7 @@ public class TestString {
 
 ---
 
-![image-20220730171651580](http://fgcy-pic.zhamao.ml/image-20220730171651580.png)
+![image-20220807232318905](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232318905.png)
 
 ---
 
@@ -1797,7 +1797,7 @@ public class TestString {
 
 ---
 
-![image-20220730171807689](http://fgcy-pic.zhamao.ml/image-20220730171807689.png)
+![image-20220807232501850](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232501850.png)
 
 ---
 
@@ -1805,15 +1805,11 @@ public class TestString {
 
 ---
 
-![image-20220730172105262](http://fgcy-pic.zhamao.ml/image-20220730172105262.png)
+![image-20220807232518441](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232518441.png)
 
 ---
 
-
-
----
-
-![image-20220730172458930](http://fgcy-pic.zhamao.ml/image-20220730172458930.png)
+![image-20220807232540846](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232540846.png)
 
 ---
 
@@ -2044,7 +2040,7 @@ true
 
 ---
 
-![image-20220731011028661](http://fgcy-pic.zhamao.ml/image-20220731011028661.png)
+![image-20220731011028661](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731011028661.png)
 
 ---
 
@@ -2088,7 +2084,7 @@ public class Demo1_6 {
 
 ---
 
-![image-20220731011429788](http://fgcy-pic.zhamao.ml/image-20220731011429788.png)
+![image-20220807232615442](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232615442.png)
 
 ---
 
@@ -2368,7 +2364,7 @@ linux.words
 
 ---
 
-![image-20220731140434954](http://fgcy-pic.zhamao.ml/image-20220731140434954.png)
+![image-20220807232632245](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232632245.png)
 
 ---
 
@@ -2408,7 +2404,7 @@ Maximum bucket size     :        23
 
 ---
 
-![image-20220731141225209](http://fgcy-pic.zhamao.ml/image-20220731141225209.png)
+![image-20220807232646414](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232646414.png)
 
 ---
 
@@ -2422,7 +2418,7 @@ Maximum bucket size     :        23
 
 ---
 
-![image-20220731141456465](http://fgcy-pic.zhamao.ml/image-20220731141456465.png)
+![image-20220807232658253](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232658253.png)
 
 ---
 
@@ -2476,7 +2472,7 @@ public class Demo1_25 {
 
 ---
 
-![image-20220731142610723](http://fgcy-pic.zhamao.ml/image-20220731142610723.png)
+![image-20220807232711018](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807232711018.png)
 
 ---
 
@@ -2486,7 +2482,7 @@ public class Demo1_25 {
 
 ---
 
-![image-20220731142800069](http://fgcy-pic.zhamao.ml/image-20220731142800069.png)
+![image-20220731142800069](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731142800069.png)
 
 ---
 
@@ -2530,7 +2526,7 @@ public class Demo1_25 {
 
 ---
 
-![image-20220731143040775](http://fgcy-pic.zhamao.ml/image-20220731143040775.png)
+![image-20220731143040775](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731143040775.png)
 
 ---
 
@@ -2540,7 +2536,7 @@ public class Demo1_25 {
 
 ---
 
-![image-20220731143254742](http://fgcy-pic.zhamao.ml/image-20220731143254742.png)
+![image-20220731143254742](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731143254742.png)
 
 ---
 
@@ -2652,7 +2648,7 @@ directBuffer 用时：504.2338  //0.5s
 
 ---
 
-![image-20220731151152900](http://fgcy-pic.zhamao.ml/image-20220731151152900.png)
+![image-20220731151152900](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731151152900.png)
 
 ---
 
@@ -2678,7 +2674,7 @@ java无法直接获取到系统内存中的数据，只能先将系统内存中�
 
 ---
 
-![image-20220731151853223](http://fgcy-pic.zhamao.ml/image-20220731151853223.png)
+![image-20220731151853223](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731151853223.png)
 
 ---
 
@@ -2729,7 +2725,7 @@ public class Demo1_10 {
 
 ---
 
-![image-20220731160632622](http://fgcy-pic.zhamao.ml/image-20220731160632622.png)
+![image-20220731160632622](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731160632622.png)
 
 ---
 
@@ -2743,7 +2739,7 @@ public class Demo1_10 {
 
 ---
 
-![image-20220731161433975](http://fgcy-pic.zhamao.ml/image-20220731161433975.png)
+![image-20220731161433975](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731161433975.png)
 
 ---
 
@@ -2783,7 +2779,7 @@ public class Demo1_26 {
 
 ---
 
-![image-20220731161757573](http://fgcy-pic.zhamao.ml/image-20220731161757573.png)
+![image-20220731161757573](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731161757573.png)
 
 ---
 
@@ -2801,7 +2797,7 @@ public class Demo1_26 {
 
 ---
 
-![image-20220731161938357](http://fgcy-pic.zhamao.ml/image-20220731161938357.png)
+![image-20220731161938357](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731161938357.png)
 
 ---
 
@@ -2861,7 +2857,7 @@ public class Demo1_27 {
 
 ---
 
-![image-20220731163440228](http://fgcy-pic.zhamao.ml/image-20220731163440228.png)
+![image-20220731163440228](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731163440228.png)
 
 ---
 
@@ -2871,7 +2867,7 @@ public class Demo1_27 {
 
 ---
 
-![image-20220731163541095](http://fgcy-pic.zhamao.ml/image-20220731163541095.png)
+![image-20220731163541095](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731163541095.png)
 
 ---
 
@@ -2881,7 +2877,7 @@ public class Demo1_27 {
 
 ---
 
-![image-20220731163641246](http://fgcy-pic.zhamao.ml/image-20220731163641246.png)
+![image-20220731163641246](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731163641246.png)
 
 ---
 
@@ -3073,7 +3069,7 @@ public class Demo1_26 {
 
 ---
 
-![image-20220731172951500](http://fgcy-pic.zhamao.ml/image-20220731172951500.png)
+![image-20220731172951500](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731172951500.png)
 
 ---
 
@@ -3083,7 +3079,7 @@ public class Demo1_26 {
 
 ---
 
-![image-20220731172924325](http://fgcy-pic.zhamao.ml/image-20220731172924325.png)
+![image-20220731172924325](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731172924325.png)
 
 ---
 
@@ -3115,7 +3111,7 @@ public class Demo1_26 {
 
 ----
 
-![image-20220731174331705](http://fgcy-pic.zhamao.ml/image-20220731174331705.png)
+![image-20220731174331705](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731174331705.png)
 
 ---
 
@@ -3208,7 +3204,7 @@ public class Demo2_2 {
 
 ---
 
-![image-20220731224705621](http://fgcy-pic.zhamao.ml/image-20220731224705621.png)
+![image-20220731224705621](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731224705621.png)
 
 ---
 
@@ -3216,7 +3212,7 @@ public class Demo2_2 {
 
 ---
 
-![image-20220731224813682](http://fgcy-pic.zhamao.ml/image-20220731224813682.png)
+![image-20220731224813682](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731224813682.png)
 
 ---
 
@@ -3232,7 +3228,7 @@ GC Root有哪些
 
 ---
 
-![image-20220731224952505](http://fgcy-pic.zhamao.ml/image-20220731224952505.png)
+![image-20220731224952505](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731224952505.png)
 
 ---
 
@@ -3242,7 +3238,7 @@ GC Root有哪些
 
 ---
 
-![image-20220731225233890](http://fgcy-pic.zhamao.ml/image-20220731225233890.png)
+![image-20220731225233890](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731225233890.png)
 
 ---
 
@@ -3252,7 +3248,7 @@ GC Root有哪些
 
 ---
 
-![image-20220731230238168](http://fgcy-pic.zhamao.ml/image-20220731230238168.png)
+![image-20220731230238168](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731230238168.png)
 
 ---
 
@@ -3270,7 +3266,7 @@ GC Root有哪些
 
 ---
 
-![image-20220731225509137](http://fgcy-pic.zhamao.ml/image-20220731225509137.png)
+![image-20220731225509137](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220731225509137.png)
 
 ---
 
@@ -3603,7 +3599,7 @@ Heap
 
 ---
 
-![image-20220801232427927](http://fgcy-pic.zhamao.ml/image-20220801232427927.png)
+![image-20220801232427927](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220801232427927.png)
 
 ---
 
@@ -3635,7 +3631,7 @@ Heap
 
 ---
 
-![image-20220801233836932](http://fgcy-pic.zhamao.ml/image-20220801233836932.png)
+![image-20220801233836932](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220801233836932.png)
 
 ---
 
@@ -3655,7 +3651,7 @@ Heap
 
 ---
 
-![image-20220801233458168](http://fgcy-pic.zhamao.ml/image-20220801233458168.png)
+![image-20220801233458168](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220801233458168.png)
 
 ---
 
@@ -3669,7 +3665,7 @@ Heap
 
 ---
 
-![image-20220801235201849](http://fgcy-pic.zhamao.ml/image-20220801235201849.png)
+![image-20220801235201849](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220801235201849.png)
 
 ---
 
@@ -3691,7 +3687,7 @@ Heap
 
 ---
 
-[![vnsGuj.png](https://s1.ax1x.com/2022/08/05/vnsGuj.png)](https://imgtu.com/i/vnsGuj)
+![image-20220807233333410](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807233333410.png)
 
 ---
 
@@ -3779,7 +3775,7 @@ public class Demo2_1 {
 
 ---
 
-[![vnWFo9.png](https://s1.ax1x.com/2022/08/05/vnWFo9.png)](https://imgtu.com/i/vnWFo9)
+![image-20220807233410647](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807233410647.png)
 
 ---
 
@@ -3820,7 +3816,7 @@ public class Demo2_1 {
 
 ---
 
-[![vnWhTJ.png](https://s1.ax1x.com/2022/08/05/vnWhTJ.png)](https://imgtu.com/i/vnWhTJ)
+[![image-20220807233446770](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807233446770.png)
 
 ---
 
@@ -3862,7 +3858,7 @@ public class Demo2_1 {
 
 ---
 
-[![vnf3BF.png](https://s1.ax1x.com/2022/08/05/vnf3BF.png)](https://imgtu.com/i/vnf3BF)
+![image-20220807233508410](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807233508410.png)
 
 ---
 
@@ -3906,7 +3902,7 @@ public class Demo2_1 {
 
 ---
 
-[![vnfyAH.png](https://s1.ax1x.com/2022/08/05/vnfyAH.png)](https://imgtu.com/i/vnfyAH)
+![image-20220807233532177](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807233532177.png)
 
 ---
 
@@ -3943,7 +3939,7 @@ public class Demo2_1 {
 
 ---
 
-[![vnfOg0.png](https://s1.ax1x.com/2022/08/05/vnfOg0.png)](https://imgtu.com/i/vnfOg0)
+![image-20220807233557478](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807233557478.png)
 
 ---
 
@@ -3996,7 +3992,7 @@ public class Demo2_1 {
 
 ---
 
-[![vnhQPA.png](https://s1.ax1x.com/2022/08/05/vnhQPA.png)](https://imgtu.com/i/vnhQPA)
+![image-20220807142117396](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807142117396.png)
 
 ---
 
@@ -4024,7 +4020,7 @@ public class Demo2_1 {
 
 ---
 
-[![vnoDkF.png](https://s1.ax1x.com/2022/08/05/vnoDkF.png)](https://imgtu.com/i/vnoDkF)
+![image-20220807141612251](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807141612251.png)
 
 ---
 
@@ -4066,7 +4062,7 @@ public class Demo2_1 {
 
 ---
 
-![image-20220806221941249.png](https://s2.loli.net/2022/08/06/HfyA8sVmDU5Rgtv.png)
+![image-20220807141512078](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807141512078.png)
 
 ---
 
@@ -4142,34 +4138,513 @@ CMS垃圾回收器，采用标记清除算法；会产生大量内存碎片；�
 
 
 
+
+
+### 4.4 G1
+
+定义：Garbage First 
+
+2004 论文发布 
+
+2009 JDK 6u14 体验 
+
+2012 JDK 7u4 官方支持 
+
+2017 JDK 9 默认 【废除CMS垃圾回收器】（本身是一款并发的垃圾回收器）
+
+
+
+适用场景 ：
+
+同时注重吞吐量（Throughput）和低延迟（Low latency），默认的暂停目标是 200 ms 
+
+超大堆内存，会将堆划分为多个**大小相等**的` Region `
+
+整体上是 标记+整理 算法，两个区域之间是 复制 算法 
+
+
+
+相关 JVM 参数
+
+ -XX:+UseG1GC 
+
+-XX:G1HeapRegionSize=size 
+
+-XX:MaxGCPauseMillis=time
+
+
+
+**（1）垃圾回收阶段**
+
+---
+
+![image-20220807112008878](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807112008878.png)
+
+---
+
+
+
+
+
+
+
+
+
+**（2) Young Collection** 
+
+​	
+
+---
+
+![image-20220807112216078](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807112216078.png)
+
+---
+
+G1会将都内存划分为多个大小相等的区域，其中一些区域为伊甸园区【E】，有大小限制
+
+当伊甸园区的内存被占满时，会触发一次垃圾回收；
+
+进行新生代的垃圾回收时会STW
+
+
+
+
+
+
+
+---
+
+![image-20220807112849366](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807112849366.png)
+
+---
+
+将新生代幸存下来的对象，通过复制算法，放到幸存区；
+
+
+
+
+
+
+
+
+
+
+
+---
+
+![image-20220807113203408](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807113203408.png)
+
+---
+
+再次触发一次垃圾回收，将幸存区中符合晋升条件的对象，复制到老年代
+
+将幸存区中不满足晋升条件的对象，复制到 另一个幸存区中；
+
+将伊甸园中，有GCRoot对象引用的对象复制到幸存区中；
+
+
+
+
+
+
+
+
+
+
+
+**（3) Young Collection + CM  【新生代的垃圾回收 + 并发标记】**
+
+​		在` Young GC `时会进行 GC Root 的初始标记 【上一步，新生代的垃圾回收，STW时进行，并不会占用并发标记的时间】
+
+​		**老年代占 用**  堆空间比例达到阈值时，进行并发标记（不会 STW），由下面的 JVM 参数决定
+
+​		` -XX:InitiatingHeapOccupancyPercent=percent `（默认45%）
+
+----
+
+![image-20220807114608726](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807114608726.png)
+
+---
+
+当老年代【O】占用达到整个堆空间的45%时，就会进行并发标记
+
+
+
+
+
+**（4) Mixed Collection** 
+
+​	会对 E、S、O 进行全面垃圾回收 
+
+​	最终标记（Remark）会 STW ，原因：并发标记时，用户线程也在工作，此时可能会产生新的垃圾【没有GCRoot对象应用的对象】
+
+​	拷贝存活（Evacuation）会 STW 
+
+
+
+`-XX:MaxGCPauseMillis=ms`  之前提过的设置G1垃圾回收器最大暂停时间，决定响应时间的参数，与吞吐量互斥
+
+
+
+----
+
+![image-20220807115458981](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807115458981.png)
+
+---
+
+对 E、S、O 进行全面垃圾回收 ，将伊甸园的幸存对象复制到幸存区，将幸存区的未能晋升的对象复制到幸存区【非自己】；
+
+老年代的垃圾回收有点特别：因为要兼顾最大暂停时间，所以G1不会对所有的老年代区域进行垃圾回收；仅会挑选一些回收价值较高的区域进行垃圾回收；
+
+将有GCRoot对象引用的对象复制到老年代【非自己】
+
+
+
+G1：被称为Garbage first，原因：在混合收集阶段，对老年代的垃圾回收，会首先挑选回收价值最高的区域进行垃圾回收；
+
+注意：在老年代的区域还不是特别多时，就算对全部的老年代进行垃圾回收，也不会影响最大暂停时间时，会对所有的老年代区域进行垃圾回收；
+
+
+
+（5) Full GC 
+
+SerialGC 
+
+新生代内存不足发生的垃圾收集 - minor gc
+
+ 老年代内存不足发生的垃圾收集 - full gc 
+
+
+
+ParallelGC 
+
+新生代内存不足发生的垃圾收集 - minor gc 
+
+老年代内存不足发生的垃圾收集 - full gc 
+
+
+
+CMS 
+
+新生代内存不足发生的垃圾收集 - minor gc 
+
+老年代内存不足
+
+​	并发收集失败后，会退化为串行收集，此时为FullGC
+
+
+
+G1 
+
+新生代内存不足发生的垃圾收集 - minor gc 
+
+老年代内存不足
+
+​	当老年代的内存使用占整个堆内存的45%以上时，就会进行并发标记，然后进行混合收集；此时当垃圾收集速度 大于 并发时垃圾产生的速度
+
+  【这样不会发生 FullGC】,当垃圾收集速度 小于 并发时垃圾产生的速度，此时并发收集失败，会退化为FullGC，STW地时间会特别长
+
+
+
+
+
+
+
+**（6) Young Collection 跨代引用** 
+
+​		新生代回收的跨代引用（老年代引用新生代）问题
+
+
+
+---
+
+![image-20220807133853983](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807133853983.png)
+
+---
+
+回顾垃圾回收过程：
+
+首先是寻找根对象，然后使用可达性分析算法找到存活对象；然后使用三种算法之中的一种或多种进行垃圾回收；
+
+
+
+问题：对新生代进行可达性分析时，要先找根对象；而老年代中有大量的根对象，那么是否是遍历老年代；
+
+​		G1中是不需要的；它提出了一个叫卡表的概念（将作为老年代的region进行细分，分为一个个的卡，一个512K），在新生代中有一个` Remembered Set`的概		念，它用于记录有哪些脏卡；
+
+​		G1使用 `post-write barrier`（写屏障） ,来更新脏卡；当老年代中的某个卡中的对象，引用了新生代中的对象时，写屏障会将该卡标记为脏卡；并记录到` Remembered Set` 中
+
+​		
+
+卡表 与 Remembered Set 
+
+更新脏卡的过程是一个异步的过程：
+
+ 	在引用变更时通过  ` post-write barrier`（写屏障） + `dirty card queue` （脏卡队列）
+ 	
+ 	`  concurrent refinement threads` 更新 `Remembered Set`
+
+---
+
+![image-20220807133918471](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807133918471.png)
+
+---
+
+
+
+
+
+**（7) Remark** 
+
+​		`pre-write barrier` +` satb_mark_queue`
+
+
+
+`pre-write barrier` : 写屏障，当对象引用发生变化时，会将该对象，放入一个队列（**satb_mark_queue**），并标记为灰色，等待以后进行重新标记
+
+---
+
+![image-20220807140534030](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807140534030.png)
+
+---
+
+黑色代表：已经处理完成
+
+灰色代表：正在处理
+
+白色代表：尚未处理
+
+
+
+
+
+（8) JDK 8u20 字符串去重 
+
+​	优点：节省大量内存 
+
+​	缺点：略微多占用了 cpu 时间，新生代回收时间略微增加
+
+
+
+开启参数： ` -XX:+UseStringDeduplication`
+
+​	JDK1.8中，字符串的底层其实是char数组
+
+~~~java
+String s1 = new String("hello"); // char[]{'h','e','l','l','o'}
+String s2 = new String("hello"); // char[]{'h','e','l','l','o'}
+~~~
+
+将所有新分配的字符串放入一个队列 
+
+当新生代回收时，G1并发检查是否有字符串重复 
+
+如果它们值一样，让它们  **引用同一个 char[]** 
+
+
+
+注意，与 String.intern() 不一样
+
+​	String.intern() 关注的是字符串对象
+
+​	而字符串去重关注的是 char[] 
+
+​	在 JVM 内部，使用了不同的字符串表
+
+
+
+
+
+**（9) JDK 8u40 并发标记类卸载** 
+
+​	所有对象都经过并发标记后，就能知道哪些类不再被使用
+
+​	当 一个类加载器 的 **所有类都不再使用**，则 **卸 载它所加载的所有类** 
+
+​	注意：
+
+​		JDK的三个类加载器，是不会进行类卸载的；只有自定义的类加载器才会进行类卸载；
+
+
+
+`	XX:+ClassUnloadingWithConcurrentMark` 默认启用
+
+
+
+
+
+
+
+（10) JDK 8u60 回收巨型对象 
+
+​		一个对象大于 region 的一半时，称之为`巨型对象 `
+
+
+
+​		G1 不会对巨型对象进行拷贝 
+
+​		回收时被优先考虑 
+
+​		G1 会跟踪老年代所有 incoming 引用，这样老年代 incoming 引用为0 的巨型对象就可以在新生 代垃圾回收时处理掉【即：当老年代中的所有卡不再对某个		新生代中的巨型对象进行引用时，就可以回收掉】
+
+
+
+---
+
+![image-20220807151352836](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807151352836.png)
+
+----
+
+
+
+
+
+---
+
+![image-20220807151250734](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807151250734.png)
+
+---
+
+
+
+
+
+**（11) JDK 9 并发标记起始时间的调整** 
+
+​		并发标记必须在堆空间占满前完成，否则退化为 FullGC 【不是串行】
+
+
+
+​		JDK 9 之前需要使用	` -XX:InitiatingHeapOccupancyPercent `  45%
+
+​		JDK 9 可以动态调整 
+
+​		`	-XX:InitiatingHeapOccupancyPercent `用来设置初始值 
+
+​			进行数据采样并动态调整 
+
+​			总会添加一个安全的空档空间
+
+
+
 ## 5.0 垃圾回收调优
 
 
 
+预备知识 
+
+掌握 GC 相关的 VM 参数，会基本的空间调整 掌握相关工具 
+
+明白一点：调优跟应用、环境有关，没有放之四海而皆准的法则
+
+
+
+​	参考Oracle的JVM调优指南：
+
+> [Java Platform, Standard Edition HotSpot Virtual Machine Garbage Collection Tuning Guide, Release 12 (oracle.com)](https://docs.oracle.com/en/java/javase/12/gctuning/)
 
 
 
 
 
+查看虚拟机运行参数：
 
+```
+"D:\sofeware\Idea\JDK1.8\bin\java" -XX:+PrintFlagsFinal -version | findstr "GC"
+```
 
 
 
+~~~
+  uintx AdaptiveSizeMajorGCDecayTimeScale         = 10                                  {product}
+    uintx AutoGCSelectPauseMillis                   = 5000                                {product}
+     bool BindGCTaskThreadsToCPUs                   = false                               {product}
+    uintx CMSFullGCsBeforeCompaction                = 0                                   {product}
+    uintx ConcGCThreads                             = 0                                   {product}
+     bool DisableExplicitGC                         = false                               {product}
+     bool ExplicitGCInvokesConcurrent               = false                               {product}
+     bool ExplicitGCInvokesConcurrentAndUnloadsClasses  = false                               {product}
+    uintx G1MixedGCCountTarget                      = 8                                   {product}
+    uintx GCDrainStackTargetSize                    = 64                                  {product}
+    uintx GCHeapFreeLimit                           = 2                                   {product}
+    uintx GCLockerEdenExpansionPercent              = 5                                   {product}
+     bool GCLockerInvokesConcurrent                 = false                               {product}
+    uintx GCLogFileSize                             = 8192                                {product}
+    uintx GCPauseIntervalMillis                     = 0                                   {product}
+    uintx GCTaskTimeStampEntries                    = 200                                 {product}
+    uintx GCTimeLimit                               = 98                                  {product}
+    uintx GCTimeRatio                               = 99                                  {product}
+     bool HeapDumpAfterFullGC                       = false                               {manageable}
+     bool HeapDumpBeforeFullGC                      = false                               {manageable}
+    uintx HeapSizePerGCThread                       = 87241520                            {product}
+    uintx MaxGCMinorPauseMillis                     = 4294967295                          {product}
+    uintx MaxGCPauseMillis                          = 4294967295                          {product}
+    uintx NumberOfGCLogFiles                        = 0                                   {product}
+     intx ParGCArrayScanChunk                       = 50                                  {product}
+    uintx ParGCDesiredObjsFromOverflowList          = 20                                  {product}
+     bool ParGCTrimOverflow                         = true                                {product}
+     bool ParGCUseLocalOverflow                     = false                               {product}
+    uintx ParallelGCBufferWastePct                  = 10                                  {product}
+    uintx ParallelGCThreads                         = 13                                  {product}
+     bool ParallelGCVerbose                         = false                               {product}
+     bool PrintClassHistogramAfterFullGC            = false                               {manageable}
+     bool PrintClassHistogramBeforeFullGC           = false                               {manageable}
+     bool PrintGC                                   = false                               {manageable}
+     bool PrintGCApplicationConcurrentTime          = false                               {product}
+     bool PrintGCApplicationStoppedTime             = false                               {product}
+     bool PrintGCCause                              = true                                {product}
+     bool PrintGCDateStamps                         = false                               {manageable}
+     bool PrintGCDetails                            = false                               {manageable}
+     bool PrintGCID                                 = false                               {manageable}
+     bool PrintGCTaskTimeStamps                     = false                               {product}
+     bool PrintGCTimeStamps                         = false                               {manageable}
+     bool PrintHeapAtGC                             = false                               {product rw}
+     bool PrintHeapAtGCExtended                     = false                               {product rw}
+     bool PrintJNIGCStalls                          = false                               {product}
+     bool PrintParallelOldGCPhaseTimes              = false                               {product}
+     bool PrintReferenceGC                          = false                               {product}
+     bool ScavengeBeforeFullGC                      = true                                {product}
+     bool TraceDynamicGCThreads                     = false                               {product}
+     bool TraceParallelOldGCTasks                   = false                               {product}
+     bool UseAdaptiveGCBoundary                     = false                               {product}
+     bool UseAdaptiveSizeDecayMajorGCCost           = true                                {product}
+     bool UseAdaptiveSizePolicyWithSystemGC         = false                               {product}
+     bool UseAutoGCSelectPolicy                     = false                               {product}
+     bool UseConcMarkSweepGC                        = false                               {product}
+     bool UseDynamicNumberOfGCThreads               = false                               {product}
+     bool UseG1GC                                   = false                               {product}
+     bool UseGCLogFileRotation                      = false                               {product}
+     bool UseGCOverheadLimit                        = true                                {product}
+     bool UseGCTaskAffinity                         = false                               {product}
+     bool UseMaximumCompactionOnSystemGC            = true                                {product}
+     bool UseParNewGC                               = false                               {product}
+     bool UseParallelGC                            := true                                {product}
+     bool UseParallelOldGC                          = true                                {product}
+     bool UseSerialGC                               = false                               {product}
+java version "1.8.0_201"
+Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
+Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)
+~~~
 
 
 
 
 
+## 5.1 调优领域
 
+内存 
 
 
 
+锁竞争 
 
 
 
+cpu 占用 
 
 
 
+io
 
 
 
@@ -4179,13 +4654,19 @@ CMS垃圾回收器，采用标记清除算法；会产生大量内存碎片；�
 
 
 
+## 5.2 确定目标
 
+【低延迟】还是【高吞吐量】，选择合适的回收器 
 
+CMS，G1，ZGC 
 
+ParallelGC
 
+以上是HotSpot虚拟机的垃圾回收器
 
 
 
+Zing 是一个虚拟机，它的垃圾回收器也是兼顾高吞吐量和高响应
 
 
 
@@ -4197,26 +4678,39 @@ CMS垃圾回收器，采用标记清除算法；会产生大量内存碎片；�
 
 
 
+## 5.3 最快的 GC 
 
+答案是不发生
 
 
 
+GC 查看 FullGC 前后的内存占用，考虑下面几个问题 ：
 
 
 
+数据是不是太多？
 
+​	resultSet = statement.executeQuery("select * from table") 
 
 
 
+数据表示是否太臃肿？
 
+​	对象图
 
+​	对象大小 1最小的对象是16B； Integer一个对象头16B，int类型的数据要占用4B，再加上对齐就是24B 
 
 
 
+是否存在内存泄漏？ 
 
+​	static Map map = new HashMap<>();定义了一个静态的Map集合，不断地往里面放数据
 
+​	软【发生一次GC，发现堆内存还是不足，将软引用关联的对象所占用的内存释放掉】
 
+​    弱 【只要发生GC，就将堆内存中弱引用所关联的对象所占用的内存释放掉】
 
+​	第三方缓存实现
 
 
 
@@ -4224,23 +4718,682 @@ CMS垃圾回收器，采用标记清除算法；会产生大量内存碎片；�
 
 
 
+## 5.4 新生代调优 
 
+1、新生代的特点 所有的 new 操作的内存分配非常廉价 
 
+​	这里提出一个： `thread-local allocation buffer`(TLAB) 本地线程缓冲区的概念；为了避免不同线程，想要使用同一块线程而提出的；
 
+​	为不同线程在伊甸园区分配一块区域，它们会在各自的缓冲区中创建对象；避免并发问题
 
 
 
+2、死亡对象的回收代价是零 
 
+​	伊甸园和from区中的幸存对象，会被复制到to区中；然后直接将伊甸园区和之前的from区的内存地址标记为空闲；
 
 
 
+3、大部分对象用过即死 
 
 
 
+4、Minor GC 的时间远远低于 Full GC
 
+​	原因：新生代中存活的对象本来就少，且使用的是复制算法，STW的时间很短；
 
 
 
+
+
+新生代的调优一般可采用 调大堆内存空间；
+
+越大越好吗？
+
+
+
+GC is performed in this region more often than in other regions. If the size for the young generation is too small, then a lot of minor garbage collections are performed. If the size is too large, then only full garbage collections are performed, which can take a long time to complete. Oracle recommends that you keep the size for the young generation greater than 25% and less than 50% of the overall heap size.
+
+~~~
+GC在这个区域比在其他区域执行得更频繁。如果新生代的大小太小，那么就会执行许多小的垃圾收集
+如果太大，则只执行完整的垃圾收集（FullGC）【因为新生代大了，所以老年代就会变小】，这可能需要很长时间才能完成
+Oracle建议您将新生代的大小保持在总堆大小的25%以上、50%以下
+~~~
+
+但是，总的来说还是希望 新生代的内存尽可能大
+
+JVM参数：` -Xmn  ` 为新生代代设置堆的初始和最大大小(以字节为单位)
+
+
+
+**新生代配置原则：**
+
+1、新生代能容纳所有【并发量 * (请求与响应所创建的对象所需的内存)】为合适；因为这样可以不触发，或者是较少第触发垃圾回收；
+
+2、幸存区大到能保留【当前活跃对象+需要晋升对象】 
+
+​		当前活跃对象：当前不能回收，但发生GC后一定会回收
+
+​		需要晋升对象：当前不能回收，发生GC后也不能回收，只是没达到晋升阈值；
+
+​		当幸存区较小，JVM会动态调整幸存区的晋升阈值；使得一些对象会提前晋升到老年代中；这样会使得当老年代的内存不足触发FullGC时，该对象才会被释放		掉，这样就会大大延长了垃圾的生存时间；
+
+
+
+3、晋升阈值配置得当，让长时间存活对象尽快晋升
+
+
+
+` -XX:MaxTenuringThreshold=threshold` 设置最大晋升阈值
+
+` -XX:+PrintTenuringDistribution` 打印晋升的详细信息
+
+
+
+~~~
+Desired survivor size 48286924 bytes, new threshold 10 (max 10)
+- age 1: 28992024 bytes, 28992024 total   【年龄为一的：刚逃过一次MinorGC】
+- age 2: 1366864 bytes, 30358888 total
+- age 3: 1425912 bytes, 31784800 total
+...
+
+~~~
+
+
+
+
+
+## 5.5 老年代调优 
+
+**以 CMS 为例** 
+
+1、CMS 的老年代内存越大越好 
+
+​		CMS是一个工作于老年代的垃圾回收器，是可以并发执行的，响应时间较短的垃圾回收器；用户线程与垃圾回收线程并发运行，由用户线程在次期间产生的垃		圾【浮动垃圾】，如果不能即时清理，就会并发失败；CMS会退化为 Se ri al Ol d（串行的垃圾回收器）；所以，老年代的空间越大越好，为浮动垃圾提供额		外的内存，避免并发失败；而发生FullGC
+
+先尝试不做调优，如果没有 Full GC 那么已经...，否则先尝试调优新生代 
+
+观察发生 Full GC 时老年代内存占用，将老年代内存预设调大 1/4 ~ 1/3 
+
+​	`-XX:CMSInitiatingOccupancyFraction=percent` 空间占用达到老年代百分之多少时，使用CMS进行垃圾回收【一般预留20%的空间给浮动垃圾就可以了】
+
+
+
+## 5.6 案例 
+
+案例1 Full GC 和 Minor GC频繁 
+
+​	做法：调大新生代的大小，新生代的变大使得幸存区也跟着变大，晋升阈值提升；把存活时间较短的对象留在新生代；将存活时间较长的对象放到老年代
+
+
+
+案例2 请求高峰期发生 Full GC，单次暂停时间特别长 （CMS） 
+
+​	做法：因为CMS最耗时间的是在重新标记阶段；所以选择在进行重新标记前先进行一次MinorGC，以减少新生代的对象；减少重新标记时，对新生代对象的处	理；
+
+​	`-XX : +CMSScavengeBeforeRemark`
+
+
+
+案例3 老年代充裕情况下，发生 Full GC （CMS jdk1.7）
+
+​		老年代充裕情况下:说明没有因为内存不足【碎片】导致并发失败，考虑是不是是JDK1.7版本；
+
+​		因为JDK1.7的永久代放在堆内存中，永久代的空间不足也会导致FullGC
+
+
+
+
+
+
+
+# 六、类加载与字节码技术
+
+
+
+---
+
+![image-20220807175240103](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807175240103.png)
+
+---
+
+
+
+
+
+
+
+## 1. 类文件结构 
+
+一个简单的 HelloWorld.java
+
+~~~java
+package cn.itcast.jvm.t5;
+// HelloWorld 示例
+public class HelloWorld {
+public static void main(String[] args) {
+System.out.println("hello world");
+  }
+}
+~~~
+
+编译：执行 `javac -parameters -d . HellowWorld.java`
+
+
+
+编译为 HelloWorld.class 后是这个样子的：
+
+~~~
+0000000 ca fe ba be 00 00 00 34 00 23 0a 00 06 00 15 09
+0000020 00 16 00 17 08 00 18 0a 00 19 00 1a 07 00 1b 07
+0000040 00 1c 01 00 06 3c 69 6e 69 74 3e 01 00 03 28 29
+0000060 56 01 00 04 43 6f 64 65 01 00 0f 4c 69 6e 65 4e
+0000100 75 6d 62 65 72 54 61 62 6c 65 01 00 12 4c 6f 63
+0000120 61 6c 56 61 72 69 61 62 6c 65 54 61 62 6c 65 01
+0000140 00 04 74 68 69 73 01 00 1d 4c 63 6e 2f 69 74 63
+0000160 61 73 74 2f 6a 76 6d 2f 74 35 2f 48 65 6c 6c 6f
+0000200 57 6f 72 6c 64 3b 01 00 04 6d 61 69 6e 01 00 16
+0000220 28 5b 4c 6a 61 76 61 2f 6c 61 6e 67 2f 53 74 72
+0000240 69 6e 67 3b 29 56 01 00 04 61 72 67 73 01 00 13
+0000260 5b 4c 6a 61 76 61 2f 6c 61 6e 67 2f 53 74 72 69
+0000300 6e 67 3b 01 00 10 4d 65 74 68 6f 64 50 61 72 61
+0000320 6d 65 74 65 72 73 01 00 0a 53 6f 75 72 63 65 46
+0000340 69 6c 65 01 00 0f 48 65 6c 6c 6f 57 6f 72 6c 64
+0000360 2e 6a 61 76 61 0c 00 07 00 08 07 00 1d 0c 00 1e
+0000400 00 1f 01 00 0b 68 65 6c 6c 6f 20 77 6f 72 6c 64
+0000420 07 00 20 0c 00 21 00 22 01 00 1b 63 6e 2f 69 74
+0000440 63 61 73 74 2f 6a 76 6d 2f 74 35 2f 48 65 6c 6c
+0000460 6f 57 6f 72 6c 64 01 00 10 6a 61 76 61 2f 6c 61
+0000500 6e 67 2f 4f 62 6a 65 63 74 01 00 10 6a 61 76 61
+0000520 2f 6c 61 6e 67 2f 53 79 73 74 65 6d 01 00 03 6f
+0000540 75 74 01 00 15 4c 6a 61 76 61 2f 69 6f 2f 50 72
+0000560 69 6e 74 53 74 72 65 61 6d 3b 01 00 13 6a 61 76
+0000600 61 2f 69 6f 2f 50 72 69 6e 74 53 74 72 65 61 6d
+0000620 01 00 07 70 72 69 6e 74 6c 6e 01 00 15 28 4c 6a
+0000640 61 76 61 2f 6c 61 6e 67 2f 53 74 72 69 6e 67 3b
+0000660 29 56 00 21 00 05 00 06 00 00 00 00 00 02 00 01
+0000700 00 07 00 08 00 01 00 09 00 00 00 2f 00 01 00 01
+0000720 00 00 00 05 2a b7 00 01 b1 00 00 00 02 00 0a 00
+0000740 00 00 06 00 01 00 00 00 04 00 0b 00 00 00 0c 00
+0000760 01 00 00 00 05 00 0c 00 0d 00 00 00 09 00 0e 00
+0001000 0f 00 02 00 09 00 00 00 37 00 02 00 01 00 00 00
+0001020 09 b2 00 02 12 03 b6 00 04 b1 00 00 00 02 00 0a
+0001040 00 00 00 0a 00 02 00 00 00 06 00 08 00 07 00 0b
+0001060 00 00 00 0c 00 01 00 00 00 09 00 10 00 11 00 00
+0001100 00 12 00 00 00 05 01 00 10 00 00 00 01 00 13 00
+0001120 00 00 02 00 14
+~~~
+
+
+
+根据 JVM 规范，类文件结构如下:
+
+~~~
+ClassFile {
+        u4 magic;         【u4代表的是字节数，此处是前四个字节 魔数】
+        u2 minor_version;	【小版本号】
+        u2 major_version;	【主版本号】
+        u2 constant_pool_count; 	【常量池相关】
+        cp_info constant_pool[constant_pool_count-1];	【常量池相关】
+        u2 access_flags;	【访问修饰】
+        u2 this_class;		【自己的包名类名信息】
+        u2 super_class;		【父类信息】
+        u2 interfaces_count;【接口信息】
+        u2 interfaces[interfaces_count];  【接口信息】
+        u2 fields_count;	【成员变量信息】
+        field_info fields[fields_count]; 【成员变量信息】
+        u2 methods_count;   【方法信息】
+        method_info methods[methods_count]; 【方法信息】
+        u2 attributes_count;  【类的附加属性信息】
+        attribute_info attributes[attributes_count]; 【类的附加属性信息】
+}
+~~~
+
+
+
+### 1.1 魔数
+
+0~3 字节【0 1 2 3】，用这四个字节表示它是一个 class 	类型的文件 
+
+不同类型的文件由不同的魔数信息
+
+前四个字节 咖啡卑鄙 标识该文件是一个class类型的文件
+
+0000000 <u>**ca fe ba be**</u> 00 00 00 34 00 23 0a 00 06 00 15 09
+
+
+
+
+
+### 1.2 版本 
+
+第4~7 字节，表示类的版本 00 34（52） 表示是 Java 8 【内部有对应关系】
+
+0000000 ca fe ba be **00 00 00 34** 00 23 0a 00 06 00 15 09
+
+
+
+### 1.3 常量池
+
+---
+
+![image-20220807210200551](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807210200551.png)
+
+---
+
+
+
+8~9 字节两个字节，表示常量池长度，00 23 （35） 表示常量池有 #1~#34项，注意 #0 项不计入，也没有值 
+
+0000000 ca fe ba be 00 00 00 34 **00 23** 0a 00 06 00 15 09 
+
+
+
+第#1项 0a （十进制：10）表示一个 Method 信息【方法引用信息】，00 06（十进制：6） 和 00 15（十进制：21） 表示它引用了常量池中 #6 和 #21 项来获得 这个方法的【所属类】和【方法名】 
+
+0000000 ca fe ba be 00 00 00 34 00 23 **0a 00 06 00 15** 09
+
+~~~
+找#6 找#28 java/lang/Object
+
+找#21 找#7和#8 <init>()V
+~~~
+
+
+
+第#2项 09 表示一个 Field 信息，00 16（22）和 00 17（23） 表示它引用了常量池中 #22 和 # 23 项 来获得这个成员变量的【所属类】和【成员变量名】 0000000 ca fe ba be 00 00 00 34 00 23 0a 00 06 00 15 **09** 
+
+0000020 **00 16 00 17** 08 00 18 0a 00 19 00 1a 07 00 1b 07 
+
+
+
+第#3项 08 表示一个字符串常量名称，00 18（24）表示它引用了常量池中 #24 项 
+
+0000020 00 16 00 17 **08 00 18** 0a 00 19 00 1a 07 00 1b 07 
+
+
+
+第#4项 0a 表示一个 Method 信息，00 19（25） 和 00 1a（26） 表示它引用了常量池中 #25 和 #26 项来获得这个方法的【所属类】和【方法名】 
+
+0000020 00 16 00 17 08 00 18 **0a 00 19 00 1a** 07 00 1b 07 
+
+
+
+第#5项 07 表示一个 Class 信息
+
+00 1b（27） 表示它引用了常量池中 #27 项 0000020 00 16 00 17 08 00 18 0a 00 19 00 1a **07 00 1b** 07 
+
+
+
+第#6项 07 表示一个 Class 信息，00 1c（28） 表示它引用了常量池中 #28 项 
+
+0000020 00 16 00 17 08 00 18 0a 00 19 00 1a 07 00 1b **07** 
+
+0000040 **00 1c** 01 00 06 3c 69 6e 69 74 3e 01 00 03 28 29 
+
+
+
+第#7项 01 表示一个 utf8 串，00 06 表示长度，3c 69 6e 69 74 3e 是【  \<init>】 
+
+0000040 00 1c **01 00 06 3c 69 6e 69 74 3e** 01 00 03 28 29
+
+
+
+第#8项 01 表示一个 utf8 串，00 03 表示长度，28 29 56 是【()V】其实就是表示无参、无返回值 
+
+0000040 00 1c 01 00 06 3c 69 6e 69 74 3e **01 00 03 28 29** 
+
+0000060 **56** 01 00 04 43 6f 64 65 01 00 0f 4c 69 6e 65 4e 
+
+
+
+第#9项 01 表示一个 utf8 串，00 04 表示长度，43 6f 64 65 是【Code】 
+
+0000060 56 **01 00 04 43 6f 64 65** 01 00 0f 4c 69 6e 65 4e 
+
+
+
+第#10项 01 表示一个 utf8 串，00 0f（15） 表示长度，4c 69 6e 65 4e 75 6d 62 65 72 54 61 62 6c 65 是【LineNumberTable】 
+
+0000060 56 01 00 04 43 6f 64 65 **01 00 0f 4c 69 6e 65 4e** 
+
+0000100 **75 6d 62 65 72 54 61 62 6c 65** 01 00 12 4c 6f 63 
+
+
+
+第#11项 01 表示一个 utf8 串，00 12（18） 表示长度，4c 6f 63 61 6c 56 61 72 69 61 62 6c 65 54 61 62 6c 65是【LocalVariableTable】 
+
+0000100 75 6d 62 65 72 54 61 62 6c 65 **01 00 12 4c 6f 63** 
+
+0000120 **61 6c 56 61 72 69 61 62 6c 65 54 61 62 6c 65** 01
+
+
+
+ 第#12项 01 表示一个 utf8 串，00 04 表示长度，74 68 69 73 是【this】 
+
+0000120 61 6c 56 61 72 69 61 62 6c 65 54 61 62 6c 65 **01** 
+
+0000140 00 **04 74 68 69 73** 01 00 1d 4c 63 6e 2f 69 74 63 
+
+
+
+第#13项 01 表示一个 utf8 串，00 1d（29） 表示长度，是【Lcn/itcast/jvm/t5/HelloWorld;】 
+
+0000140 00 04 74 68 69 73 **01 00 1d 4c 63 6e 2f 69 74 63** 
+
+0000160 **61 73 74 2f 6a 76 6d 2f 74 35 2f 48 65 6c 6c 6f** 
+
+0000200 **57 6f 72 6c 64 3b** 01 00 04 6d 61 69 6e 01 00 16 
+
+
+
+第#14项 01 表示一个 utf8 串，00 04 表示长度，74 68 69 73 是【main】 
+
+0000200 57 6f 72 6c 64 3b **01 00 04 6d 61 69 6e** 01 00 16 
+
+
+
+第#15项 01 表示一个 utf8 串，00 16（22） 表示长度，是【([Ljava/lang/String;)V】其实就是参数为 字符串数组，无返回值 
+
+0000200 57 6f 72 6c 64 3b 01 00 04 6d 61 69 6e **01 00 16** 
+
+0000220 **28 5b 4c 6a 61 76 61 2f 6c 61 6e 67 2f 53 74 72** 
+
+0000240 **69 6e 67 3b 29 56** 01 00 04 61 72 67 73 01 00 13 
+
+
+
+第#16项 01 表示一个 utf8 串，00 04 表示长度，是【args】 
+
+0000240 69 6e 67 3b 29 56 **01 00 04 61 72 67 73** 01 00 13 
+
+
+
+第#17项 01 表示一个 utf8 串，00 13（19） 表示长度，是【[Ljava/lang/String;】 
+
+0000240 69 6e 67 3b 29 56 01 00 04 61 72 67 73 **01 00 13** 
+
+0000260 **5b 4c 6a 61 76 61 2f 6c 61 6e 67 2f 53 74 72 69** 
+
+0000300 **6e 67 3b** 01 00 10 4d 65 74 68 6f 64 50 61 72 61
+
+ 
+
+第#18项 01 表示一个 utf8 串，00 10（16） 表示长度，是【MethodParameters】 
+
+0000300 6e 67 3b **01 00 10 4d 65 74 68 6f 64 50 61 72 61** 
+
+0000320 **6d 65 74 65 72 73** 01 00 0a 53 6f 75 72 63 65 46 
+
+
+
+第#19项 01 表示一个 utf8 串，00 0a（10） 表示长度，是【SourceFile】 
+
+0000320 6d 65 74 65 72 73 **01 00 0a 53 6f 75 72 63 65 46** 
+
+0000340 **69 6c 65** 01 00 0f 48 65 6c 6c 6f 57 6f 72 6c 64 
+
+
+
+第#20项 01 表示一个 utf8 串，00 0f（15） 表示长度，是【HelloWorld.java】 
+
+0000340 69 6c 65 **01 00 0f 48 65 6c 6c 6f 57 6f 72 6c 64** 
+
+0000360 **2e 6a 61 76 61** 0c 00 07 00 08 07 00 1d 0c 00 1e
+
+
+
+第#21项 0c 表示一个 【名+类型】，00 07 00 08 引用了常量池中 #7 #8 两项 
+
+0000360 2e 6a 61 76 61 **0c 00 07 00 08** 07 00 1d 0c 00 1e 
+
+
+
+第#22项 07 表示一个 Class 信息，00 1d（29） 引用了常量池中 #29 项 
+
+0000360 2e 6a 61 76 61 0c 00 07 00 08 **07 00 1d** 0c 00 1e
+
+
+
+ 第#23项 0c 表示一个 【名+类型】，00 1e（30） 00 1f （31）引用了常量池中 #30 #31 两项 
+
+0000360 2e 6a 61 76 61 0c 00 07 00 08 07 00 1d **0c 00 1e** 
+
+0000400 **00 1f** 01 00 0b 68 65 6c 6c 6f 20 77 6f 72 6c 64
+
+
+
+第#24项 01 表示一个 utf8 串，00 0f（12） 表示长度，是【hello world】 
+
+0000400 00 1f **01 00 0b 68 65 6c 6c 6f 20 77 6f 72 6c 64** 
+
+
+
+第#25项 07 表示一个 Class 信息，00 20（32） 引用了常量池中 #32 项 
+
+0000420 **07 00 20** 0c 00 21 00 22 01 00 1b 63 6e 2f 69 74 
+
+
+
+第#26项 0c 表示一个 【名+类型】，00 21（33） 00 22（34）引用了常量池中 #33 #34 两项 
+
+0000420 07 00 20 **0c 00 21 00 22** 01 00 1b 63 6e 2f 69 74 
+
+
+
+第#27项 01 表示一个 utf8 串，00 1b（27） 表示长度，是【cn/itcast/jvm/t5/HelloWorld】 
+
+0000420 07 00 20 0c 00 21 00 22 **01 00 1b 63 6e 2f 69 74** 
+
+0000440 **63 61 73 74 2f 6a 76 6d 2f 74 35 2f 48 65 6c 6c** 
+
+0000460 **6f 57 6f 72 6c 64** 01 00 10 6a 61 76 61 2f 6c 61 
+
+
+
+第#28项 01 表示一个 utf8 串，00 10（16） 表示长度，是【java/lang/Object】 
+
+0000460 6f 57 6f 72 6c 64 **01 00 10 6a 61 76 61 2f 6c 61**
+
+0000500 **6e 67 2f 4f 62 6a 65 63 74** 01 00 10 6a 61 76 61 
+
+
+
+第#29项 01 表示一个 utf8 串，00 10（16） 表示长度，是【java/lang/System】 
+
+0000500 6e 67 2f 4f 62 6a 65 63 74 **01 00 10 6a 61 76 61** 
+
+0000520 **2f 6c 61 6e 67 2f 53 79 73 74 65 6d** 01 00 03 6f 
+
+
+
+第#30项 01 表示一个 utf8 串，00 03 表示长度，是【out】 
+
+0000520 2f 6c 61 6e 67 2f 53 79 73 74 65 6d **01 00 03 6f** 
+
+0000540 **75 74** 01 00 15 4c 6a 61 76 61 2f 69 6f 2f 50 72 
+
+
+
+第#31项 01 表示一个 utf8 串，00 15（21） 表示长度，是【Ljava/io/PrintStream;】 
+
+0000540 75 74 **01 00 15 4c 6a 61 76 61 2f 69 6f 2f 50 72** 
+
+0000560 **69 6e 74 53 74 72 65 61 6d 3b** 01 00 13 6a 61 76 
+
+
+
+第#32项 01 表示一个 utf8 串，00 13（19） 表示长度，是【java/io/PrintStream】 
+
+0000560 69 6e 74 53 74 72 65 61 6d 3b **01 00 13 6a 61 76** 
+
+0000600 **61 2f 69 6f 2f 50 72 69 6e 74 53 74 72 65 61 6d** 
+
+
+
+第#33项 01 表示一个 utf8 串，00 07 表示长度，是【println】 
+
+0000620 **01 00 07 70 72 69 6e 74 6c 6e** 01 00 15 28 4c 6a 
+
+
+
+第#34项 01 表示一个 utf8 串，00 15（21） 表示长度，是【(Ljava/lang/String;)V】
+
+ 0000620 01 00 07 70 72 69 6e 74 6c 6e **01 00 15 28 4c 6a** 
+
+0000640 **61 76 61 2f 6c 61 6e 67 2f 53 74 72 69 6e 67 3b** 
+
+0000660 **29 56** 00 21 00 05 00 06 00 00 00 00 00 02 00 01
+
+
+
+### 1.4 访问标识与继承信息
+
+21 表示该 class 是一个类，公共的 
+
+0000660 29 56 **00 21** 00 05 00 06 00 00 00 00 00 02 00 01
+
+
+
+05 表示根据常量池中 #5 找到本类全限定名 
+
+0000660 29 56 00 21 **00 05** 00 06 00 00 00 00 00 02 00 01 
+
+
+
+06 表示根据常量池中 #6 找到父类全限定名 
+
+0000660 29 56 00 21 00 05 **00 06** 00 00 00 00 00 02 00 01 
+
+
+
+表示接口的数量，本类为 0 0000660 29 56 00 21 00 05 00 06 **00 00** 00 00 00 02 00 01
+
+---
+
+![image-20220807220952550](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807220952550.png)
+
+---
+
+
+
+
+
+### 1.5 Field 信息 
+
+表示成员变量数量，本类为 0 
+
+0000660 29 56 00 21 00 05 00 06 00 00 **00 00** 00 02 00 01
+
+
+
+---
+
+![image-20220807221351274](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220807221351274.png)
+
+---
+
+L：是引用类型
+
+[：是一维数组
+
+
+
+
+
+
+
+### 1.6 Method 信息 
+
+表示方法数量，本类为 2 
+
+0000660 29 56 00 21 00 05 00 06 00 00 00 00 **00 02** 00 01
+
+
+
+一个方法由 访问修饰符，名称，参数描述，方法属性数量，方法属性组成 
+
+红色代表访问修饰符（本类中是 public）
+
+蓝色代表引用了常量池 #07 项作为方法名称 
+
+绿色代表引用了常量池 #08 项作为方法参数描述
+
+黄色代表方法属性数量，本方法是 1 
+
+红色代表方法属性
+
+00 09 表示引用了常量池 #09 项，发现是【Code】属性 
+
+00 00 00 2f 表示此属性的长度是 47 
+
+00 01 表示【操作数栈】最大深度 
+
+00 01 表示【局部变量表】最大槽（slot）数
+
+
+
+00 00 00 05 表示字节码长度，本例是 5 
+
+2a b7 00 01 b1 是字节码指令 
+
+00 00 00 02 表示方法细节属性数量，本例是 2 
+
+00 0a 表示引用了常量池 #10 项，发现是【LineNumberTable】属性
+
+
+
+00 00 00 06 表示此属性的总长度，本例是 6 
+
+00 01 表示【LineNumberTable】长度 
+
+00 00 表示【字节码】行号 00 04 表示【java 源码】行号 
+
+00 0b 表示引用了常量池 #11 项，发现是【LocalVariableTable】属性
+
+
+
+00 00 00 0c 表示此属性的总长度，本例是 12 00 01 表示【LocalVariableTable】长度 
+
+00 00 表示局部变量生命周期开始，相对于字节码的偏移量 
+
+00 05 表示局部变量覆盖的范围长度 
+
+00 0c 表示局部变量名称，本例引用了常量池 #12 项，是【this】 
+
+00 0d 表示局部变量的类型，本例引用了常量池 #13 项，是 【Lcn/itcast/jvm/t5/HelloWorld;】 
+
+00 00 表示局部变量占有的槽位（slot）编号，本例是 0
+
+
+
+0000660 29 56 00 21 00 05 00 06 00 00 00 00 00 02 **00 01** 
+
+0000700 <u>00 07</u> `00 08` ==00 01== **00 09 00 00 00 2f 00 01 00 01** 
+
+0000720 **00 00 00 05 2a b7 00 01 b1 00 00 00 02 00 0a 00** 
+
+0000740 **00 00 06 00 01 00 00 00 04 00 0b 00 00 00 0c 00** 
+
+0000760 **01 00 00 00 05 00 0c 00 0d 00 00** 00 09 00 0e 00
+
+## 2. 字节码指令 
+
+
+
+## 3. 编译期处理
+
+
+
+##  4. 类加载阶段 
+
+
+
+## 5. 类加载器 
+
+
+
+## 6. 运行期优化
 
 
 
