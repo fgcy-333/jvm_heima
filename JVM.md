@@ -3687,15 +3687,684 @@ Heap
 
 
 
+### 3.1 相关VM参数
+
+---
+
+[![vnsGuj.png](https://s1.ax1x.com/2022/08/05/vnsGuj.png)](https://imgtu.com/i/vnsGuj)
+
+---
+
+
+
+
+
+### 3.2 使用参数
+
+
+
+例子一：
+
+~~~java
+package cn.itcast.jvm.t2;
+
+import java.util.ArrayList;
+
+/**
+ *  演示内存的分配策略
+ */
+public class Demo2_1 {
+    private static final int _512KB = 512 * 1024;
+    private static final int _1MB = 1024 * 1024;
+    private static final int _6MB = 6 * 1024 * 1024;
+    private static final int _7MB = 7 * 1024 * 1024;
+    private static final int _8MB = 8 * 1024 * 1024;
+
+    // -Xms20M -Xmx20M -Xmn10M -XX:+UseSerialGC -XX:+PrintGCDetails -verbose:gc -XX:-ScavengeBeforeFullGC
+    public static void main(String[] args) throws InterruptedException {
+
+    }
+}
+
+~~~
+
+~~~
+Heap【堆内存】
+ def new generation   total 9216K, used 2322K [0x00000000fec00000, 0x00000000ff600000, 0x00000000ff600000)   【新生代】
+  eden space 8192K,  28% used [0x00000000fec00000, 0x00000000fee44af0, 0x00000000ff400000)   【伊甸园】
+  from space 1024K,   0% used [0x00000000ff400000, 0x00000000ff400000, 0x00000000ff500000) 	  【from区】
+  to   space 1024K,   0% used [0x00000000ff500000, 0x00000000ff500000, 0x00000000ff600000)		【to区】
+tenured generation   total 10240K, used 0K [0x00000000ff600000, 0x0000000100000000, 0x0000000100000000)  【老年代】
+the space 10240K,   0% used [0x00000000ff600000, 0x00000000ff600000, 0x00000000ff600200, 0x0000000100000000) 
+Metaspace       used 3244K, capacity 4496K, committed 4864K, reserved 1056768K 【元空间，这货不属于堆内存，只是为了方便查看信息】
+  class space    used 352K, capacity 388K, committed 512K, reserved 1048576K
+~~~
+
+`新生代的最大值与最小值设置为10M`，所以  伊甸园 + form区 + to区=10M
+
+新生代total（总共9M），原因：幸存区to必须为空，所以空出1M的内存
+
+
+
+
+
+
+
+例子二：
+
+~~~java
+package cn.itcast.jvm.t2;
+
+import java.sql.Array;
+import java.util.ArrayList;
+
+/**
+ * 演示内存的分配策略
+ */
+public class Demo2_1 {
+    private static final int _512KB = 512 * 1024;
+    private static final int _1MB = 1024 * 1024;
+    private static final int _6MB = 6 * 1024 * 1024;
+    private static final int _7MB = 7 * 1024 * 1024;
+    private static final int _8MB = 8 * 1024 * 1024;
+
+    // -Xms20M -Xmx20M -Xmn10M -XX:+UseSerialGC -XX:+PrintGCDetails -verbose:gc -XX:-ScavengeBeforeFullGC
+    public static void main(String[] args) throws InterruptedException {
+        ArrayList<Object> list = new ArrayList<>();
+        list.add(new byte[_7MB]);
+    }
+}
+
+~~~
+
+---
+
+[![vnWFo9.png](https://s1.ax1x.com/2022/08/05/vnWFo9.png)](https://imgtu.com/i/vnWFo9)
+
+---
+
+发生一次MinorGC将伊甸园中的没用的对象回收掉，将伊甸园中一些还有GCRoot引用的对象放到from区中；为伊甸园区腾出空间；
+
+
+
+
+
+
+
+例子三：
+
+~~~java
+package cn.itcast.jvm.t2;
+
+import java.sql.Array;
+import java.util.ArrayList;
+
+/**
+ * 演示内存的分配策略
+ */
+public class Demo2_1 {
+    private static final int _512KB = 512 * 1024;
+    private static final int _1MB = 1024 * 1024;
+    private static final int _6MB = 6 * 1024 * 1024;
+    private static final int _7MB = 7 * 1024 * 1024;
+    private static final int _8MB = 8 * 1024 * 1024;
+
+    // -Xms20M -Xmx20M -Xmn10M -XX:+UseSerialGC -XX:+PrintGCDetails -verbose:gc -XX:-ScavengeBeforeFullGC
+    public static void main(String[] args) throws InterruptedException {
+        ArrayList<Object> list = new ArrayList<>();
+        list.add(new byte[_7MB]);//还剩：8192k *0.1 =819.2k
+        list.add(new byte[_512KB]);//几乎占满伊甸园区 （也只是触发一次GC）
+    }
+}
+~~~
+
+---
+
+[![vnWhTJ.png](https://s1.ax1x.com/2022/08/05/vnWhTJ.png)](https://imgtu.com/i/vnWhTJ)
+
+---
+
+此时伊甸园区还有：8192*0.04=327K，会发生垃圾回收；
+
+
+
+
+
+
+
+例子四：
+
+~~~java
+package cn.itcast.jvm.t2;
+
+import java.sql.Array;
+import java.util.ArrayList;
+
+/**
+ * 演示内存的分配策略
+ */
+public class Demo2_1 {
+    private static final int _512KB = 512 * 1024;
+    private static final int _1MB = 1024 * 1024;
+    private static final int _6MB = 6 * 1024 * 1024;
+    private static final int _7MB = 7 * 1024 * 1024;
+    private static final int _8MB = 8 * 1024 * 1024;
+
+    // -Xms20M -Xmx20M -Xmn10M -XX:+UseSerialGC -XX:+PrintGCDetails -verbose:gc -XX:-ScavengeBeforeFullGC
+    public static void main(String[] args) throws InterruptedException {
+        ArrayList<Object> list = new ArrayList<>();
+        list.add(new byte[_7MB]);//还剩：8192k *0.1 =819.2k
+        list.add(new byte[_512KB]);//8192*0.04=327K
+        list.add(new byte[_512KB]);//尝试添加这个对象，失败 因为伊甸园内存不足，触发一次gc
+    }
+}
+~~~
+
+---
+
+[![vnf3BF.png](https://s1.ax1x.com/2022/08/05/vnf3BF.png)](https://imgtu.com/i/vnf3BF)
+
+---
+
+
+
+
+
+
+
+
+
+例子五：
+
+大对象，在新生代内存不足以容纳，而老年代可以容纳时，直接晋升到老年代（不经过GC）
+
+伊甸园总共就8M左右，还占用了28%，肯定放不下一个8M的对象
+
+~~~java
+package cn.itcast.jvm.t2;
+
+import java.sql.Array;
+import java.util.ArrayList;
+
+/**
+ * 演示内存的分配策略
+ */
+public class Demo2_1 {
+    private static final int _512KB = 512 * 1024;
+    private static final int _1MB = 1024 * 1024;
+    private static final int _6MB = 6 * 1024 * 1024;
+    private static final int _7MB = 7 * 1024 * 1024;
+    private static final int _8MB = 8 * 1024 * 1024;
+
+    // -Xms20M -Xmx20M -Xmn10M -XX:+UseSerialGC -XX:+PrintGCDetails -verbose:gc -XX:-ScavengeBeforeFullGC
+    public static void main(String[] args) throws InterruptedException {
+        ArrayList<Object> list = new ArrayList<>();
+        list.add(new byte[_8MB]);//还剩：8192k *0.1 =819.2k
+    }
+}
+~~~
+
+---
+
+[![vnfyAH.png](https://s1.ax1x.com/2022/08/05/vnfyAH.png)](https://imgtu.com/i/vnfyAH)
+
+---
+
+
+
+
+
+例子六：当新生代和老年代的空间不足时，报错OutOfMemory
+
+~~~java
+package cn.itcast.jvm.t2;
+
+import java.sql.Array;
+import java.util.ArrayList;
+
+/**
+ * 演示内存的分配策略
+ */
+public class Demo2_1 {
+    private static final int _512KB = 512 * 1024;
+    private static final int _1MB = 1024 * 1024;
+    private static final int _6MB = 6 * 1024 * 1024;
+    private static final int _7MB = 7 * 1024 * 1024;
+    private static final int _8MB = 8 * 1024 * 1024;
+
+    // -Xms20M -Xmx20M -Xmn10M -XX:+UseSerialGC -XX:+PrintGCDetails -verbose:gc -XX:-ScavengeBeforeFullGC
+    public static void main(String[] args) throws InterruptedException {
+        ArrayList<Object> list = new ArrayList<>();
+        list.add(new byte[_8MB]);//还剩：8192k *0.1 =819.2k
+        list.add(new byte[_8MB]);//新生代和老年代都容纳不了
+    }
+}
+~~~
+
+---
+
+[![vnfOg0.png](https://s1.ax1x.com/2022/08/05/vnfOg0.png)](https://imgtu.com/i/vnfOg0)
+
+---
+
+做了两次GC自救，还是没能救活；外抛异常；
+
+
+
+
+
+
+
+
+
+例子七：
+
+因为线程导致的OOM，不会使得整个进程结束；
+
+~~~java
+package cn.itcast.jvm.t2;
+
+import java.sql.Array;
+import java.util.ArrayList;
+
+/**
+ * 演示内存的分配策略
+ */
+public class Demo2_1 {
+    private static final int _512KB = 512 * 1024;
+    private static final int _1MB = 1024 * 1024;
+    private static final int _6MB = 6 * 1024 * 1024;
+    private static final int _7MB = 7 * 1024 * 1024;
+    private static final int _8MB = 8 * 1024 * 1024;
+
+    // -Xms20M -Xmx20M -Xmn10M -XX:+UseSerialGC -XX:+PrintGCDetails -verbose:gc -XX:-ScavengeBeforeFullGC
+    public static void main(String[] args) throws InterruptedException {
+    //开一个子线程 进行oom
+        new Thread(() -> {
+            ArrayList<byte[]> list = new ArrayList<>();
+            list.add(new byte[_8MB]);
+            list.add(new byte[_8MB]);
+        }).start();
+
+
+        //看是否会使得整个JVM挂掉
+        System.out.println("sleep....");
+        Thread.sleep(1800L);
+    }
+}
+~~~
+
+---
+
+[![vnhQPA.png](https://s1.ax1x.com/2022/08/05/vnhQPA.png)](https://imgtu.com/i/vnhQPA)
+
+---
+
+主线程还能正常结束
+
 ## 4.0 垃圾回收器
 
+1、`串行 `    **单线程**    **堆内存较小**，适合个人电脑
+
+2、`吞吐量优先` 多线程 堆内存较大，多核 cpu 让**单位时间内**，**STW 的时间最短**  每次垃圾回收的时间不一定是最短的，但单位时间内，STW的时间一定是最短的；	   这样就称吞吐量高 
+
+3、` 响应时间优先` 多线程 堆内存较大，多核 cpu 尽可能让 `单次` STW 的时间最短 
 
 
 
+### 4.1 串行
+
+`-XX:+UseSerialGC = Serial + SerialOld`
+
+`Serial` 是工作在新生代  【使用复制算法】
+
+`SerialOld` 是工作在老年代 【使用标记整理算法】
+
+
+
+---
+
+[![vnoDkF.png](https://s1.ax1x.com/2022/08/05/vnoDkF.png)](https://imgtu.com/i/vnoDkF)
+
+---
+
+多个线程在安全点停下，因为发生GC是有可能会改变对象地址；这样会出现问题； 	
+
+这个串行的垃圾回收器是单线程执行的；等这个垃圾回收线程完成后，才开始其他用户线程的执行；
+
+
+
+
+
+### 4.2 吞吐量优先
+
+`-XX:+UseParallelGC` ~ `-XX:+UseParallelOldGC `  **jdk1.8默认开启这两个参数**
+
+`-XX:+UseParallelGC:` **并行的**  垃圾回收器，工作在新生代，采用复制算法
+
+`-XX:+UseParallelOldGC:`  **并行的**  垃圾回收器，工作在老年代，采用标记整理算法
+
+上面两个参数只要有其中一个开启，另一个也会开启；
+
+
+
+` -XX:ParallelGCThreads=n` :用于控制parallelGC的线程数量 【默认开启的线程数量与CPU的核数相同】
+
+`-XX:+UseAdaptiveSizePolicy`   : 开启自适应的大小调整策略 【调整伊甸园和幸存区的比例，调整堆得大小，调整晋升阈值】
+
+
+
+`-XX:GCTimeRatio=ratio` : 用于设置吞吐率目标 1 / (1+radio)，当达不到这个目标，就会开始调整值，一般是增大堆的大小；【一般radio=19 】
+
+` -XX:MaxGCPauseMillis=ms` : 最大暂停毫秒数，默认200毫秒 
+
+堆空间变大了，单位时间内进行GC的次数会少；吞吐率就可以上去
+
+堆空间变大了，单次GC的时间就会变小
+
+上面两个目标是冲突的，我们要注意平衡；
+
+---
+
+![image-20220806221941249.png](https://s2.loli.net/2022/08/06/HfyA8sVmDU5Rgtv.png)
+
+---
+
+
+
+
+
+### 4.3 响应时间优先
+
+`-XX : +UseConcMarkSweepGC` ~ `-XX : +UseParNewGC` ~      `Se ri al Ol d`
+
+`-XX : +UseConcMarkSweepGC`  【CMS】 这个是老年代的垃圾回收器，与之配合的是  `-XX : +UseParNewGC` 工作在新生代的垃圾回收器，但是当发生并发失败时，CMS老年代的垃圾回收器就会退化为串行的垃圾回收器
+
+并发的垃圾回收器：在垃圾回收期间，用户线程还可以工作，双方抢占CPU资源；【只有某些时刻可以并发执行，大部分不行，但还是可以减少Stop The World的时间】
+
+上一个介绍的，并行的垃圾回收器：在垃圾回收期间，不允许任何用户线程运行，但有多个线程同时执行垃圾回收
+
+注意：
+
+并发是一个CPU某个时刻只干一件事；并行是多个CPU某一个时刻同时在干一件事；
+
+
+
+`-XX : Paral l el GCTh reads=n  ` ~  ` -XX : ConcGCTh reads=th reads `
+
+`-XX : Paral l el GCTh reads=n ` : 并行的垃圾回收线程数【一般与CPU的核数相同】 
+
+` -XX : ConcGCTh reads=th reads  `: 并发的垃圾回收线程数【一般设置为CPU核数的四分之一】
+
+
+
+`-XX : CMSIni ti ati ngOccupancyFracti on=pe rcent ` 执行CMS垃圾回收的内存占比
+
+​	因为CMS回收器，有浮动垃圾；如果像其他的垃圾回收器一样等到放不下新的对象时才去清理，就会浪费空间
+
+
+
+
+
+`-XX : +CMSScavengeBefo reRemark`  该参数的作用是，在重新标记的时候，先清理一次新生代
+
+
+
+CMS垃圾回收器的工作示意图：
+
+----
+
+![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/Snipaste_2022-08-06_22-55-06.png)
+
+---
+
+1、等待多个线程进入安全点，STW开启垃圾回收线程，进行初始标记【这个过程很快，因为只是标记】
+
+2、初始标记完成后，用户线程就可以恢复运行，同时垃圾回收线程可以并发运行【并发标记】；
+
+3、并发标记后，开始STW，进行重新标记；因为用户线程运行期间，可能产生一些新的对象，会对标记结果产生结果；
+
+4、重新标记后，用户线程又可以继续运行，此时垃圾回收线程可以并发清理； 
+
+​		只有在初始标记和重新标记时STW，响应时间较短
+
+
+
+给出一个概念：浮动垃圾,在并发清理时，由用户线程产生的垃圾；这些垃圾只能等待下一次垃圾回收时清理
+
+
+
+
+
+注意：
+
+CMS垃圾回收器，采用标记清除算法；会产生大量内存碎片；因为内存碎片过多导致无法为用户线程分配内存，造成并发失败；此时回退化为SerialOld垃圾回收器；此时，机会耗费很多时间
 
 
 
 ## 5.0 垃圾回收调优
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
