@@ -5311,7 +5311,7 @@ L：是引用类型
 
 
 
-一个方法由 访问修饰符，名称，参数描述，方法属性数量，方法属性组成 
+一个`方法`由 `访问修饰符`，`名称`，`参数描述`，`方法属性数量`，`方法属性`组成 
 
 红色代表访问修饰符（本类中是 public）
 
@@ -5367,17 +5367,1840 @@ L：是引用类型
 
 
 
-0000660 29 56 00 21 00 05 00 06 00 00 00 00 00 02 **00 01** 
+----
 
-0000700 <u>00 07</u> `00 08` ==00 01== **00 09 00 00 00 2f 00 01 00 01** 
+![image-20220808221303085](http://fgcy-pic.zhamao.ml/image-20220808221303085.png)
 
-0000720 **00 00 00 05 2a b7 00 01 b1 00 00 00 02 00 0a 00** 
+---
 
-0000740 **00 00 06 00 01 00 00 00 04 00 0b 00 00 00 0c 00** 
 
-0000760 **01 00 00 00 05 00 0c 00 0d 00 00** 00 09 00 0e 00
+
+
+
+
+
+
+
+红色代表访问修饰符（本类中是 public static） 
+
+蓝色代表引用了常量池 #14 项作为方法名称 
+
+绿色代表引用了常量池 #15 项作为方法参数描述 
+
+黄色代表方法属性数量，本方法是 2 红色代表方法属性（属性1）
+
+00 09 表示引用了常量池 #09 项，发现是【Code】属性
+
+00 00 00 37 表示此属性的长度是 55 00 02 表示【操作数栈】最大深度 
+
+00 01 表示【局部变量表】最大槽（slot）数 
+
+00 00 00 05 表示字节码长度，本例是 9 b2 00 02 12 03 b6 00 04 b1 是字节码指令 
+
+00 00 00 02 表示方法细节属性数量，本例是 2 
+
+00 0a 表示引用了常量池 #10 项，发现是【LineNumberTable】属性
+
+
+
+00 00 00 0c 表示此属性的总长度，本例是 12 
+
+00 01 表示【LocalVariableTable】长度 
+
+00 00 表示局部变量生命周期开始，相对于字节码的偏移量 
+
+00 09 表示局部变量覆盖的范围长度
+
+00 10 表示局部变量名称，本例引用了常量池 #16 项，是【args】 
+
+00 11 表示局部变量的类型，本例引用了常量池 #17 项，是【[Ljava/lang/String;】 
+
+00 00 表示局部变量占有的槽位（slot）编号，本例是 0
+
+
+
+---
+
+![image-20220808222238237](http://fgcy-pic.zhamao.ml/image-20220808222238237.png)
+
+---
+
+红色代表方法属性（属性2） 
+
+00 12 表示引用了常量池 #18 项，发现是【MethodParameters】属性 
+
+00 00 00 05 表示此属性的总长度，本例是 5 01 参数数量 
+
+00 10 表示引用了常量池 #16 项，是【args】 00 00 访问修饰符
+
+
+
+---
+
+![image-20220808222321341](http://fgcy-pic.zhamao.ml/image-20220808222321341.png)
+
+---
+
+
+
+
+
+### 1.7 附加属性 
+
+00 01 表示附加属性数量 
+
+00 13 表示引用了常量池 #19 项，即【SourceFile】
+
+ 00 00 00 02 表示此属性的长度 
+
+00 14 表示引用了常量池 #20 项，即【HelloWorld.java】 
+
+---
+
+![image-20220808222406790](http://fgcy-pic.zhamao.ml/image-20220808222406790.png)
+
+---
+
+
+
+
+
+类的格式
+
+参考文献 ： https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html
+
+
 
 ## 2. 字节码指令 
+
+### 2.1 入门
+
+ 接着上一节，研究一下两组字节码指令，一个是 
+
+`public cn.itcast.jvm.t5.HelloWorld();` 构造方法的字节码指令
+
+~~~
+2a b7 00 01 b1
+~~~
+
+1、2a => aload_0 加载 slot 0 的局部变量，即 this，做为下面的 invokespecial 构造方法调用的参数 
+
+2、b7 => invokespecial 预备调用构造方法，哪个方法呢？ 
+
+3、00 01 引用常量池中 #1 项，即【 Method java/lang/Object."":()V 】 
+
+4、 b1 表示返回
+
+~~~
+this .  init()v  return
+~~~
+
+
+
+
+
+另一个是 `public static void main(java.lang.String[]); `主方法的字节码指令
+
+~~~
+b2 00 02 12 03 b6 00 04 b1
+~~~
+
+1、b2 => getstatic 用来加载静态变量，哪个静态变量呢？ 
+
+2、00 02 引用常量池中 #2 项，即【Field java/lang/System.out:Ljava/io/PrintStream;】 
+
+3、12 => ldc 加载参数，哪个参数呢？ 
+
+4、03 引用常量池中 #3 项，即 【String hello world】 
+
+5、b6 => invokevirtual 预备调用成员方法，哪个方法呢？ 
+
+6、00 04 引用常量池中 #4 项，即【Method java/io/PrintStream.println:(Ljava/lang/String;)V】 
+
+7、b1 表示返回
+
+~~~
+System.out   "hello world"  .  println(String)v  return
+~~~
+
+
+
+请参考:
+
+ https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5
+
+
+
+
+
+
+
+### 2.2 javap 工具 
+
+自己分析类文件结构太麻烦了，Oracle 提供了 javap 工具来反编译 class 文件
+
+~~~
+javap -v HelloWorld.class
+Classfile /root/HelloWorld.class
+Last modified Jul 7, 2019; size 597 bytes	   【大小】
+MD5 checksum 361dca1c3f4ae38644a9cd5060ac6dbc 【MD5的校验签名】
+Compiled from "HelloWorld.java"
+public class cn.itcast.jvm.t5.HelloWorld
+minor version: 0
+major version: 52	【对应JDK8】
+flags: ACC_PUBLIC, ACC_SUPER	【public修饰权限】
+Constant pool:
+#1 = Methodref #6.#21 // java/lang/Object."<init>":()V 【 方法引用  Object的无参构造】
+#2 = Fieldref #22.#23 //
+java/lang/System.out:Ljava/io/PrintStream;
+#3 = String #24 // hello world
+#4 = Methodref #25.#26 // java/io/PrintStream.println:
+(Ljava/lang/String;)V
+#5 = Class #27 // cn/itcast/jvm/t5/HelloWorld
+#6 = Class #28 // java/lang/Object
+#7 = Utf8 <init>
+#8 = Utf8 ()V
+#9 = Utf8 Code
+#10 = Utf8 LineNumberTable
+#11 = Utf8 LocalVariableTable
+#12 = Utf8 this
+#13 = Utf8 Lcn/itcast/jvm/t5/HelloWorld;
+#14 = Utf8 main
+#15 = Utf8 ([Ljava/lang/String;)V
+#16 = Utf8 args
+#17 = Utf8 [Ljava/lang/String;
+#18 = Utf8 MethodParameters
+#19 = Utf8 SourceFile
+#20 = Utf8 HelloWorld.java
+#21 = NameAndType #7:#8 // "<init>":()V
+#22 = Class #29 // java/lang/System
+#23 = NameAndType #30:#31 // out:Ljava/io/PrintStream;
+#24 = Utf8 hello world
+#25 = Class #32 // java/io/PrintStream
+#26 = NameAndType #33:#34 // println:(Ljava/lang/String;)V
+#27 = Utf8 cn/itcast/jvm/t5/HelloWorld
+#28 = Utf8 java/lang/Object
+#29 = Utf8 java/lang/System
+#30 = Utf8 out
+#31 = Utf8 Ljava/io/PrintStream;
+#32 = Utf8 java/io/PrintStream
+#33 = Utf8 println
+#34 = Utf8 (Ljava/lang/String;)V
+{
+        public cn.itcast.jvm.t5.HelloWorld();
+        descriptor: ()V
+        flags: ACC_PUBLIC
+        Code:
+        stack=1, locals=1, args_size=1
+        0: aload_0
+        1: invokespecial #1 // Method java/lang/Object."
+        <init>":()V
+        4: return
+        LineNumberTable:
+        line 4: 0
+        LocalVariableTable:
+        Start Length Slot Name Signature
+        0 5 0 this Lcn/itcast/jvm/t5/HelloWorld;
+        public static void main(java.lang.String[]);
+        descriptor: ([Ljava/lang/String;)V
+        flags: ACC_PUBLIC, ACC_STATIC
+        Code:
+        stack=2, locals=1, args_size=1
+        0: getstatic #2 // Field
+        java/lang/System.out:Ljava/io/PrintStream;
+        3: ldc #3 // String hello world
+        5: invokevirtual #4 // Method
+        java/io/PrintStream.println:(Ljava/lang/String;)V
+        8: return
+        LineNumberTable:
+        line 6: 0
+        line 7: 8
+        LocalVariableTable:
+        Start Length Slot Name Signature
+        0 9 0 args [Ljava/lang/String;
+        MethodParameters:
+        Name Flags
+        args
+}
+~~~
+
+
+
+### 2.3 图解方法执行流程 
+
+1）原始 java 代码
+
+~~~java
+package cn.itcast.jvm.t3.bytecode;
+/**
+* 演示 字节码指令 和 操作数栈、常量池的关系
+*/
+public class Demo3_1 {
+    public static void main(String[] args) {
+    int a = 10;
+    int b = Short.MAX_VALUE + 1;
+    int c = a + b;
+    System.out.println(c);
+    }
+}
+~~~
+
+
+
+2）编译后的字节码文件
+
+~~~
+javap -v Demo3_1.class
+Classfile /root/Demo3_1.class
+Last modified Jul 7, 2019; size 665 bytes
+MD5 checksum a2c29a22421e218d4924d31e6990cfc5
+Compiled from "Demo3_1.java"
+public class cn.itcast.jvm.t3.bytecode.Demo3_1
+minor version: 0
+major version: 52
+flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+#1 = Methodref #7.#26 // java/lang/Object."<init>":()V
+#2 = Class #27 // java/lang/Short
+#3 = Integer 32768
+#4 = Fieldref #28.#29 //
+java/lang/System.out:Ljava/io/PrintStream;
+#5 = Methodref #30.#31 // java/io/PrintStream.println:(I)V
+#6 = Class #32 // cn/itcast/jvm/t3/bytecode/Demo3_1
+#7 = Class #33 // java/lang/Object
+#8 = Utf8 <init>
+#9 = Utf8 ()V
+#10 = Utf8 Code
+#11 = Utf8 LineNumberTable
+#12 = Utf8 LocalVariableTable
+#13 = Utf8 this#20 = Utf8 I
+#21 = Utf8 b
+#22 = Utf8 c
+#23 = Utf8 MethodParameters
+#24 = Utf8 SourceFile
+#25 = Utf8 Demo3_1.java
+#26 = NameAndType #8:#9 // "<init>":()V
+#27 = Utf8 java/lang/Short
+#28 = Class #34 // java/lang/System
+#29 = NameAndType #35:#36 // out:Ljava/io/PrintStream;
+#30 = Class #37 // java/io/PrintStream
+#31 = NameAndType #38:#39 // println:(I)V
+#32 = Utf8 cn/itcast/jvm/t3/bytecode/Demo3_1
+#33 = Utf8 java/lang/Object
+#34 = Utf8 java/lang/System
+#35 = Utf8 out
+#36 = Utf8 Ljava/io/PrintStream;
+#37 = Utf8 java/io/PrintStream
+#38 = Utf8 println
+#39 = Utf8 (I)V
+{
+public cn.itcast.jvm.t3.bytecode.Demo3_1();
+descriptor: ()V
+flags: ACC_PUBLIC
+Code:
+stack=1, locals=1, args_size=1
+0: aload_0
+1: invokespecial #1 // Method java/lang/Object."
+<init>":()V
+4: return
+LineNumberTable:
+line 6: 0
+LocalVariableTable:
+Start Length Slot Name Signature
+0 5 0 this Lcn/itcast/jvm/t3/bytecode/Demo3_1;
+public static void main(java.lang.String[]);
+descriptor: ([Ljava/lang/String;)V
+flags: ACC_PUBLIC, ACC_STATIC
+Code:
+stack=2, locals=4, args_size=1
+0: bipush 10
+2: istore_1
+3: ldc #3 // int 32768
+5: istore_2
+6: iload_1
+7: iload_2
+8: iadd
+9: istore_3
+10: getstatic #4 // Field
+java/lang/System.out:Ljava/io/PrintStream;
+13: iload_3
+14: invokevirtual #5 // Method
+java/io/PrintStream.println:(I)V
+17: return
+LineNumberTable:
+line 8: 0
+line 9: 3
+line 10: 6
+line 11: 10
+line 12: 17
+LocalVariableTable:
+Start Length Slot Name Signature
+0 18 0 args [Ljava/lang/String;
+3 15 1 a I
+6 12 2 b I
+10 8 3 c I
+MethodParameters:
+Name Flags
+args
+}
+
+#14 = Utf8 Lcn/itcast/jvm/t3/bytecode/Demo3_1;
+#15 = Utf8 main
+#16 = Utf8 ([Ljava/lang/String;)V
+#17 = Utf8 args
+#18 = Utf8 [Ljava/lang/String;
+#19 = Utf8 a
+#20 = Utf8 I
+#21 = Utf8 b
+#22 = Utf8 c
+#23 = Utf8 MethodParameters
+#24 = Utf8 SourceFile
+#25 = Utf8 Demo3_1.java
+#26 = NameAndType #8:#9 // "<init>":()V
+#27 = Utf8 java/lang/Short
+#28 = Class #34 // java/lang/System
+#29 = NameAndType #35:#36 // out:Ljava/io/PrintStream;
+#30 = Class #37 // java/io/PrintStream
+#31 = NameAndType #38:#39 // println:(I)V
+#32 = Utf8 cn/itcast/jvm/t3/bytecode/Demo3_1
+#33 = Utf8 java/lang/Object
+#34 = Utf8 java/lang/System
+#35 = Utf8 out
+#36 = Utf8 Ljava/io/PrintStream;
+#37 = Utf8 java/io/PrintStream
+#38 = Utf8 println
+#39 = Utf8 (I)V
+{
+public cn.itcast.jvm.t3.bytecode.Demo3_1();
+descriptor: ()V
+flags: ACC_PUBLIC
+Code:
+stack=1, locals=1, args_size=1
+0: aload_0
+1: invokespecial #1 // Method java/lang/Object."
+<init>":()V
+4: return
+LineNumberTable:
+line 6: 0
+LocalVariableTable:
+Start Length Slot Name Signature
+0 5 0 this Lcn/itcast/jvm/t3/bytecode/Demo3_1;
+public static void main(java.lang.String[]);
+descriptor: ([Ljava/lang/String;)V
+flags: ACC_PUBLIC, ACC_STATIC
+Code:
+stack=2, locals=4, args_size=1
+0: bipush 10
+2: istore_1
+3: ldc #3 // int 32768
+5: istore_2
+6: iload_1
+7: iload_2
+8: iadd
+9: istore_3
+10: getstatic #4 // Field
+java/lang/System.out:Ljava/io/PrintStream;
+13: iload_3
+14: invokevirtual #5 // Method
+java/io/PrintStream.println:(I)V
+17: return
+LineNumberTable:
+line 8: 0
+line 9: 3
+line 10: 6
+line 11: 10
+line 12: 17
+LocalVariableTable:
+Start Length Slot Name Signature
+0 18 0 args [Ljava/lang/String;
+3 15 1 a I
+6 12 2 b I
+10 8 3 c I
+MethodParameters:
+Name Flags
+args
+}
+
+~~~
+
+
+
+
+
+3）常量池载入运行时常量池
+
+---
+
+![image-20220808225817493](http://fgcy-pic.zhamao.ml/image-20220808225817493.png)
+
+---
+
+
+
+
+
+4）方法字节码载入方法区
+
+---
+
+![image-20220808225845252](http://fgcy-pic.zhamao.ml/image-20220808225845252.png)
+
+---
+
+
+
+5）main 线程开始运行，分配栈帧内存
+
+（stack=2，locals=4）
+
+----
+
+![image-20220808230231526](C:/Users/fgcy/AppData/Roaming/Typora/typora-user-images/image-20220808230231526.png)
+
+---
+
+操作数栈的宽度是四个字节
+
+
+
+6）执行引擎开始执行字节码
+
+bipush 10 
+
+将一个 byte 压入操作数栈（其长度会补齐 4 个字节），类似的指令还有 
+
+sipush 将一个 short 压入操作数栈（其长度会补齐 4 个字节） 
+
+ldc 将一个 int 压入操作数栈 
+
+ldc2_w 将一个 long 压入操作数栈（分两次压入，因为 long 是 8 个字节） 
+
+这里小的数字都是和字节码指令存在一起，超过 short 范围的数字存入了常量池
+
+
+
+istore_1
+
+将操作数栈顶数据弹出，存入局部变量表的 slot 1
+
+---
+
+![image-20220808231259983](http://fgcy-pic.zhamao.ml/image-20220808231259983.png)
+
+---
+
+
+
+
+
+---
+
+![image-20220808231322044](http://fgcy-pic.zhamao.ml/image-20220808231322044.png)
+
+---
+
+
+
+ldc #3
+
+从常量池加载 #3 数据到操作数栈 
+
+注意 Short.MAX_VALUE 是 32767，所以 32768 = Short.MAX_VALUE + 1 实际是在编译期间计算 好的【算是一种编译器的优化】
+
+---
+
+![image-20220808231612428](http://fgcy-pic.zhamao.ml/image-20220808231612428.png)
+
+---
+
+
+
+
+
+istore_2
+
+----
+
+![image-20220808231816628](http://fgcy-pic.zhamao.ml/image-20220808231816628.png)
+
+----
+
+
+
+---
+
+![image-20220808231845387](http://fgcy-pic.zhamao.ml/image-20220808231845387.png)
+
+---
+
+
+
+
+
+iload_1
+
+---
+
+![image-20220808232202160](http://fgcy-pic.zhamao.ml/image-20220808232202160.png)
+
+---
+
+
+
+iload_2
+
+---
+
+![image-20220808232233002](http://fgcy-pic.zhamao.ml/image-20220808232233002.png)
+
+---
+
+
+
+
+
+iadd
+
+---
+
+![image-20220808232304007](C:/Users/fgcy/AppData/Roaming/Typora/typora-user-images/image-20220808232304007.png)
+
+---
+
+
+
+---
+
+![image-20220808232323679](http://fgcy-pic.zhamao.ml/image-20220808232323679.png)
+
+---
+
+
+
+istore_3
+
+---
+
+![image-20220808232359932](http://fgcy-pic.zhamao.ml/image-20220808232359932.png)
+
+---
+
+
+
+---
+
+![image-20220808232419598](http://fgcy-pic.zhamao.ml/image-20220808232419598.png)
+
+---
+
+
+
+
+
+getstatic #4
+
+---
+
+![image-20220809194216749](http://fgcy-pic.zhamao.ml/image-20220809194216749.png)
+
+---
+
+
+
+---
+
+![image-20220809194232084](http://fgcy-pic.zhamao.ml/image-20220809194232084.png)
+
+---
+
+
+
+iload_3
+
+---
+
+![image-20220809194258685](http://fgcy-pic.zhamao.ml/image-20220809194258685.png)
+
+---
+
+
+
+---
+
+![image-20220809194312978](http://fgcy-pic.zhamao.ml/image-20220809194312978.png)
+
+---
+
+
+
+invokevirtual #5 
+
+找到常量池 #5 项 定位到方法区 java/io/PrintStream.println:(I)V 方法 
+
+生成新的栈帧（分配 locals、stack等） 
+
+传递参数，执行新栈帧中的字节码
+
+
+
+---
+
+![image-20220809194453876](http://fgcy-pic.zhamao.ml/image-20220809194453876.png)
+
+---
+
+执行完毕，弹出栈帧 
+
+清除 main 操作数栈内容
+
+----
+
+![image-20220809194520533](http://fgcy-pic.zhamao.ml/image-20220809194520533.png)
+
+---
+
+return 
+
+完成 main 方法调用，弹出 main 栈帧 
+
+程序结束
+
+
+
+### 2.4 练习 - 分析 i++
+
+目的：从字节码角度分析 a++ 相关题目 
+
+源码：
+
+~~~java
+package cn.itcast.jvm.t3.bytecode;
+/**
+* 从字节码角度分析 a++ 相关题目
+*/
+public class Demo3_2 {
+public static void main(String[] args) {
+    int a = 10;
+    int b = a++ + ++a + a--;
+    System.out.println(a);
+    System.out.println(b);
+    }
+}
+~~~
+
+
+
+字节码：
+
+~~~
+public static void main(java.lang.String[]);
+descriptor: ([Ljava/lang/String;)V
+flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+ Code:
+  stack=2, locals=3, args_size=1
+    0: bipush 10
+    2: istore_1
+    3: iload_1
+    4: iinc 1, 1
+    7: iinc 1, 1
+    10: iload_1
+    11: iadd
+    12: iload_1
+    13: iinc 1, -1
+    16: iadd
+    17: istore_2
+    18: getstatic #2 // Field
+    java/lang/System.out:Ljava/io/PrintStream;
+    21: iload_1
+    22: invokevirtual #3 // Method
+    java/io/PrintStream.println:(I)V
+    25: getstatic #2 // Field
+    java/lang/System.out:Ljava/io/PrintStream;
+    28: iload_2
+    29: invokevirtual #3 // Method
+    java/io/PrintStream.println:(I)V
+    32: return
+    
+LineNumberTable:
+    line 8: 0
+    line 9: 3
+    line 10: 18
+    line 11: 25
+    line 12: 32
+    LocalVariableTable:
+    Start Length Slot Name Signature
+    0 33 0 args [Ljava/lang/String;
+    3 30 1 a I
+    18 15 2 b I
+~~~
+
+分析：
+
+注意` iinc 指令`是直接在  **局部变量 `slot `**上进行运算 
+
+a++ 和 ++a 的区别是先执行` iload` 还是 先执行 `iinc`
+
+
+
+---
+
+![image-20220809203918195](http://fgcy-pic.zhamao.ml/image-20220809203918195.png)
+
+---
+
+![image-20220809203945867](C:/Users/fgcy/AppData/Roaming/Typora/typora-user-images/image-20220809203945867.png)
+
+----
+
+![image-20220809204002762](http://fgcy-pic.zhamao.ml/image-20220809204002762.png)
+
+---
+
+
+
+----
+
+![image-20220809204024144](http://fgcy-pic.zhamao.ml/image-20220809204024144.png)
+
+---
+
+
+
+----
+
+![image-20220809204041830](http://fgcy-pic.zhamao.ml/image-20220809204041830.png)
+
+----
+
+![image-20220809204056743](http://fgcy-pic.zhamao.ml/image-20220809204056743.png)
+
+---
+
+![image-20220809204109092](http://fgcy-pic.zhamao.ml/image-20220809204109092.png)
+
+----
+
+![image-20220809204120623](http://fgcy-pic.zhamao.ml/image-20220809204120623.png)
+
+---
+
+![image-20220809204135324](http://fgcy-pic.zhamao.ml/image-20220809204135324.png)
+
+----
+
+![image-20220809204221238](http://fgcy-pic.zhamao.ml/image-20220809204221238.png)
+
+----
+
+![image-20220809204232916](http://fgcy-pic.zhamao.ml/image-20220809204232916.png)
+
+----
+
+
+
+### 2.5 条件判断指令
+
+---
+
+![image-20220809205201784](http://fgcy-pic.zhamao.ml/image-20220809205201784.png)
+
+![image-20220809205229204](http://fgcy-pic.zhamao.ml/image-20220809205229204.png)
+
+---
+
+几点说明： 
+
+byte，short，char 都会按 int 比较，因为操作数栈都是 4 字节 
+
+goto 用来进行跳转到指定行号的字节码
+
+
+
+例子：
+
+源码：
+
+~~~java
+public class Demo3_3 {
+public static void main(String[] args) {
+    int a = 0;
+        if(a == 0) {
+        	a = 10;
+     	} else {
+        	a = 20;
+        }
+    }
+}
+
+~~~
+
+
+
+
+
+字节码：
+
+~~~
+0: iconst_0   【注意：-1到5之间的数 用iconst表示】这里表示将一个常量0放到操作数栈中
+1: istore_1		将操作数栈中的数放到局部变量表一号槽位中
+2: iload_1		将局部变量表一号槽位中的数加载到操作数栈中
+3: ifne 12		判断该数是否等于零 不等于零跳到12行，等于执行下一跳指令
+6: bipush 10    将10放到操作数栈中
+8: istore_1		将操作数栈中的数放到局部变量表一号槽位中
+9: goto 15		跳转到15行
+12: bipush 20	将20放到操作数栈中
+14: istore_1	将操作数栈中的数放到局部变量表一号槽位中
+15: return		结束方法
+~~~
+
+
+
+
+
+以上比较指令中没有 long，float，double 的比较，那么它们要比较怎 么办？ 
+
+参考 https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html#jvms-6.5.lcmp
+
+
+
+
+
+
+
+### 2.6 循环控制指令
+
+其实循环控制还是前面介绍的那些指令，
+
+
+
+例如 while 循环：
+
+~~~java
+public class Demo3_4 {
+public static void main(String[] args) {
+        int a = 0;
+        while (a < 10) {
+            a++;
+        }
+    }
+}
+~~~
+
+
+
+
+
+字节码是：
+
+~~~
+0: iconst_0   【注意：-1到5之间的数 用iconst表示】这里表示将一个常量0放到操作数栈中
+1: istore_1		将操作数栈中的数放到一号槽位中
+2: iload_1		把一号槽位中的数放到操作数栈中
+3: bipush 10	将10放到操作数栈中
+5: if_icmpge 14	 零是否大于等于十 大于等于跳到14 小于继续下一条
+8: iinc 1, 1	槽位为一的数自增一
+11: goto 2		跳转到2
+14: return		结束方法
+~~~
+
+
+
+再比如 do while 循环：
+
+~~~java
+public class Demo3_5 {
+    public static void main(String[] args) {
+        int a = 0;
+        do {
+       	  a++;
+        } while (a < 10);
+    }
+}
+~~~
+
+~~~
+ 0: iconst_0
+ 1: istore_1
+ 2: iinc 1, 1
+ 5: iload_1
+ 6: bipush 10
+ 8: if_icmplt 2
+ 11: return
+~~~
+
+
+
+最后再看看 for 循环：
+
+~~~java
+public class Demo3_6 {
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            
+        }
+    }
+}
+~~~
+
+
+
+字节码是：
+
+~~~
+0: iconst_0
+1: istore_1
+2: iload_1
+3: bipush 10
+5: if_icmpge 14
+8: iinc 1, 1
+11: goto 2
+14: return
+~~~
+
+注意 比较 while 和 for 的字节码，你发现它们是一模一样的，殊途也能同归
+
+
+
+### 2.7 练习 - 判断结果
+
+请从字节码角度分析，下列代码运行的结果：
+
+~~~java
+public class Demo3_6_1 {
+    public static void main(String[] args) {
+        int i = 0;
+        int x = 0;
+        while (i < 10) {
+            x = x++;
+            i++;
+        }
+        System.out.println(x); // 结果是 0
+    }
+}
+~~~
+
+
+
+分析 `x=x++`
+
+我们知到 x++对应两条指令，1：从局部变量表中获取数据到操作数栈中，2:将局部变量表中的槽位中的数据自增一
+
+
+
+分析赋值运算符`=` 将操作数中的数字再赋值给局部变量表中的槽位中的数
+
+
+
+
+
+### 2.8 构造方法
+
+
+
+cinit()V
+
+~~~java
+public class Demo3_8_1 {
+    static int i = 10;
+    static {
+        i = 20;
+    }
+    static {
+        i = 30;
+    }
+}
+~~~
+
+编译器会按从上至下的顺序，收集所有 static 静态代码块和静态成员赋值的代码，合并为一个特殊的方 法 \<cinit>()V ：
+
+字节码如下：
+
+~~~
+0: bipush 10   					将数字10放到操作数栈中
+2: putstatic #2 // Field i:I	将操作数中的数字放到常量池中的一个名为I的变量中
+5: bipush 20					将数字20放到操作数栈中
+7: putstatic #2 // Field i:I	将操作数中的数字放到常量池中的一个名为I的变量中
+10: bipush 30					将数字30放到操作数栈中
+12: putstatic #2 // Field i:I	将操作数中的数字放到常量池中的一个名为I的变量中
+15: return						结束方法
+~~~
+
+`<cinit>()V 方法`会在类加载的初始化阶段被调用  【类的构造方法】
+
+
+
+\<init>()V
+
+~~~java
+public class Demo3_8_2 {
+    private String a = "s1";
+     {
+        b = 20;
+    }
+        private int b = 10;
+     {
+        a = "s2";
+    }
+    public Demo3_8_2(String a, int b) {
+        this.a = a;
+        this.b = b;
+    }
+    public static void main(String[] args) {
+        Demo3_8_2 d = new Demo3_8_2("s3", 30);
+        System.out.println(d.a);
+        System.out.println(d.b);
+    }
+}
+~~~
+
+编译器会按从上至下的顺序，收集所有 {} 代码块和成员变量赋值的代码，形成新的构造方法
+
+**但原始构 造方法内的代码总是在最后**
+
+
+
+字节码：
+
+~~~
+public cn.itcast.jvm.t3.bytecode.Demo3_8_2(java.lang.String, int);
+descriptor: (Ljava/lang/String;I)V
+flags: ACC_PUBLIC
+    Code:
+    stack=2, locals=3, args_size=3
+        0: aload_0        【加载this】
+        1: invokespecial #1 // super.<init>()V   调用Object的init方法 
+        4: aload_0			加载this
+        5: ldc #2 // <- "s1"	将常量池中的“s1”加载到操作数栈
+        7: putfield #3 // -> this.a		将"s1"赋值给this的a变量
+        10: aload_0
+        11: bipush 20 // <- 20
+        13: putfield #4 // -> this.b
+        16: aload_0
+        17: bipush 10 // <- 10
+        19: putfield #4 // -> this.b
+        22: aload_0
+        23: ldc #5 // <- "s2"
+        25: putfield #3 // -> this.a
+        28: aload_0 // ------------------------------
+        29: aload_1 // <- slot 1(a) "s3" |
+        30: putfield #3 // -> this.a |
+        33: aload_0 |
+        34: iload_2 // <- slot 2(b) 30 |
+        35: putfield #4 // -> this.b --------------------
+        38: return
+    LineNumberTable: ...
+    LocalVariableTable:
+        Start Length Slot Name Signature
+        0 39 0 this Lcn/itcast/jvm/t3/bytecode/Demo3_8_2;
+        0 39 1 a Ljava/lang/String;
+        0 39 2 b I
+MethodParameters: ...
+
+~~~
+
+
+
+
+
+### 2.9 方法调用
+
+看一下几种不同的方法调用对应的字节码指令：
+
+~~~java
+public class Demo3_9 {
+    public Demo3_9() { }
+    private void test1() { }
+    private final void test2() { }
+    public void test3() { }
+    public static void test4() { }
+    public static void main(String[] args) {
+        Demo3_9 d = new Demo3_9();
+        d.test1();
+        d.test2();
+        d.test3();
+        d.test4();
+        Demo3_9.test4();
+    }
+}
+~~~
+
+~~~
+0: new #2 // class cn/itcast/jvm/t3/bytecode/Demo3_9   【分配该对象在堆中所需要的内存，将对象的引用放到操作数栈中】
+3: dup   【将栈顶的对象引用进行一次复制，放在栈顶； 	】
+4: invokespecial #3 // Method "<init>":()V   【根据栈顶的引用调用对象的构造方法】 调用结束后，将栈顶元素出栈
+7: astore_1									【将操作数栈中的对象地址放到局部变量表的一号槽位中】
+8: aload_1
+9: invokespecial #4 // Method test1:()V
+12: aload_1
+13: invokespecial #5 // Method test2:()V
+16: aload_1
+17: invokevirtual #6 // Method test3:()V
+20: aload_1   【加载对象的地址到操作数栈】
+21: pop		【发现是静态方法的调用，将对象丢弃出操作数栈】
+22: invokestatic #7 // Method test4:()V	【调用静态方法】
+25: invokestatic #7 // Method test4:()V
+28: return
+~~~
+
+`invokespecial   ` ：私有方法、构造方法
+
+`invokestatic` ： 静态方法
+
+上面两个方法属于静态绑定，在字节码生成后（编译期），就可以确定是哪个类的哪个方法；【因为静态的方法，和私有的方法不可以重写】
+
+`invokevisual` :普通public的方法 【可以重写，即可以多态，编译期间不可以确认调用哪个类的哪个方法】 动态绑定 	 
+
+
+
+字节码指令分析
+
+1、new 是创建【对象】，给对象分配堆内存，执行成功会将【对象引用】压入操作数栈
+
+2、dup 是复制操作数栈栈顶的内容，本例即为【对象引用】，为什么需要两份引用呢
+
+​	一个是要配合 invokespecial 调用该对象的构造方法 "\<init>":()V （会消耗掉栈顶一个引用），另一个要配合 astore_1 赋值给局部变量
+
+3、最终方法（final），私有方法（private），构造方法都是由 invokespecial 指令来调用，属于静态绑定
+
+4、普通成员方法是由 invokevirtual 调用，属于动态绑定，即支持多态
+
+5、成员方法与静态方法调用的另一个区别是，执行方法前是否需要【对象引用】
+
+6、比较有意思的是 d.test4(); 是通过【对象引用】调用一个静态方法，可以看到在调用
+
+7、invokestatic 之前执行了 pop 指令，把【对象引用】从操作数栈弹掉了😂
+
+8、还有一个执行 invokespecial 的情况是通过 super 调用父类方法
+
+
+
+
+
+### 2.10 多态的原理
+
+源码：
+
+~~~java
+package cn.itcast.jvm.t3.bytecode;
+
+import java.io.IOException;
+
+/**
+ * 演示多态原理，注意加上下面的 JVM 参数，禁用指针压缩
+ * -XX:-UseCompressedOops -XX:-UseCompressedClassPointers
+ */
+public class Demo3_10 {
+
+    public static void test(Animal animal) {
+        animal.eat();
+        System.out.println(animal.toString());
+    }
+
+    public static void main(String[] args) throws IOException {
+        test(new Cat());
+        test(new Dog());
+        System.in.read();
+    }
+}
+
+abstract class Animal {
+    public abstract void eat();
+
+    @Override
+    public String toString() {
+        return "我是" + this.getClass().getSimpleName();
+    }
+}
+
+class Dog extends Animal {
+
+    @Override
+    public void eat() {
+        System.out.println("啃骨头");
+    }
+}
+
+class Cat extends Animal {
+
+    @Override
+    public void eat() {
+        System.out.println("吃鱼");
+    }
+}
+~~~
+
+
+
+1）运行代码 
+
+停在 System.in.read() 方法上，这时运行 jps 获取进程 id
+
+
+
+2）运行 HSDB 工具 进入 JDK 安装目录，执行
+
+~~~
+java -cp ./lib/sa-jdi.jar sun.jvm.hotspot.HSDB
+~~~
+
+进入图形界面
+
+----
+
+![image-20220809233300483](http://fgcy-pic.zhamao.ml/image-20220809233300483.png)
+
+----
+
+
+
+3）查找某个对象
+
+打开 `Tools -> Find Object By Query `
+
+输入` select d from cn.itcast.jvm.t3.bytecode.Dog d `点击 Execute 执行
+
+-----
+
+![image-20220809235241134](http://fgcy-pic.zhamao.ml/image-20220809235241134.png)
+
+----
+
+
+
+4）查看对象内存结构 
+
+点击超链接可以看到对象的内存结构，此对象没有任何属性，因此只有对象头的 16 字节，前 8 字节是 MarkWord，后 8 字节就是对象的 Class 指针 
+
+但目前看不到它的实际地址
+
+----
+
+![image-20220809235352985](http://fgcy-pic.zhamao.ml/image-20220809235352985.png)
+
+---
+
+5）查看对象 Class 的内存地址 
+
+可以通过 Windows -> Console 进入命令行模式，执行
+
+~~~
+mem 0x00000001299b4978 2
+~~~
+
+mem 有两个参数，参数 1 是对象地址，参数 2 是查看 2 行（即 16 字节） 
+
+结果中第二行 0x000000001b7d4028 即为 Class 的内存地址
+
+----
+
+![image-20220810195514780](http://fgcy-pic.zhamao.ml/image-20220810195514780.png)
+
+----
+
+
+
+6）查看类的 vtable
+
+方法1：Alt+R 进入 Inspector 工具，输入刚才的 Class 内存地址，看到如下界面
+
+---
+
+![image-20220810200256239](http://fgcy-pic.zhamao.ml/image-20220810200256239.png)
+
+---
+
+
+
+方法2：或者 Tools -> Class Browser 输入 Dog 查找，可以得到相同的结果
+
+---
+
+![image-20220810200332444](http://fgcy-pic.zhamao.ml/image-20220810200332444.png)
+
+----
+
+无论通过哪种方法，都可以找到 Dog` Class 的 vtable 长度`为 6，意思就是 Dog 类有 6 个虚方法【多态 相关的】（final，static 不会列入）
+
+ 那么这 6 个方法都是谁呢？
+
+从 **Class 的起始地址开始算**，**偏移 0x1b8 就是 vtable 的起始地址**，进行计 算得到：
+
+~~~
+0x000000001b7d4028
+               1b8 +
+---------------------
+0x000000001b7d41e0
+~~~
+
+
+
+通过 Windows -> Console 进入命令行模式，执行
+
+~~~
+mem 0x000000001b7d41e0 6
+~~~
+
+类地址 + 偏移量地址 = vtable地址
+
+在Inspector中找到Vtable的的长度为6
+
+
+
+~~~
+0x000000001b7d41e0: 0x000000001b3d1b10
+0x000000001b7d41e8: 0x000000001b3d15e8
+0x000000001b7d41f0: 0x000000001b7d35e8
+0x000000001b7d41f8: 0x000000001b3d1540
+0x000000001b7d4200: 0x000000001b3d1678
+0x000000001b7d4208: 0x000000001b7d3fa8
+~~~
+
+就得到了 6 个虚方法的入口地址
+
+
+
+
+
+通过对象找到类对象，找到虚方法表，通过虚方法表找到方法的入口地址【连接阶段就生成虚方法表】
+
+
+
+
+
+7）验证方法地址
+
+通过 Tools -> Class Browser 查看每个类的方法定义，比较可知
+
+----
+
+![image-20220810210142699](http://fgcy-pic.zhamao.ml/image-20220810210142699.png)
+
+---
+
+![image-20220810210528315](http://fgcy-pic.zhamao.ml/image-20220810210528315.png)
+
+-----
+
+![image-20220810210907013](http://fgcy-pic.zhamao.ml/image-20220810210907013.png)
+
+----
+
+
+
+~~~
+Dog - public void eat() @0x000000001b7d3fa8
+Animal - public java.lang.String toString() @0x000000001b7d35e8;
+Object - protected void finalize() @0x000000001b3d1b10;
+Object - public boolean equals(java.lang.Object) @0x000000001b3d15e8;
+Object - public native int hashCode() @0x000000001b3d1540;
+Object - protected native java.lang.Object clone() @0x000000001b3d1678;
+~~~
+
+对号入座，发现 
+
+eat() 方法是 Dog 类自己的 
+
+toString() 方法是继承 String 类的
+
+finalize() ，equals()，hashCode()，clone() 都是继承 Object 类的
+
+
+
+8）小结
+
+当执行 invokevirtual 指令时： 
+
+1. 先通过栈帧中的**对象引用**找到对象 
+2. 分析**对象头**，找到对象的实际 Class【对象头中包含有8个字节的关于该对象Class对象的地址】
+3.  Class 结构中有` vtable`，它在**类加载的链接阶段**就已经根据方法的重写规则生成好了
+4. 查表得到方法的具体地址 
+5. 执行方法的字节码
+
+
+
+注意：
+
+静态方法，私有方法，最终方法不会在虚方法表
+
+
+
+
+
+### 2.11 异常处理
+
+try-catch
+
+~~~java
+public class Demo3_11_1 {
+public static void main(String[] args) {
+         int i = 0;
+        try {
+            i = 10;
+        } catch (Exception e) {
+            i = 20;
+        }
+    }
+}
+~~~
+
+注意 为了抓住重点，下面的字节码省略了不重要的部分:\
+
+~~~java
+public static void main(java.lang.String[]);
+descriptor: ([Ljava/lang/String;)V
+flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+    stack=1, locals=3, args_size=1
+        0: iconst_0
+        1: istore_1     i=0
+        2: bipush 10
+        4: istore_1		i=10
+        5: goto 12		转去结束方法
+        8: astore_2    将异常对象的引用地址存放到局部变量表中的二号槽位
+        9: bipush 20
+        11: istore_1	将操作数栈中的20 放到局部变量表中的1号槽位
+        12: return		结束方法
+    Exception table:   异常表
+    from to target type
+    2 5 8 Class java/lang/Exception   包含第二行到第四行的指令【包前不包后】出现异常后，判断是否是表中的异常类型或子类 是就进入第八行指令
+    LineNumberTable: ...
+    LocalVariableTable:
+        Start Length Slot Name Signature
+        9 3 2 e Ljava/lang/Exception;
+        0 13 0 args [Ljava/lang/String;
+        2 11 1 i I
+StackMapTable: ...
+MethodParameters: ...
+}
+~~~
+
+重点小结：
+
+可以看到多出来一个 Exception table 的结构，[from, to) 是前闭后开的检测范围，一旦这个范围 内的字节码执行出现异常，则通过 type 匹配异常类型，如果一致，进入 target 所指示行号 8 行的字节码指令 astore_2 是将异常对象引用存入局部变量表的 slot 2 位置
+
+
+
+
+
+多个 single-catch 块的情况
+
+~~~java
+public class Demo3_11_2 {
+    public static void main(String[] args) {
+        int i = 0;
+        try {
+            i = 10;
+        } catch (ArithmeticException e) {
+            i = 30;
+        } catch (NullPointerException e) {
+            i = 40;
+        } catch (Exception e) {
+            i = 50;
+        }
+    }
+}
+~~~
+
+~~~
+public static void main(java.lang.String[]);
+descriptor: ([Ljava/lang/String;)V
+flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+    stack=1, locals=3, args_size=1
+        0: iconst_0
+        1: istore_1
+        2: bipush 10
+        4: istore_1
+        5: goto 26
+        8: astore_2
+        9: bipush 30
+        11: istore_1
+        12: goto 26
+        15: astore_2
+        16: bipush 40
+        18: istore_1
+        19: goto 26
+        22: astore_2
+        23: bipush 50
+        25: istore_1
+        26: return
+    Exception table:
+    from to target type
+    2 5 8 Class java/lang/ArithmeticException
+    2 5 15 Class java/lang/NullPointerException
+    2 5 22 Class java/lang/Exception
+LineNumberTable: ...
+    LocalVariableTable:
+    Start Length Slot Name Signature
+    9 3 2 e Ljava/lang/ArithmeticException; 这里三个异常类型的对象都会放到一个槽位中，因为每次只会出现一个异常，所以可以共用
+    16 3 2 e Ljava/lang/NullPointerException;
+    23 3 2 e Ljava/lang/Exception;
+    0 27 0 args [Ljava/lang/String;
+    2 25 1 i I
+StackMapTable: ...
+MethodParameters: ...
+~~~
+
+注意：
+
+因为异常出现时，只能进入 Exception table 中一个分支，所以局部变量表 slot 2 位置被共用
+
+
+
+
+
+multi-catch 的情况：
+
+~~~java
+public class Demo3_11_3 {
+    public static void main(String[] args) {
+        try {
+            Method test = Demo3_11_3.class.getMethod("test");
+            test.invoke(null);
+        } catch (NoSuchMethodException | IllegalAccessException |
+            InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void test() {
+        System.out.println("ok");
+    }
+}
+~~~
+
+~~~
+public static void main(java.lang.String[]);
+descriptor: ([Ljava/lang/String;)V
+flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+    stack=3, locals=2, args_size=1
+        0: ldc #2
+        2: ldc #3
+        4: iconst_0
+        5: anewarray #4
+        8: invokevirtual #5
+        11: astore_1
+        12: aload_1
+        13: aconst_null
+        14: iconst_0
+        15: anewarray #6
+        18: invokevirtual #7
+        21: pop
+        22: goto 30
+        25: astore_1
+        26: aload_1
+        27: invokevirtual #11 // e.printStackTrace:()V
+        30: return
+Exception table:
+        from to target type
+        0 22 25 Class java/lang/NoSuchMethodException
+        0 22 25 Class java/lang/IllegalAccessException
+        0 22 25 Class java/lang/reflect/InvocationTargetException  无论是哪个异常，都会去执行25行指令
+LineNumberTable: ...
+LocalVariableTable:
+        Start Length Slot Name Signature
+        12 10 1 test Ljava/lang/reflect/Method;
+        26 4 1 e Ljava/lang/ReflectiveOperationException;
+        0 31 0 args [Ljava/lang/String;
+StackMapTable: ...
+MethodParameters: ...
+~~~
+
+
+
+finally
+
+~~~java
+public class Demo3_11_4 {
+    public static void main(String[] args) {
+        int i = 0;
+        try {
+            i = 10;
+        } catch (Exception e) {
+            i = 20;
+        } finally {
+            i = 30;
+        }
+    }
+}
+~~~
+
+~~~
+public static void main(java.lang.String[]);
+descriptor: ([Ljava/lang/String;)V
+flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+    stack=1, locals=4, args_size=1
+        0: iconst_0
+        1: istore_1 // 0 -> i
+        2: bipush 10 //           try --------------------------------------
+        4: istore_1 // 10 -> i    catch-------------------------
+        5: bipush 30 //           finally 要执行的逻辑
+        7: istore_1 // 30 -> i
+        8: goto 27 // 			  跳转到return -----------------------------------
+        11: astore_2 // 		  将抓到的异常对象放在二号槽位上
+        12: bipush 20 // 		  抓到异常后的逻辑
+        14: istore_1 // 20 -> i 
+        15: bipush 30 // finally   finally 要执行的逻辑
+        17: istore_1 // 30 -> i 
+        18: goto 27 //			 跳转到return -----------------------------------
+        21: astore_3 // 		 捕获任何异常，放到三号槽位中【try块中出现了error、throwable、或不在范围内的异常 以及 catch中出现的任何异常】
+        22: bipush 30 // finally   finally 要执行的逻辑
+        24: istore_1 // 30 -> i 
+        25: aload_3 // <-        取槽位为三的异常对象
+        26: athrow //   		抛出
+        27: return				结束方法
+Exception table:
+        from to target type
+        2 5 11 Class java/lang/Exception
+        2 5 21 any // 剩余的异常类型，比如 Error
+        11 15 21 any // 剩余的异常类型，比如 Error
+LineNumberTable: ...
+LocalVariableTable:
+        Start Length Slot Name Signature
+        12 3 2 e Ljava/lang/Exception;
+        0 28 0 args [Ljava/lang/String;
+        2 26 1 i I
+StackMapTable: ...
+MethodParameters: ...
+~~~
+
+可以看到 finally 中的代码被复制了 3 份，分别放入 **try 流程**，**catch 流程**以及 **catch 剩余的异常类型流 程**
+
+
+
+### 2.12 练习 - finally 面试题
+
+**finally 出现了 return** 
+
+先问问自己，下面的题目输出什么？
+
+~~~java
+public class Demo3_12_2 {
+    public static void main(String[] args) {
+        int result = test();
+        System.out.println(result);
+    }
+    
+    public static int test() {
+        try {
+            return 10;
+        } finally {
+            return 20;
+        }
+    }
+}
+~~~
+
+~~~
+public static int test();
+descriptor: ()I
+flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+    stack=1, locals=2, args_size=0
+        0: bipush 10 // <- 10 放入栈顶
+        2: istore_0 // 10 -> slot 0 (从栈顶移除了)
+        3: bipush 20 // <- 20 放入栈顶
+        5: ireturn // 返回栈顶 int(20)
+        6: astore_1 // catch any -> slot 1
+        7: bipush 20 // <- 20 放入栈顶
+        9: ireturn // 返回栈顶 int(20)
+Exception table:
+        from to target type
+        0 3 6 any
+LineNumberTable: ...
+StackMapTable: ...
+~~~
+
+由于 finally 中的 ireturn 被插入了所有可能的流程，因此返回结果肯定以 finally 的为准 
+
+至于字节码中第 2 行，似乎没啥用，且留个伏笔，看下个例子 
+
+跟上例中的 finally 相比，发现**没有 athrow** 了，
+
+这告诉我们：**如果在 finally 中出现了 return，会 吞掉  异常**😱😱😱，
+
+
+
+可以试一下下面的代码:
+
+~~~java
+public class Demo3_12_1 {
+    public static void main(String[] args) {
+        int result = test();
+        System.out.println(result);
+    }
+    public static int test() {
+        try {
+            int i = 1/0;
+            return 10;
+        } finally {
+            return 20;
+        }
+    }
+}
+~~~
+
+注意：
+
+这样是不会发生异常的，结果是20
+
+
+
+
+
+finally 对返回值影响 
+
+同样问问自己，下面的题目输出什么？
+
+~~~java
+public class Demo3_12_2 {
+    public static void main(String[] args) {
+        int result = test();
+        System.out.println(result);
+    }
+    public static int test() {
+        int i = 10;
+        try {
+            return i;
+        } finally {
+            i = 20;
+        }
+    }
+}
+~~~
+
+~~~
+public static int test();
+descriptor: ()I
+flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+    stack=1, locals=3, args_size=0
+        0: bipush 10 // <- 10 放入栈顶
+        2: istore_0 // 10 -> i
+        3: iload_0 // <- i(10)
+        4: istore_1 // 10 -> slot 1，    【本来想直接返回的，发现有finally】暂存至 slot 1，目的是为了固定返回值
+        5: bipush 20 // <- 20 放入栈顶
+        7: istore_0 // 20 -> i
+        8: iload_1 // <- slot 1(10) 载入 slot 1 暂存的值
+        9: ireturn // 返回栈顶的 int(10)
+        10: astore_2
+        11: bipush 20
+        13: istore_0
+        14: aload_2
+        15: athrow
+Exception table:
+        from to target type
+        3     5   10    any
+LineNumberTable: ...
+LocalVariableTable:
+        Start Length Slot Name Signature
+         3       13     0    i      I
+StackMapTable: ...
+~~~
+
+
 
 
 
