@@ -5369,7 +5369,7 @@ L：是引用类型
 
 ----
 
-![image-20220808221303085](http://fgcy-pic.zhamao.ml/image-20220808221303085.png)
+![image-20220808221303085](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220808221303085.png)
 
 ---
 
@@ -5421,7 +5421,7 @@ L：是引用类型
 
 ---
 
-![image-20220808222238237](http://fgcy-pic.zhamao.ml/image-20220808222238237.png)
+![image-20220808222238237](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220808222238237.png)
 
 ---
 
@@ -5437,7 +5437,7 @@ L：是引用类型
 
 ---
 
-![image-20220808222321341](http://fgcy-pic.zhamao.ml/image-20220808222321341.png)
+![image-20220808222321341](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220808222321341.png)
 
 ---
 
@@ -5457,7 +5457,7 @@ L：是引用类型
 
 ---
 
-![image-20220808222406790](http://fgcy-pic.zhamao.ml/image-20220808222406790.png)
+![image-20220808222406790](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220808222406790.png)
 
 ---
 
@@ -5831,7 +5831,7 @@ args
 
 ---
 
-![image-20220808225817493](http://fgcy-pic.zhamao.ml/image-20220808225817493.png)
+![image-20220808225817493](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220808225817493.png)
 
 ---
 
@@ -5843,7 +5843,7 @@ args
 
 ---
 
-![image-20220808225845252](http://fgcy-pic.zhamao.ml/image-20220808225845252.png)
+![image-20220808225845252](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220808225845252.png)
 
 ---
 
@@ -5855,7 +5855,7 @@ args
 
 ----
 
-![image-20220808230231526](C:/Users/fgcy/AppData/Roaming/Typora/typora-user-images/image-20220808230231526.png)
+![image-20220808230231526](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220808230231526.png)
 
 ---
 
@@ -5895,7 +5895,7 @@ istore_1
 
 ---
 
-![image-20220808231322044](http://fgcy-pic.zhamao.ml/image-20220808231322044.png)
+![image-20220808231322044](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220808231322044.png)
 
 ---
 
@@ -5909,7 +5909,7 @@ ldc #3
 
 ---
 
-![image-20220808231612428](http://fgcy-pic.zhamao.ml/image-20220808231612428.png)
+![image-20220808231612428](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220808231612428.png)
 
 ---
 
@@ -5941,7 +5941,7 @@ iload_1
 
 ---
 
-![image-20220808232202160](http://fgcy-pic.zhamao.ml/image-20220808232202160.png)
+![image-20220808232202160](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220808232202160.png)
 
 ---
 
@@ -5951,7 +5951,7 @@ iload_2
 
 ---
 
-![image-20220808232233002](http://fgcy-pic.zhamao.ml/image-20220808232233002.png)
+![image-20220808232233002](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220808232233002.png)
 
 ---
 
@@ -5963,7 +5963,7 @@ iadd
 
 ---
 
-![image-20220808232304007](C:/Users/fgcy/AppData/Roaming/Typora/typora-user-images/image-20220808232304007.png)
+![image-20220808232304007](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220808232304007.png)
 
 ---
 
@@ -5989,7 +5989,7 @@ istore_3
 
 ---
 
-![image-20220808232419598](http://fgcy-pic.zhamao.ml/image-20220808232419598.png)
+![image-20220808232419598](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220808232419598.png)
 
 ---
 
@@ -6027,7 +6027,7 @@ iload_3
 
 ---
 
-![image-20220809194312978](http://fgcy-pic.zhamao.ml/image-20220809194312978.png)
+![image-20220809194312978](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220809194312978.png)
 
 ---
 
@@ -6148,11 +6148,11 @@ a++ 和 ++a 的区别是先执行` iload` 还是 先执行 `iinc`
 
 ---
 
-![image-20220809203945867](C:/Users/fgcy/AppData/Roaming/Typora/typora-user-images/image-20220809203945867.png)
+![image-20220809203945867](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220809203945867.png)
 
 ----
 
-![image-20220809204002762](http://fgcy-pic.zhamao.ml/image-20220809204002762.png)
+![image-20220809204002762](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220809204002762.png)
 
 ---
 
@@ -6172,27 +6172,27 @@ a++ 和 ++a 的区别是先执行` iload` 还是 先执行 `iinc`
 
 ----
 
-![image-20220809204056743](http://fgcy-pic.zhamao.ml/image-20220809204056743.png)
+![image-20220809204056743](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220809204056743.png)
 
 ---
 
-![image-20220809204109092](http://fgcy-pic.zhamao.ml/image-20220809204109092.png)
+![image-20220809204109092](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220809204109092.png)
 
 ----
 
-![image-20220809204120623](http://fgcy-pic.zhamao.ml/image-20220809204120623.png)
+![image-20220809204120623](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220809204120623.png)
 
 ---
 
-![image-20220809204135324](http://fgcy-pic.zhamao.ml/image-20220809204135324.png)
+![image-20220809204135324](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220809204135324.png)
 
 ----
 
-![image-20220809204221238](http://fgcy-pic.zhamao.ml/image-20220809204221238.png)
+![image-20220809204221238](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220809204221238.png)
 
 ----
 
-![image-20220809204232916](http://fgcy-pic.zhamao.ml/image-20220809204232916.png)
+![image-20220809204232916](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220809204232916.png)
 
 ----
 
@@ -6202,9 +6202,9 @@ a++ 和 ++a 的区别是先执行` iload` 还是 先执行 `iinc`
 
 ---
 
-![image-20220809205201784](http://fgcy-pic.zhamao.ml/image-20220809205201784.png)
+![image-20220809205201784](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220809205201784.png)
 
-![image-20220809205229204](http://fgcy-pic.zhamao.ml/image-20220809205229204.png)
+![image-20220809205229204](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220809205229204.png)
 
 ---
 
@@ -6647,7 +6647,7 @@ java -cp ./lib/sa-jdi.jar sun.jvm.hotspot.HSDB
 
 ----
 
-![image-20220809233300483](http://fgcy-pic.zhamao.ml/image-20220809233300483.png)
+![image-20220809233300483](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220809233300483.png)
 
 ----
 
@@ -6661,7 +6661,7 @@ java -cp ./lib/sa-jdi.jar sun.jvm.hotspot.HSDB
 
 -----
 
-![image-20220809235241134](http://fgcy-pic.zhamao.ml/image-20220809235241134.png)
+![image-20220809235241134](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220809235241134.png)
 
 ----
 
@@ -6675,7 +6675,7 @@ java -cp ./lib/sa-jdi.jar sun.jvm.hotspot.HSDB
 
 ----
 
-![image-20220809235352985](http://fgcy-pic.zhamao.ml/image-20220809235352985.png)
+![image-20220809235352985](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220809235352985.png)
 
 ---
 
@@ -6693,7 +6693,7 @@ mem 有两个参数，参数 1 是对象地址，参数 2 是查看 2 行（即 
 
 ----
 
-![image-20220810195514780](http://fgcy-pic.zhamao.ml/image-20220810195514780.png)
+![image-20220810195514780](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220810195514780.png)
 
 ----
 
@@ -6705,7 +6705,7 @@ mem 有两个参数，参数 1 是对象地址，参数 2 是查看 2 行（即 
 
 ---
 
-![image-20220810200256239](http://fgcy-pic.zhamao.ml/image-20220810200256239.png)
+![image-20220813004142929](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220813004142929.png)
 
 ---
 
@@ -6715,7 +6715,7 @@ mem 有两个参数，参数 1 是对象地址，参数 2 是查看 2 行（即 
 
 ---
 
-![image-20220810200332444](http://fgcy-pic.zhamao.ml/image-20220810200332444.png)
+![image-20220810200332444](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220810200332444.png)
 
 ----
 
@@ -6773,15 +6773,15 @@ mem 0x000000001b7d41e0 6
 
 ----
 
-![image-20220810210142699](http://fgcy-pic.zhamao.ml/image-20220810210142699.png)
+![image-20220813004223713](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220813004223713.png)
 
 ---
 
-![image-20220810210528315](http://fgcy-pic.zhamao.ml/image-20220810210528315.png)
+![image-20220813004257145](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220813004257145.png)
 
 -----
 
-![image-20220810210907013](http://fgcy-pic.zhamao.ml/image-20220810210907013.png)
+![image-20220813004327252](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220813004327252.png)
 
 ----
 
@@ -7202,9 +7202,888 @@ StackMapTable: ...
 
 
 
+### 2.13 synchronized
+
+~~~java
+public class Demo3_13 {
+    public static void main(String[] args) {
+        Object lock = new Object();
+            synchronized (lock) {
+            System.out.println("ok");
+        }
+    }
+}
+~~~
+
+~~~
+public static void main(java.lang.String[]);
+descriptor: ([Ljava/lang/String;)V
+flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+    stack=2, locals=4, args_size=1
+        0: new #2 // new Object  创建一块内存空间用于存放对象【放到操作数栈中】
+        3: dup						复制操作数栈中的引用，放到栈顶中
+        4: invokespecial #1 // invokespecial <init>:()V	通过栈顶的对象引用调用构造器 用完弹栈
+        7: astore_1 // lock引用 -> lock					将目前栈顶的对象引用放到1号槽位
+        8: aload_1 // <- lock （synchronized开始）         从一号槽位中，取出lock对象
+        9: dup											 将lock对象赋值一份放到栈顶
+        10: astore_2 // lock引用 -> slot 2				将栈顶中的对象放到2号槽位
+        11: monitorenter // monitorenter(lock引用)		将目前栈顶的对象加锁
+        12: getstatic #3 // <- System.out				 加载静态变量到操作数栈中
+        15: ldc #4 // <- "ok"							 加载字符串常量到操作数栈中
+        17: invokevirtual #5 // invokevirtual println:  调用静态对象的println方法
+        (Ljava/lang/String;)V
+        20: aload_2 // <- slot 2(lock引用)				将2号槽位的lock对象，加载到栈中
+        21: monitorexit // monitorexit(lock引用)			根据对象解锁
+        22: goto 30										准备结束
+        25: astore_3 // any -> slot 3                   将异常对象放到三号槽位中
+        26: aload_2 // <- slot 2(lock引用)				加载lock对象的引用到二号槽位
+        27: monitorexit // monitorexit(lock引用)			解锁
+        28: aload_3										 加载异常对象到操作数栈中
+        29: athrow										外抛异常
+        30: return										结束
+Exception table:
+        from    to    target    type
+        12      22       25     any
+        25      28       25     any
+LineNumberTable: ...
+LocalVariableTable:
+        Start Length Slot  Name    Signature
+        0       31     0   args    [Ljava/lang/String;
+        8       23     1   lock    Ljava/lang/Object;
+StackMapTable: ...
+MethodParameters: ...
+~~~
+
+注意：
+
+方法级别的 `synchronized `不会在字节码指令中有所体现
+
 
 
 ## 3. 编译期处理
+
+所谓的 语法糖 ，其实就是指 java 编译器把 *.java 源码编译为 *.class 字节码的过程中，自动生成 和转换的一些代码
+
+主要是为了减轻程序员的负担，算是 java 编译器给我们的一个额外福利（给糖吃 嘛） 
+
+
+
+注意，以下代码的分析，借助了 javap 工具，idea 的反编译功能，idea 插件 jclasslib 等工具
+
+另外， **编译器转换的结果直接**就是 **class 字节码**，只是为了便于阅读，给出了 **几乎等价 的 java 源码方式**，并 **不是编译器还会转换出中间的 java 源码**，**切记**。
+
+
+
+
+
+### 3.1 默认构造器
+
+~~~java
+public class Candy1 {
+}
+~~~
+
+
+
+编译成class后的代码：
+
+~~~java
+public class Candy1 {
+    // 这个无参构造是编译器帮助我们加上的
+    public Candy1() {
+        super(); // 即调用父类 Object 的无参构造方法，即调用 java/lang/Object."<init>":()V
+    }
+}
+~~~
+
+
+
+### 3.2 自动拆装箱 
+
+这个特性是 JDK 5 开始加入的， 代码片段1 ：
+
+~~~java
+public class Candy2 {
+    public static void main(String[] args) {
+        Integer x = 1;  
+        int y = x;
+    }
+}
+~~~
+
+这段代码在 JDK 5 之前是无法编译通过的，必须改写为 代码片段2 :
+
+~~~java
+public class Candy2 {
+    public static void main(String[] args) {
+        Integer x = Integer.valueOf(1);  //在-128~127之间会直接有一个Integer对象，超过这个范围就会new Integer对象【装箱】
+        int y = x.intValue();   //拆箱	
+    }
+}
+~~~
+
+显然之前版本的代码太麻烦了，需要在基本类型和包装类型之间来回转换（尤其是集合类中操作的都是 包装类型）
+
+因此这些转换的事情在 **JDK 5 以后**都由 编译器 在 **编译阶段完成**
+
+即 代码片段1 都会在**编 译阶段 **被 转换为 代码片段2;
+
+
+
+
+
+
+
+### 3.3 泛型集合取值
+
+泛型也是在` JDK 5 `开始加入的特性，但 java 在编译泛型代码后会执行 `泛型擦除 `的动作，即`泛型信息 在编译为字节码之后`就 **丢失了**
+
+实际的类型都当做了 Object 类型来处理：
+
+~~~java
+public class Candy3 {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+        list.add(10); // 实际调用的是 List.add(Object e)
+        Integer x = list.get(0); // 实际调用的是 Object obj = List.get(int index);
+    }
+}
+~~~
+
+所以在取值时，编译器真正生成的字节码中，还要额外做一个类型转换的操作：
+
+~~~java
+// 需要将 Object 转为 Integer
+Integer x = (Integer)list.get(0);
+~~~
+
+
+
+如果前面的 x 变量类型修改为 int 基本类型那么最终生成的字节码是：
+
+~~~java
+// 需要将 Object 转为 Integer, 并执行拆箱操作
+int x = ((Integer)list.get(0)).intValue();
+~~~
+
+还好这些麻烦事都不用自己做。
+
+
+
+
+
+擦除的是字节码上的泛型信息，可以看到 LocalVariableTypeTable 仍然保留了方法参数泛型的信息
+
+字节码如下：
+
+~~~java
+public cn.itcast.jvm.t3.candy.Candy3();
+descriptor: ()V
+flags: ACC_PUBLIC
+    Code:
+    stack=1, locals=1, args_size=1
+        0: aload_0
+        1: invokespecial #1 // Method java/lang/Object."<init>":()V
+        4: return
+LineNumberTable:
+line 6: 0
+LocalVariableTable:
+        Start Length Slot Name    Signature
+        0        5    0    this     Lcn/itcast/jvm/t3/candy/Candy3;
+public static void main(java.lang.String[]);
+descriptor: ([Ljava/lang/String;)V
+flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+    stack=2, locals=3, args_size=1
+        0: new #2 // class java/util/ArrayList    创建空间 将对象引用放到栈中
+        3: dup									   //复制引用 放到栈顶
+        4: invokespecial #3 // Method java/util/ArrayList." <init>":()V  调用ArrayList的构造方法
+        7: astore_1       // 将对象引用放到栈中
+        8: aload_1			//将对象放到一号槽位中
+        9: bipush 10			//将10放到栈中
+        11: invokestatic #4 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;  调用静态方法，转为包装Integer
+        14: invokeinterface #5, 2 // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z  调用接口方法 返回布尔
+        //上面一行是泛型擦除原理，调用的方法不区分类型      
+        19: pop
+              
+        20: aload_1   //从槽位一中获取list引用 到栈中
+        21: iconst_0   //将0放到栈中
+        22: invokeinterface #6, 2 // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object; 调用接口方法，返回值类型Object
+          //泛型擦除本质，返回的对象是Object类型    
+        27: checkcast #7 // class java/lang/Integer   强制类型转换为Integer
+        30: astore_2		//转换后的对象，放到2号槽位
+        31: return   		//结束方法
+LineNumberTable:
+        line 8: 0
+        line 9: 8
+        line 10: 20
+        line 11: 31
+LocalVariableTable: 【局部变量表】
+        Start    Length   Slot    Name    Signature
+        0          32      0      args      [Ljava/lang/String;
+        8          24      1      list       Ljava/util/List;
+LocalVariableTypeTable: 【局部变量类型表】记录泛型信息
+        Start    Length     Slot      Name     Signature
+        8          24         1       list      Ljava/util/List<Ljava/lang/Integer;>;
+~~~
+
+
+
+
+
+使用反射，仍然能够获得这些信息：
+
+~~~java
+public Set<Integer> test(List<String> list, Map<Integer, Object> map) {
+}
+~~~
+
+注意：有局限性===》只能获取方法入参和返回值的泛型类型
+
+
+
+~~~java
+Method test = Candy3.class.getMethod("test", List.class, Map.class);
+Type[] types = test.getGenericParameterTypes();
+
+for (Type type : types) {
+    if (type instanceof ParameterizedType) {
+        ParameterizedType parameterizedType = (ParameterizedType) type;
+        System.out.println("原始类型 - " + parameterizedType.getRawType());
+        Type[] arguments = parameterizedType.getActualTypeArguments();
+        for (int i = 0; i < arguments.length; i++) {
+            System.out.printf("泛型参数[%d] - %s\n", i, arguments[i]);
+        }
+    }
+}
+~~~
+
+~~~
+原始类型 - interface java.util.List
+泛型参数[0] - class java.lang.String
+原始类型 - interface java.util.Map
+泛型参数[0] - class java.lang.Integer
+泛型参数[1] - class java.lang.Object
+~~~
+
+
+
+### 3.4 可变参数
+
+可变参数也是 JDK 5 开始加入的新特性： 
+
+例如：
+
+~~~java
+public class Candy4 {
+    public static void foo(String... args) {
+        String[] array = args; // 直接赋值
+        System.out.println(array);
+    }
+    public static void main(String[] args) {
+        foo("hello", "world");
+    }
+}
+~~~
+
+可变参数 String... args 其实是一个 String[] args ，从代码中的赋值语句中就可以看出来
+
+
+
+同样 java 编译器会在编译期间将上述代码变换为：
+
+~~~java
+public class Candy4 {
+    public static void foo(String[] args) {
+        String[] array = args; // 直接赋值
+        System.out.println(array);
+    }
+    public static void main(String[] args) {
+        foo(new String[]{"hello", "world"});
+    }
+}
+~~~
+
+注意 如果调用了 **foo()** 则等价代码为 **foo(new String[]{})** ，创建了一个  **空的数组**  ，而  **不会传递 null** 进去
+
+
+
+
+
+
+
+### 3.5 foreach 循环
+
+仍是 JDK 5 开始引入的语法糖，数组的循环：
+
+~~~java
+public class Candy5_1 {
+    public static void main(String[] args) {
+        int[] array = {1, 2, 3, 4, 5}; // 数组赋初值的简化写法也是语法糖哦
+        for (int e : array) {
+            System.out.println(e);
+        }
+    }
+}
+~~~
+
+
+
+会被编译器转换为：
+
+~~~java
+public class Candy5_1 {
+    public Candy5_1() {
+    }
+    public static void main(String[] args) {
+        int[] array = new int[]{1, 2, 3, 4, 5};
+        for(int i = 0; i < array.length; ++i) {
+            int e = array[i];
+            System.out.println(e);
+        }
+    }
+}
+~~~
+
+
+
+
+
+
+
+而集合的循环：
+
+~~~java
+public class Candy5_2 {
+    public static void main(String[] args) {
+        List<Integer> list = Arrays.asList(1,2,3,4,5);
+        for (Integer i : list) {
+            System.out.println(i);
+        }
+    }
+}
+~~~
+
+实际被编译器转换为对迭代器的调用：
+
+~~~java
+public class Candy5_2 {
+    public Candy5_2() {
+    }
+    
+    public static void main(String[] args) {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+        Iterator iter = list.iterator();
+        while(iter.hasNext()) {
+            Integer e = (Integer)iter.next();
+            System.out.println(e);
+        }
+    }
+}
+~~~
+
+注意 foreach 循环写法，能够配合数组，以及所有实现了 Iterable 接口的集合类一起使用，其中 Iterable 用来获取集合的迭代器（ Iterator ）
+
+
+
+
+
+
+
+### 3.6 switch 字符串
+
+`从 JDK 7 开始`，switch 可以作用于**字符串和枚举类**
+
+这个功能其实也是语法糖【因为原生的字节码指令是不支持switch中使用字符串和枚举类】是通过一些转换实现的
+
+例如：
+
+~~~java
+public class Candy6_1 {
+    public static void choose(String str) {
+        switch (str) {
+             case "hello": {
+                System.out.println("h");
+                break;
+            }
+            case "world": {
+                System.out.println("w");
+                break;
+            }
+        }
+    }
+}
+~~~
+
+注意 switch 配合 String 和枚举使用时，变量不能为null，原因分析完语法糖转换后的代码应当自然清 楚
+
+
+
+会被编译器转换为：【拆成两个switch】
+
+~~~java
+public class Candy6_1 {
+        public Candy6_1() {
+        }
+
+        public static void choose(String str) {
+            byte x = -1;
+            switch (str.hashCode()) {
+                case 99162322: // hello 的 hashCode
+                    if (str.equals("hello")) {
+                        x = 0;
+                    }
+                    break;
+                case 113318802: // world 的 hashCode
+                    if (str.equals("world")) {
+                        x = 1;
+                    }
+            }
+
+            switch (x) {
+                case 0:
+                    System.out.println("h");
+                    break;
+                case 1:
+                    System.out.println("w");
+            }
+        }
+}
+~~~
+
+可以看到，执行了两遍 switch，第一遍是根据字符串的 hashCode 和 equals 将字符串的转换为相应 byte 类型，第二遍才是利用 byte 执行进行比较
+
+为什么第一遍时必须既比较 hashCode，又利用 equals 比较呢？
+
+hashCode 是为了提高效率，减少可 能的比较；
+
+而 equals 是为了防止 hashCode 冲突，
+
+
+
+String重写Object类的hashCode方法 源码如下：【内容相同，hashcode必相同】
+
+~~~java
+ public int hashCode() {
+    int h = hash;
+    //首先判断本对象是否已经计算过hash值并且字符串的长度大于0
+     //还没
+    if (h == 0 && value.length > 0) {
+      char val[] = value;
+      //循环字符串中的字符，用以计算hash值
+      for (int i = 0; i < value.length; i++) {
+        h = 31 * h + val[i];
+      }
+      hash = h;
+    }
+    return h;
+  }
+~~~
+
+
+
+String重写Object类的equal方法 源码如下：
+
+~~~java
+public boolean equals(Object anObject) {
+    //判断两个对象的引用地址是否一致
+    if (this == anObject) {
+      return true;
+    }
+    //判断传入的对象是否是String类型
+    if (anObject instanceof String) {
+      String anotherString = (String)anObject;
+      int n = value.length;
+      //判断两个字符串是否长度相等
+      if (n == anotherString.value.length) {
+        char v1[] = value;
+        char v2[] = anotherString.value;
+        int i = 0;
+        //逐个比较两个字符串中的字符
+        while (n-- != 0) {
+          if (v1[i] != v2[i])
+            return false;
+          i++;
+        }
+        return true;
+      }
+    }
+    return false;
+  }
+~~~
+
+
+
+**hashCode()的返回值大多数情况是将对象的内部地址转换成整数并返回，少数情况不是这样，也就代表着HashCode不是内存地址**
+
+
+
+
+
+
+
+例如 BM 和 C. 这两个字符串的hashCode值都是 2123 ，如果有如下代码：
+
+~~~java
+public class Candy6_2 {
+    public static void choose(String str) {
+        switch (str) {
+            case "BM": {
+                System.out.println("h");
+                break;
+            }
+            case "C.": {
+                System.out.println("w");
+                break;
+            }
+        }
+    }
+}
+~~~
+
+
+
+会被编译器转换为：
+
+~~~java
+public class Candy6_2 {
+public Candy6_2() {
+}
+public static void choose(String str) {
+    byte x = -1;
+    switch(str.hashCode()) {
+        case 2123: // hashCode 值可能相同，需要进一步用 equals 比较
+            if (str.equals("C.")) {
+                x = 1;
+            } else if (str.equals("BM")) {
+                x = 0;
+            }
+        default:
+            switch(x) {
+                case 0:
+                    System.out.println("h");
+                    break;
+                case 1:
+                    System.out.println("w");
+            }
+        }
+    }
+}
+~~~
+
+
+
+
+
+### 3.7 switch 枚举
+
+ switch 枚举的例子，原始代码：
+
+~~~java
+enum Sex {
+    MALE, FEMALE
+}
+~~~
+
+
+
+~~~java
+public class Candy7 {
+    public static void foo(Sex sex) {
+        switch (sex) {
+        case MALE:
+            System.out.println("男"); break;
+        case FEMALE:
+            System.out.println("女"); break;
+        }
+    }
+}
+~~~
+
+
+
+
+
+转换后代码：
+
+~~~java
+public class Candy7 {
+/**
+* 定义一个合成类（仅 jvm 使用，对我们不可见）
+* 用来映射枚举的 ordinal 与数组元素的关系
+* 枚举的 ordinal 表示枚举对象的序号，从 0 开始
+* 即 MALE 的 ordinal()=0，FEMALE 的 ordinal()=1
+*/
+    static class $MAP {
+    // 数组大小即为枚举元素个数，里面存储case用来对比的数字
+        static int[] map = new int[2];
+        static {
+            map[Sex.MALE.ordinal()] = 1;//数组第一个元素，值为1
+            map[Sex.FEMALE.ordinal()] = 2;//数组第二个元素，值为2
+        }
+    }
+    public static void foo(Sex sex) {
+        int x = $MAP.map[sex.ordinal()];
+        switch (x) {
+            case 1:
+                System.out.println("男");
+                break;
+            case 2:
+                System.out.println("女");
+                break;
+        }
+    }
+}
+~~~
+
+
+
+### 3.8 枚举类 
+
+JDK 7 新增了枚举类，以前面的性别枚举为例：【枚举类 也称为多例，可以用于实现单例】
+
+~~~java
+enum Sex {
+    MALE , FEMALE
+}
+~~~
+
+
+
+转换后代码：
+
+~~~java
+public final class Sex extends Enum<Sex> {
+    public static final Sex MALE;
+    public static final Sex FEMALE;
+    private static final Sex[] $VALUES;
+    
+    static {
+        MALE = new Sex("MALE", 0);
+        FEMALE = new Sex("FEMALE", 1);
+        $VALUES = new Sex[]{MALE, FEMALE};
+    }
+    /**
+    * Sole constructor. Programmers cannot invoke this constructor.
+    * It is for use by code emitted by the compiler in response to
+    * enum type declarations.
+    *
+    * @param name - The name of this enum constant, which is the identifier
+    * used to declare it.
+    * @param ordinal - The ordinal of this enumeration constant (its position
+    * in the enum declaration, where the initial constant is
+    	assigned
+    */
+    //调用枚举类的父类构造，入参两个名称和标识号
+    private Sex(String name, int ordinal) {
+        super(name, ordinal);
+    }
+    
+    //返回一个克隆的数组，里面放着Sex的两个实例
+    public static Sex[] values() {
+        return $VALUES.clone();
+    }
+    
+    //类似于Map集合，通过key 找value
+    public static Sex valueOf(String name) {
+        return Enum.valueOf(Sex.class, name);
+    }
+}
+~~~
+
+
+
+
+
+### 3.9 try-with-resources
+
+​	JDK 7 开始新增了对需要关闭的资源处理的特殊语法` try-with-resources`：
+
+~~~java
+try(资源变量 = 创建资源对象){
+
+} catch( ) {
+    
+}
+~~~
+
+其中资源对象需要实现 AutoCloseable 接口，
+
+例如 `InputStream `、 `OutputStream `、 `Connection `、 `Statement `、 `ResultSet `等接口都实现了 **`AutoCloseable `**，
+
+使用 try-withresources 可以不用写 finally 语句块，编译器会帮助生成关闭资源代码，
+
+例如：
+
+源码：
+
+~~~java
+public class Candy9 {
+    public static void main(String[] args) {
+        try(InputStream is = new FileInputStream("d:\\1.txt")) {
+            System.out.println(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+~~~
+
+
+
+会被转换为：
+
+~~~java
+public class Candy9 {
+    public Candy9() {
+    }
+
+    public static void main(String[] args) {
+        try {
+            InputStream is = new FileInputStream("d:\\1.txt");
+            Throwable t = null;
+            try {
+                System.out.println(is);
+            } catch (Throwable e1) {
+                // t 是我们代码出现的异常
+                t = e1;
+                throw e1;
+            } finally {
+                // 判断了资源不为空
+                if (is != null) {
+                    // 如果我们代码有异常
+                    if (t != null) {
+                        try {
+                            is.close();
+                        } catch (Throwable e2) {
+                            // 如果 close 出现异常，
+                            //try代码中有问题，关闭资源时也出现问题 此时关闭异常作为被压制异常添加
+                            //【也就是说此处会有两个异常被抛出】
+                            t.addSuppressed(e2);
+                        }
+                    } else {
+                        // 我们try块中没有异常
+                        //如果出现异常 就是关闭资源时出异常
+                        is.close();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+~~~
+
+
+
+为什么要设计一个` addSuppressed(Throwable e) `（添加被压制异常）的方法呢？
+
+是为了防止异常信 息的丢失
+
+ try-with-resources 生成的 fianlly 中如果抛出了异常：
+
+~~~java
+public class Test6 {
+    public static void main(String[] args) {
+        try (MyResource resource = new MyResource()) {
+            int i = 1/0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class MyResource implements AutoCloseable {
+    public void close() throws Exception {
+        throw new Exception("close 异常");
+    }
+}
+~~~
+
+输出：
+
+~~~
+java.lang.ArithmeticException: / by zero
+    at test.Test6.main(Test6.java:7)
+    Suppressed: java.lang.Exception: close 异常
+        at test.MyResource.close(Test6.java:18)
+        at test.Test6.main(Test6.java:6)
+~~~
+
+如以上代码所示，两个异常信息都不会丢
+
+
+
+### 3.10 方法重写时的桥接方法 
+
+我们都知道，方法重写时对返回值分两种情况： 
+
+父子类的返回值完全一致 
+
+子类返回值可以是父类返回值的子类（比较绕口，见下面的例子）
+
+~~~java
+class A {
+    public Number m() {
+        return 1;
+    }
+}
+class B extends A {
+    @Override
+    // 子类 m 方法的返回值是 Integer 是父类 m 方法返回值 Number 的子类
+    public Integer m() {
+        return 2;
+    }
+}
+~~~
+
+注意：
+
+Number 是一个抽象类，也是一个超类（即父类）
+
+Number 类属于 java.lang 包，所有的包装类（如 `Double、Float、Byte、Short、Integer 以及 Long`）都是抽象类 Number 的子类
+
+----
+
+![image-20220813002021693](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220813002021693.png)
+
+----
+
+
+
+对于子类，java 编译器会做如下处理：
+
+~~~java
+class B extends A {
+    public Integer m() {
+        return 2;
+    }
+    // 此方法才是真正重写了父类 public Number m() 方法
+    public synthetic bridge Number m() {
+        // 调用 public Integer m()
+        return m();
+    }
+}
+~~~
+
+其中桥接方法比较特殊，仅对 java 虚拟机可见，并且与原来的 public Integer m() 没有命名冲突，可以 用下面**反射代码**来验证：
+
+~~~java
+for (Method m : B.class.getDeclaredMethods()) {
+    System.out.println(m);
+}
+~~~
+
+会输出：
+
+~~~java
+public java.lang.Integer test.candy.B.m()
+public java.lang.Number test.candy.B.m()
+~~~
+
+
 
 
 
