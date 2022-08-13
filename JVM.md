@@ -2,7 +2,7 @@
 
 定义：
 
-Java Virtual Machine  （java的运行）java二进制字节码的运行环境
+Java Virtual Machine  java二进制字节码的运行环境
 
 
 
