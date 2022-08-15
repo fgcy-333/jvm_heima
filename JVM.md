@@ -8085,57 +8085,2050 @@ public java.lang.Number test.candy.B.m()
 
 
 
+### 3.11 匿名内部类
+
+源代码：
+
+~~~java
+public class Candy11 {
+    public static void main(String[] args) {
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                System.out.println("ok");
+            }
+        };
+    }
+}
+~~~
+
+
+
+转换后代码：
+
+~~~java
+// 额外生成的类
+final class Candy11$1 implements Runnable {
+    Candy11$1() {
+        
+    }
+    
+    public void run() {
+    System.out.println("ok");
+    }
+}
+~~~
+
+~~~java
+public class Candy11 {
+    public static void main(String[] args) {
+        Runnable runnable = new Candy11$1();
+    }
+}
+~~~
+
+
+
+
+
+**引用局部变量**的匿名内部类，源代码：
+
+~~~java
+public class Candy11 {
+    public static void test(final int x) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+            System.out.println("ok:" + x);
+            }
+        };
+    }
+}
+~~~
+
+
+
+转换后代码：
+
+~~~java
+// 额外生成的类
+final class Candy11$1 implements Runnable {
+    int val$x;//成员变量
+    Candy11$1(int x) {
+        this.val$x = x;//构造赋初值【只执行一次，所以要求变量是用final修饰的】
+    }
+    public void run() {
+        System.out.println("ok:" + this.val$x);
+    }
+}
+~~~
+
+~~~java
+public class Candy11 {
+    public static void test(final int x) {
+        Runnable runnable = new Candy11$1(x);
+    }
+}
+~~~
+
+注意 
+
+这同时解释了为什么匿名内部类引用局部变量时，局部变量必须是 final 的：
+
+因为在创建 `Candy11$1 `对象时，将 x 的值赋值给了` Candy11$1` 对象的``，所以 x 不应该再发生变 化了，如果变化，那么 val$x 属性没有机会再跟着一起变化
+
 
 
 ##  4. 类加载阶段 
 
 
 
+### 4.1 加载
+
+将类的字节码载入方法区中，内部采用 C++ 的 `instanceKlass ` 【C++的一种数据结构】描述 java 类，它的重要 field 有： 
+
+`_java_mirror `即 java 的类镜像，例如对 String 来说，就是 String.class，作用是把 klass 暴 露给 java 使用 【java对象不能直接访问klass的信息，需要通过这个						`_java_mirrot`类对象 间接访问  这个_java_mirror 相当于C++数据结构与java对象的桥梁】
+
+`_super` 即父类 _fields 即成员变量
+
+ `_methods `即方法 
+
+`_constants `即常量池
+
+ `_class_loader `即类加载器 【加载这个类的类加载器】
+
+`_vtable `虚方法表 【实现多态的本质】
+
+`_itable `接口方法表 
+
+如果这个类还有父类没有加载，先加载父类 
+
+加载  和  链接  **可能是交替运行**的 
+
+
+
+注意 
+
+instanceKlass 这样的**【元数据】**是**存储在方法区**（1.8 后的实现叫元空间内），但` _java_mirror` 是存储在堆中 
+
+可以通过前面介绍的 HSDB 工具查看
+
+ 
+
+---
+
+![image-20220813205905808](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220813205905808.png)
+
+---
+
+通过类加载器将字节码加载进方法区中（jdk1.8叫元空间），对应instanceKlass的数据结构中的数据
+
+同时，会在堆内存中，生成一个`_java_mirror`镜像 (类对象)，类对象持有instanceKlass的地址引用，数据结构 `instanceKlass`中的
+
+`_java_mirror`属性会持有与之相对应的类对象的地址引用
+
+此处，静态变量紧跟类对象地址的后边【在jdk1.6及以前，静态变量跟在instanceKlass地址后面 也就是方法区中】
+
+
+
+每个对象都有自己的对象头：16个字节；其中8字节对应该对象的类对象地址引用
+
+如果想用通过一个对象获取它的class信息，就需要找到对象头，通过对象头中**8个字节的类对象地址**，找到该对象的类对象；再通过类对象获取
+
+**instanceKlass**数据结构的内存地址（在方法区中），**instanceKlass**中有该类的所有信息
+
+可以通过反射getMethods、getField、getConstructor
+
+从**instanceKlass**获取信息
+
+
+
+### 4.2 链接
+
+- **验证**
+
+​		验证类（字节码）是否符合 **JVM规范**，安全性检查
+
+
+
+HelloWorld源码：
+
+~~~java
+package cn.itcast.jvm.t5;
+
+// 二进制字节码（类基本信息，常量池，类方法定义，包含了虚拟机指令）
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("hello world");
+    }
+}
+~~~
+
+
+
+ 用 `UltraEdit` 等支持二进制的编辑器修改 `HelloWorld.class` 的魔数
+
+本来是`CAFEBABE` 详见类结构文件之魔数
+
+----
+
+![image-20220814094821671](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220814094821671.png)
+
+----
+
+
+
+在命令行运行：
+
+~~~java
+D:\learn\黑马程序员\资料-解密JVM\代码\jvm\out\production\jvm\cn\itcast\jvm\t5> java HelloWorld
+Error: A JNI error has occurred, please check your installation and try again
+Exception in thread "main" java.lang.ClassFormatError: Incompatible magic value 3405691578 in class file HelloWorld
+        at java.lang.ClassLoader.defineClass1(Native Method)
+        at java.lang.ClassLoader.defineClass(Unknown Source)
+        at java.security.SecureClassLoader.defineClass(Unknown Source)
+        at java.net.URLClassLoader.defineClass(Unknown Source)
+        at java.net.URLClassLoader.access$100(Unknown Source)
+        at java.net.URLClassLoader$1.run(Unknown Source)
+        at java.net.URLClassLoader$1.run(Unknown Source)
+        at java.security.AccessController.doPrivileged(Native Method)
+        at java.net.URLClassLoader.findClass(Unknown Source)
+        at java.lang.ClassLoader.loadClass(Unknown Source)
+        at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+        at java.lang.ClassLoader.loadClass(Unknown Source)
+        at sun.launcher.LauncherHelper.checkAndLoadMain(Unknown Source)
+~~~
+
+
+
+**准备**
+
+为 **static 变量**分配空间，设置默认值 【如果是int类型的，就分配4个字节的空间，默认值为0】
+
+static 变量在 JDK 7 之前存储于 `instanceKlass 末尾`，从 JDK 7 开始，存储于` _java_mirror 末尾 `
+
+static 变量  分配空间  和  赋值  是**两个步骤**，**分配空间** 在  `准备阶段完成`，**赋值** 在 **初始化阶段完成** 
+
+
+
+例子：
+
+源码
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+// 演示 final 对静态变量的影响
+public class Load8 {
+
+    static int a;
+    static int b = 10;//在初始化阶段赋值 cinit 静态代码块
+    static final int c = 20;//在编译阶段就可以确定 不是在初始化阶段赋值的
+    static final String d = "hello";//在编译阶段就可以确定 不是在初始化阶段赋值的
+    static final Object e = new Object();//在初始化阶段赋值的
+}
+~~~
+
+~~~
+  Last modified 2022-8-14; size 449 bytes
+  MD5 checksum 4bb749e3f4b79189b537767004912b40
+  Compiled from "Load8.java"
+public class cn.itcast.jvm.t3.load.Load8
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #3.#24         // java/lang/Object."<init>":()V
+   #2 = Fieldref           #5.#25         // cn/itcast/jvm/t3/load/Load8.b:I
+   #3 = Class              #26            // java/lang/Object
+   #4 = Fieldref           #5.#27         // cn/itcast/jvm/t3/load/Load8.e:Ljava/lang/Object;
+   #5 = Class              #28            // cn/itcast/jvm/t3/load/Load8
+   #6 = Utf8               a
+   #7 = Utf8               I
+   #8 = Utf8               b
+   #9 = Utf8               c
+  #10 = Utf8               ConstantValue
+  #11 = Integer            20
+  #12 = Utf8               d
+  #13 = Utf8               Ljava/lang/String;
+  #14 = String             #29            // hello
+  #15 = Utf8               e
+  #16 = Utf8               Ljava/lang/Object;
+  #17 = Utf8               <init>
+  #18 = Utf8               ()V
+  #19 = Utf8               Code
+  #20 = Utf8               LineNumberTable
+  #21 = Utf8               <clinit>
+  #22 = Utf8               SourceFile
+  #23 = Utf8               Load8.java
+  #24 = NameAndType        #17:#18        // "<init>":()V
+  #25 = NameAndType        #8:#7          // b:I
+  #26 = Utf8               java/lang/Object
+  #27 = NameAndType        #15:#16        // e:Ljava/lang/Object;
+  #28 = Utf8               cn/itcast/jvm/t3/load/Load8
+  #29 = Utf8               hello
+{
+  static int a; 【只分配空间】
+    descriptor: I
+    flags: ACC_STATIC
+
+  static int b; 【只分配空间】
+    descriptor: I
+    flags: ACC_STATIC
+
+  static final int c; 【分配空间 并赋值】
+    descriptor: I
+    flags: ACC_STATIC, ACC_FINAL
+    ConstantValue: int 20
+
+  static final java.lang.String d; 【分配空间 并赋值】
+    descriptor: Ljava/lang/String;
+    flags: ACC_STATIC, ACC_FINAL
+    ConstantValue: String hello
+
+  static final java.lang.Object e; 【只分配空间】
+    descriptor: Ljava/lang/Object;
+    flags: ACC_STATIC, ACC_FINAL
+
+  public cn.itcast.jvm.t3.load.Load8();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 4: 0
+
+  static {};         【静态代码块 即是cinit 类初始化器  对应类加载的初始化阶段】
+    descriptor: ()V
+    flags: ACC_STATIC
+    Code:
+      stack=2, locals=0, args_size=0
+         0: bipush        10
+         2: putstatic     #2                  // Field b:I 【将10 赋值给静态变量b】
+         
+         5: new           #3                  // class java/lang/Object
+         8: dup
+         9: invokespecial #1                  // Method java/lang/Object."<init>":()V
+        12: putstatic     #4                  // Field e:Ljava/lang/Object; 【创建一个对象 赋值给静态变量e】
+        
+        15: return
+      LineNumberTable:
+        line 7: 0
+        line 10: 5
+}
+SourceFile: "Load8.java"
+~~~
+
+
+
+如果 static 变量是 final 的 **基本类型** 以及 **字符串常量**，那么 **编译阶段 值 就确定**了，**赋值** 在`类加载的 准备阶 段完成 `
+
+如果 static 变量是 final 的，但属于引用类型，那么赋值也会在**初始化阶段完成**
+
+
+
+
+
+
+
+**解析** 
+
+将常量池中的符号引用解析为直接引用
+
+例子1【只进行类加载】
+
+源码：
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+import java.io.IOException;
+
+/**
+ * 解析的含义
+ */
+public class Load2 {
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
+        ClassLoader classloader = Load2.class.getClassLoader();
+        Class<?> c = classloader.loadClass("cn.itcast.jvm.t3.load.C");//loadClass方法只会进行类的加载，不会进行解析
+        System.in.read();
+    }
+}
+
+class C {
+    D d = new D();
+}
+
+class D {
+
+}
+~~~
+
+注意：
+
+加载  和  链接  **可能是交替运行**的  如一部分字节码文件格式验证动作
+
+加载阶段尚未完成，连接阶段可能已经开始
+
+
+
+运行 然后：
+
+~~~java
+D:\sofeware\Idea\JDK1.8>jps
+11952 Launcher
+20176 RemoteMavenServer36
+8000
+19832 Load2
+21692 Jps
+
+D:\sofeware\Idea\JDK1.8>java -cp ./lib/sa-jdi.jar sun.jvm.hotspot.HSDB
+~~~
+
+---
+
+![image-20220814122949105](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220814122949105.png)
+
+---
+
+![image-20220814123510642](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220814123510642.png)
+
+---
+
+
+
+
+
+
+
+例子2 【进行加载、连接、初始化】
+
+源码：
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+import java.io.IOException;
+
+/**
+ * 解析的含义
+ */
+public class Load2 {
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
+        new C();
+        System.in.read();
+    }
+}
+
+class C {
+    D d = new D();
+}
+
+class D {
+
+}
+
+~~~
+
+---
+
+![image-20220814124137969](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220814124137969.png)
+
+---
+
+可以看到类D已经被解析了，可以直接得到类D的内存地址了
+
+
+
+
+
+小结：
+
+将  `常量池`  中的  `符号引用`  **解析为**   `直接引用`
+
+
+
+### 4.3 初始化
+
+**cinit()V 方法**
+
+初始化即调用cinit()V ，虚拟机会保证这个 **类的『构造方法』**的 **线程安全**
+
+
+
+**发生的时机**
+
+概括得说，类初始化是【懒惰的】 
+
+- main 方法所在的类，总会被首先初始化 
+
+- 首次访问这个类的  静态变量 **(是静态变量不是静态常量)**  或   静态方法  时 
+
+- 子类初始化，如果父类还没初始化，会引发 
+
+- 子类访问父类的静态变量，**只会**  触发父类的初始化 
+
+- Class.forName 
+
+- new 会导致初始化
+
+
+
+不会导致类初始化的情况 
+
+- 访问类的 static final 静态常量（**基本类型和字符串**）不会触发初始化 
+
+- 类对象.class 不会触发初始化 **【类对象，在加载阶段就会被创建出来】**
+
+- 创建该类的数组不会触发初始化 
+
+- 类加载器的 loadClass 方法 
+
+- Class.forName 的参数 2 为 false 时
+
+
+
+
+
+例子1：运行main方法，其所在的类的类初始化方法会被调用
+
+~~~java
+class A {
+    static int a = 0;
+    static {
+        System.out.println("a init");
+    }
+}
+
+class B extends A {
+    final static double b = 5.0;
+    static boolean c = false;
+    static {
+        System.out.println("b init");
+    }
+}
+~~~
+
+
+
+~~~java
+public class Load3 {
+    static {
+        System.out.println("main init");
+    }
+    public static void main(String[] args) throws ClassNotFoundException {
+
+    }
+}
+~~~
+
+~~~
+main init
+~~~
+
+输出了 `main init` 说明了执行main方法，会触发该类的` <cinit>`方法，也可以叫做类构造器，也可以称为静态代码块；即是触发了类的初始化；
+
+
+
+例子2：静态常量不会触发初始化
+
+~~~java
+class A {
+    static int a = 0;
+    static {
+        System.out.println("a init");
+    }
+}
+
+class B extends A {
+    final static double b = 5.0;
+    static boolean c = false;
+    static {
+        System.out.println("b init");
+    }
+}
+~~~
+
+
+
+~~~java
+public class Load3 {
+    static {
+        System.out.println("main init");
+    }
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
+        // 1. 静态常量不会触发初始化
+        System.out.println(B.b);
+    }
+}
+~~~
+
+~~~
+main init
+5.0
+~~~
+
+没有触发类B的初始化 没有看到  `b init`
+
+
+
+例子3：创建该类的数组不会触发初始化
+
+~~~java
+class A {
+    static int a = 0;
+    static {
+        System.out.println("a init");
+    }
+}
+
+class B extends A {
+    final static double b = 5.0;
+    static boolean c = false;
+    static {
+        System.out.println("b init");
+    }
+}
+~~~
+
+
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+import java.io.IOException;
+
+public class Load3 {
+    static {
+        System.out.println("main init");
+    }
+    
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
+        // 3. 创建该类的数组不会触发初始化
+        System.out.println(new B[0]);
+
+    }
+}
+~~~
+
+~~~
+main init
+[Lcn.itcast.jvm.t3.load.B;@7f31245a
+~~~
+
+
+
+例子4：类对象的loadClass方法，不会触发解析及其之后的阶段
+
+~~~~java
+class A {
+    static int a = 0;
+    static {
+        System.out.println("a init");
+    }
+}
+
+class B extends A {
+    final static double b = 5.0;
+    static boolean c = false;
+    static {
+        System.out.println("b init");
+    }
+}
+~~~~
+
+
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+import java.io.IOException;
+
+public class Load3 {
+    static {
+        System.out.println("main init");
+    }
+    
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
+        // 4. 不会初始化类 B，但会加载 B、A 
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
+        cl.loadClass("cn.itcast.jvm.t3.B");
+    }
+}
+~~~
+
+~~~
+main init
+~~~
+
+
+
+
+
+例子5：Class类的静态方法，forName(),的第二个参数是false；那么这个类是不会初始化的
+
+~~~java
+class A {
+    static int a = 0;
+    static {
+        System.out.println("a init");
+    }
+}
+
+class B extends A {
+    final static double b = 5.0;
+    static boolean c = false;
+    static {
+        System.out.println("b init");
+    }
+}
+~~~
+
+
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+import java.io.IOException;
+
+public class Load3 {
+    static {
+        System.out.println("main init");
+    }
+    
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
+         // 5. 不会初始化类 B，但会加载 B、A
+        ClassLoader c2 = Thread.currentThread().getContextClassLoader();
+        Class.forName("cn.itcast.jvm.t3.load.B", false, c2);
+    }
+}
+~~~
+
+~~~
+main init
+~~~
+
+
+
+
+
+例子6：首次 访问这个类的静态变量或静态方法时 **会进行类的初始化**
+
+~~~java
+class A {
+    static int a = 0;
+    static {
+        System.out.println("a init");
+    }
+}
+
+class B extends A {
+    final static double b = 5.0;
+    static boolean c = false;
+    static {
+        System.out.println("b init");
+    }
+}
+~~~
+
+
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+import java.io.IOException;
+
+public class Load3 {
+    static {
+        System.out.println("main init");
+    }
+    
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
+        // 1. 首次 访问这个类的静态变量或静态方法时
+        System.out.println(A.a);
+    }
+}
+~~~
+
+```
+main init
+a init
+0
+```
+
+
+
+
+
+
+
+例子7：子类初始化，如果父类还没初始化，会引发
+
+~~~java
+class A {
+    static int a = 0;
+    static {
+        System.out.println("a init");
+    }
+}
+
+class B extends A {
+    final static double b = 5.0;
+    static boolean c = false;
+    static {
+        System.out.println("b init");
+    }
+}
+~~~
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+import java.io.IOException;
+
+public class Load3 {
+    static {
+        System.out.println("main init");
+    }
+    
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
+         // 2. 子类初始化，如果父类还没初始化，会引发
+        System.out.println(B.c);
+    }
+}
+~~~
+
+```
+main init
+a init
+b init
+false
+```
+
+类B是类A的子类；获取类B的静态变量（非静态常量）时，会触发类B的初始化；此时发现类A还未初始化，先进行类A的初始化
+
+
+
+
+
+
+
+例子7： 子类访问父类静态变量，只触发父类初始化
+
+~~~java
+class A {
+    static int a = 0;
+    static {
+        System.out.println("a init");
+    }
+}
+
+class B extends A {
+    final static double b = 5.0;
+    static boolean c = false;
+    static {
+        System.out.println("b init");
+    }
+}
+~~~
+
+
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+import java.io.IOException;
+
+public class Load3 {
+    static {
+        System.out.println("main init");
+    }
+    
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
+        // 3. 子类访问父类静态变量，只触发父类初始化
+        System.out.println(B.a);
+    }
+}
+~~~
+
+```
+main init
+a init
+0
+```
+
+类B是类A的子类，可以通过类B调用类A的静态变量；非继承；
+
+
+
+
+
+
+
+例子8：Class类的forname方法，触发完整的加载，连接【验证、准备、解析】，初始化
+
+~~~java
+class A {
+    static int a = 0;
+    static {
+        System.out.println("a init");
+    }
+}
+
+class B extends A {
+    final static double b = 5.0;
+    static boolean c = false;
+    static {
+        System.out.println("b init");
+    }
+}
+~~~
+
+
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+import java.io.IOException;
+
+public class Load3 {
+    static {
+        System.out.println("main init");
+    }
+    
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
+        // 4. 会初始化类 B，并先初始化类 A
+        Class.forName("cn.itcast.jvm.t3.load.B");//单个参数的情况，默认 inicialize 为true
+    }
+}
+~~~
+
+```
+main init
+a init
+b init
+```
+
+类B是类A的子类；调用Class类的forName方法会，触发类B的初始化；此时发现类A还未初始化，先进行类A的初始化
+
+
+
+### 4.4 练习 
+
+从字节码分析，使用 a，b，c 这三个常量是否会导致 E 初始化
+
+
+
+例子1：【静态常量，且是基本数据类型和String类型】
+
+~~~java
+class E {
+    public static final int a = 10;
+    public static final String b = "hello";
+    public static final Integer c = 20;  // Integer.valueOf(20)
+    static {
+        System.out.println("init E");
+    }
+}
+~~~
+
+
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+public class Load4 {
+    public static void main(String[] args) {
+        System.out.println(E.a);
+        System.out.println(E.b);
+    }
+}
+~~~
+
+~~~
+10
+hello
+~~~
+
+
+
+
+
+ 例子2：
+
+~~~java
+class E {
+    public static final int a = 10;
+    public static final String b = "hello";
+    public static final Integer c = 20;  // Integer.valueOf(20)
+    static {
+        System.out.println("init E");
+    }
+}
+~~~
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+public class Load4 {
+    public static void main(String[] args) {
+        System.out.println(E.c);
+    }
+}
+~~~
+
+```
+init E
+20
+```
+
+
+
+
+
+例子3：
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+public class Load4 {
+    public static void main(String[] args) {
+        System.out.println(E.a);
+        System.out.println(E.b);
+        System.out.println(E.c);
+
+    }
+}
+
+class E {
+    public static final int a = 10;
+    public static final String b = "hello";
+    public static final Integer c = 20;  // Integer.valueOf(20)
+    static {
+        System.out.println("init E");
+    }
+}
+
+~~~
+
+
+
+~~~java
+E.class
+  Last modified 2022-8-14; size 702 bytes
+  MD5 checksum a6474cb9f4ab609d88688d41027f1ad8
+  Compiled from "Load4.java"
+class cn.itcast.jvm.t3.load.E
+  minor version: 0
+  major version: 52
+  flags: ACC_SUPER
+Constant pool:
+   #1 = Methodref          #8.#28         // java/lang/Object."<init>":()V
+   #2 = Methodref          #29.#30        // java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+   #3 = Fieldref           #7.#31         // cn/itcast/jvm/t3/load/E.c:Ljava/lang/Integer;
+   #4 = Fieldref           #32.#33        // java/lang/System.out:Ljava/io/PrintStream;
+   #5 = String             #34            // init E
+   #6 = Methodref          #35.#36        // java/io/PrintStream.println:(Ljava/lang/String;)V
+   #7 = Class              #37            // cn/itcast/jvm/t3/load/E
+   #8 = Class              #38            // java/lang/Object
+   #9 = Utf8               a
+  #10 = Utf8               I
+  #11 = Utf8               ConstantValue
+  #12 = Integer            10
+  #13 = Utf8               b
+  #14 = Utf8               Ljava/lang/String;
+  #15 = String             #39            // hello
+  #16 = Utf8               c
+  #17 = Utf8               Ljava/lang/Integer;
+  #18 = Utf8               <init>
+  #19 = Utf8               ()V
+  #20 = Utf8               Code
+  #21 = Utf8               LineNumberTable
+  #22 = Utf8               LocalVariableTable
+  #23 = Utf8               this
+  #24 = Utf8               Lcn/itcast/jvm/t3/load/E;
+  #25 = Utf8               <clinit>
+  #26 = Utf8               SourceFile
+  #27 = Utf8               Load4.java
+  #28 = NameAndType        #18:#19        // "<init>":()V
+  #29 = Class              #40            // java/lang/Integer
+  #30 = NameAndType        #41:#42        // valueOf:(I)Ljava/lang/Integer;
+  #31 = NameAndType        #16:#17        // c:Ljava/lang/Integer;
+  #32 = Class              #43            // java/lang/System
+  #33 = NameAndType        #44:#45        // out:Ljava/io/PrintStream;
+  #34 = Utf8               init E
+  #35 = Class              #46            // java/io/PrintStream
+  #36 = NameAndType        #47:#48        // println:(Ljava/lang/String;)V
+  #37 = Utf8               cn/itcast/jvm/t3/load/E
+  #38 = Utf8               java/lang/Object
+  #39 = Utf8               hello
+  #40 = Utf8               java/lang/Integer
+  #41 = Utf8               valueOf
+  #42 = Utf8               (I)Ljava/lang/Integer;
+  #43 = Utf8               java/lang/System
+  #44 = Utf8               out
+  #45 = Utf8               Ljava/io/PrintStream;
+  #46 = Utf8               java/io/PrintStream
+  #47 = Utf8               println
+  #48 = Utf8               (Ljava/lang/String;)V
+{
+  public static final int a;
+    descriptor: I
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 10
+
+  public static final java.lang.String b;
+    descriptor: Ljava/lang/String;
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: String hello                 //【静态常量b的值，在链接的准备阶段就已经准备好了】
+
+  public static final java.lang.Integer c;     // 【静态常量c的值，在链接的准备阶段就已经准备好了】
+    descriptor: Ljava/lang/Integer;
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+
+  cn.itcast.jvm.t3.load.E();
+    descriptor: ()V
+    flags:
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 12: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcn/itcast/jvm/t3/load/E;
+
+  static {};            //类初始化方法
+    descriptor: ()V
+    flags: ACC_STATIC
+    Code:
+      stack=2, locals=0, args_size=0
+         0: bipush        20
+         2: invokestatic  #2                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+         5: putstatic     #3                  // Field c:Ljava/lang/Integer;【将基本数据类型20装箱成Integer，再赋值给静态变量c】
+             
+         8: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        11: ldc           #5                  // String init E
+        13: invokevirtual #6                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        16: return
+      LineNumberTable:
+        line 15: 0
+        line 17: 8
+        line 18: 16
+}
+SourceFile: "Load4.java"
+~~~
+
+
+
+
+
+练习2：
+
+内部类实现懒汉式单例：
+
+测试1：调用外部类的静态方法，会触发外部类的类初始化，但不会触发内部类的类初始化；而内部类中通过类初始化方法创建外部类对象【由JVM保证，类初始			  化器中的线程安全问题】
+
+~~~java
+class Singleton {
+    static {
+        System.out.println("Singleton cinit..");
+    }
+
+    public static void test() {
+        System.out.println("a static method");
+    }
+
+    private Singleton() {
+    }
+
+    private static class LazyHolder {
+        private static final Singleton SINGLETON = new Singleton();
+
+        static {
+            System.out.println("innerClass cinit...\n mean outerClass instance will be create later");
+        }
+    }
+
+    public static Singleton getInstance() {
+        return LazyHolder.SINGLETON;
+    }
+}
+
+~~~
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+public class Load9 {
+    public static void main(String[] args) {
+        Singleton.test();
+    }
+}
+~~~
+
+~~~
+Singleton cinit..
+a static method
+~~~
+
+
+
+测试2：通过外部类的静态方法，调用内部类中的静态变量，导致内部类的初始化，进而创建外部类对象，实现懒汉式单例；
+
+~~~java
+class Singleton {
+    static {
+        System.out.println("Singleton cinit..");
+    }
+
+    public static void test() {
+        System.out.println("a static method");
+    }
+
+    private Singleton() {
+    }
+
+    private static class LazyHolder {
+        private static final Singleton SINGLETON = new Singleton();
+
+        static {
+            System.out.println("innerClass cinit...\n mean outerClass instance will be create later");
+        }
+    }
+
+    public static Singleton getInstance() {
+        return LazyHolder.SINGLETON;
+    }
+}
+~~~
+
+
+
+~~~java
+public class Load9 {
+    public static void main(String[] args) {
+        Singleton instance = Singleton.getInstance();
+        System.out.println(instance);
+    }
+}
+~~~
+
+~~~
+Singleton cinit..
+innerClass cinit...
+ mean outerClass instance will be create later
+cn.itcast.jvm.t3.load.Singleton@7f31245a
+~~~
+
+main方法所在的类先初始化
+
+
+
 ## 5. 类加载器 
+
+以 JDK 8 为例：
+
+---
+
+![image-20220814172416207](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220814172416207.png)
+
+---
+
+Bootstrap ClassLoader：启动类加载器
+
+Extension ClassLoader：扩展类加载器
+
+Application ClassLoader ：应用程序加载器
+
+
+
+注意：
+
+扩展类加载器中是不可以直接通过getParent方法获取父级的类加载器；原因：Bootstrap ClassLoader是由C++编写的，java代码无法直接访问	
+
+
+
+
+
+通过一些虚拟机参数，使得自定义的类可以交由BootstrapClassLoader进行加载
+
+
+
+~~~java
+public class F {
+    static {
+        System.out.println("bootstrap F init");
+    }
+}
+~~~
+
+~~~java
+public class Load5_1 {
+    public Load5_1() {
+    }
+
+    public static void main(String[] args) throws ClassNotFoundException {
+        Class<?> aClass = Class.forName("F");
+        System.out.println(aClass.getClassLoader());
+    }
+}
+~~~
+
+~~~
+输入命令 java -Xbootclasspath/a:. Load5_1 
+【.代表是当前路径，即除了java_home/jre/lib目录下的所有类都由启动类加载器负责加载，还要追加一个路径：当前路径】
+~~~
+
+
+
+ ~~~java
+ bootstrap F init
+ null   【说明这个是启动类加载器】
+ ~~~
+
+> https://blog.csdn.net/PengZyi/article/details/114846569  **Java 中带包的类的编译与运行**
+
+
+
+
+
+-Xbootclasspath 表示设置 bootclasspath 
+
+其中 /a:. 表示将当前目录追加至 bootclasspath 之后 
+
+可以用这个办法替换核心类 
+
+`java -Xbootclasspath:`
+
+`java -Xbootclasspath/a:<后追加路径> `
+
+`java -Xbootclasspath/p:<前追加路径>`  用于替换某些由启动类加载器加载的类
+
+
+
+
+
+
+
+
+
+### 5.2 扩展类加载器
+
+例子1：证明，是由应用类加载器加载自定义类
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+public class G {
+    static {
+        System.out.println("classpath G init");
+    }
+}
+~~~
+
+
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+public class Load5_2 {
+    public static void main(String[] args) throws ClassNotFoundException {
+        Class<?> aClass = Class.forName("cn.itcast.jvm.t3.load.G");
+        System.out.println(aClass.getClassLoader());
+    }
+}
+~~~
+
+~~~
+classpath G init
+sun.misc.Launcher$AppClassLoader@18b4aac2
+~~~
+
+
+
+
+
+例子2：测试在扩展类加载器的路径中，有同名类时，由哪个类加载器进行加载
+
+同名类：
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+public class G {
+    static {
+       System.out.println("ext G init");
+    }
+}
+~~~
+
+
+
+打个 jar 包
+
+~~~
+D:\learn\黑马程序员\资料-解密JVM\代码\jvm\out\production\jvm>jar -cfv my.jar cn/itcast/jvm/t3/load/G.class
+已添加清单
+正在添加: cn/itcast/jvm/t3/load/G.class(输入 = 487) (输出 = 327)(压缩了 32%) 
+~~~
+
+
+
+将 jar 包拷贝到 JAVA_HOME/jre/lib/ext 
+
+---
+
+![image-20220814203028290](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220814203028290.png)
+
+---
+
+
+
+重新执行 Load5_2 
+
+输出
+
+~~~
+ext G init
+sun.misc.Launcher$ExtClassLoader@4b67cf4d
+~~~
+
+
+
+### 5.3 双亲委派模式
+
+所谓的双亲委派，就是指调用类加载器的 loadClass 方法时，**查找类的规则**
+
+注意 这里的双亲，翻译为**上级**似乎更为合适，因为它们并没有继承关系
+
+
+
+源码解析：
+
+~~~java
+  protected Class<?> loadClass(String name, boolean resolve)
+        throws ClassNotFoundException
+    {
+        synchronized (getClassLoadingLock(name)) {
+            // First, check if the class has already been loaded
+            Class<?> c = findLoadedClass(name);//在缓存中确认一遍该类是否已经被加载
+            if (c == null) {
+                long t0 = System.nanoTime();
+                try {
+                    if (parent != null) {、
+                        //一般这里是应用程序加载器，上一级是扩展类加载器，再上一层是启动类加载器
+                        //递归调用当前方法；一般是两层
+                        //有上级的话，委派上级 loadClass
+                        c = parent.loadClass(name, false);
+                    } else {
+                        //启动类加载器
+                        //调用本地方法，查看java_home/jre/lib目录下是否有某个类，全类名
+                        // 3. 如果没有上级了（ExtClassLoader），则委派BootstrapClassLoader
+                        c = findBootstrapClassOrNull(name);
+                    }
+                } catch (ClassNotFoundException e) {
+                    
+                    // ClassNotFoundException thrown if class not found
+                    // from the non-null parent class loader
+                }
+
+                if (c == null) {
+                    // If still not found, then invoke findClass in order
+                    // to find the class.
+                    long t1 = System.nanoTime();
+                    //查找自己的目录下是否有该名字的类
+                    //App是当前目录
+                    //Ext是java_home/jre/lib/ext
+                    c = findClass(name);
+
+                    // this is the defining class loader; record the stats
+                    sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);
+                    sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);
+                    sun.misc.PerfCounter.getFindClasses().increment();
+                }
+            }
+            if (resolve) {
+                resolveClass(c);
+            }
+            return c;
+        }
+    }
+~~~
+
+
+
+例如：
+
+~~~java
+public class Load5_3 {
+    public static void main(String[] args) throws ClassNotFoundException {
+        Class<?> aClass = Load5_3.class.getClassLoader().loadClass("cn.itcast.jvm.t3.load.H");
+        System.out.println(aClass.getClassLoader());
+    }
+}
+~~~
+
+执行流程为：
+
+1. `sun.misc.Launcher$AppClassLoader` //1 处， 开始查看已加载的类，结果没有
+2. `sun.misc.Launcher$AppClassLoader` // 2 处，委派上级 `sun.misc.Launcher$ExtClassLoader.loadClass()` 
+3.  `sun.misc.Launcher$ExtClassLoader` // 1 处，查看已加载的类，结果没有 
+4. ` sun.misc.Launcher$ExtClassLoader` // 3 处，没有上级了，则委派 BootstrapClassLoader 查找 
+5. BootstrapClassLoader 是在 JAVA_HOME/jre/lib 下找 H 这个类，显然没有 
+6. `sun.misc.Launcher$ExtClassLoader` // 4 处，调用自己的 findClass 方法，是在` JAVA_HOME/jre/lib/ext `下找 H 这个类，显然没有，回到 `sun.misc.Launcher$AppClassLoader` 的 // 2 处
+7. 继续执行到 `sun.misc.Launcher$AppClassLoader `// 4 处，调用它自己的` findClass 方法`，在 `classpath` 下查找，找到了
+
+
+
+
+
+
+
+### 5.4 线程上下文类加载器
+
+我们在使用 JDBC 时，都需要加载 Driver 驱动，不知道你注意到没有，不写`Class.forName("com.mysql.jdbc.Driver")`
+
+
+
+也是可以让 com.mysql.jdbc.Driver 正确加载的，你知道是怎么做的吗？
+
+让我们追踪一下源码：
+
+~~~java
+public class DriverManager {
+    // 注册驱动的集合
+    private final static CopyOnWriteArrayList<DriverInfo> registeredDrivers= new CopyOnWriteArrayList<>();
+    
+    // 初始化驱动
+    static {
+        loadInitialDrivers();
+        println("JDBC DriverManager initialized");
+    }
+}
+~~~
+
+这里的类DriverManager 所对应的类加载器为BootstractClassloader【再rt.jar包下 】
+
+
+
+先不看别的，看看 DriverManager 的类加载器：
+
+~~~java
+System.out.println(DriverManager.class.getClassLoader());
+~~~
+
+打印 null，表示它的类加载器是 Bootstrap ClassLoader，会到 JAVA_HOME/jre/lib 下搜索类；【加载与之相关联的类时，都应该使用启动类加载器】
+
+但  JAVA_HOME/jre/lib 下显然没有 mysql-connector-java-5.1.47.jar 包，这样问题来了，在 DriverManager 的静态代码块中，怎么能正确加载 
+
+com.mysql.jdbc.Driver 呢？
+
+
+
+继续看 loadInitialDrivers() 方法：
+
+~~~java
+ private static void loadInitialDrivers() {
+        String drivers;
+        try {
+            drivers = AccessController.doPrivileged(new PrivilegedAction<String>() {
+                public String run() {
+                    return System.getProperty("jdbc.drivers");
+                }
+            });
+        } catch (Exception ex) {
+            drivers = null;
+        }
+   
+
+     	// 1）使用 ServiceLoader 机制加载驱动，即 SPI
+        AccessController.doPrivileged(new PrivilegedAction<Void>() {
+            public Void run() {
+
+                ServiceLoader<Driver> loadedDrivers = ServiceLoader.load(Driver.class);
+                //遍历每一个实现类的全类名，通过线程上下文持有的 应用程序类加载器 加载每一个实现类【破坏双亲委派机制】
+                Iterator<Driver> driversIterator = loadedDrivers.iterator();
+
+     
+                try{
+                    while(driversIterator.hasNext()) {
+                        driversIterator.next();
+                    }
+                } catch(Throwable t) {
+                // Do nothing
+                }
+                return null;
+            }
+        });
+
+        println("DriverManager.initialize: jdbc.drivers = " + drivers);
+
+     	// 2）使用 jdbc.drivers 定义的驱动名加载驱动
+        if (drivers == null || drivers.equals("")) {
+            return;
+        }
+        String[] driversList = drivers.split(":");
+        println("number of Drivers:" + driversList.length);
+        for (String aDriver : driversList) {
+            try {
+                println("DriverManager.Initialize: loading " + aDriver);
+                
+                // 这里的 ClassLoader.getSystemClassLoader() 就是应用程序类加载器
+                Class.forName(aDriver, true, ClassLoader.getSystemClassLoader());
+            } catch (Exception ex) {
+                println("DriverManager.Initialize: load failed: " + ex);
+            }
+        }
+    }
+~~~
+
+
+
+先看 2）发现它最后是使用 Class.forName 完成类的加载和初始化，关联的是应用程序类加载器，因此 可以顺利完成类加载 
+
+再看 1）它就是大名鼎鼎的` Service Provider Interface` （SPI） 
+
+​			   约定如下，在 jar 包的 META-INF/services 包下，以**接口全限定名** 为文件名，**文件内容** 是实现类的全类名
+
+---
+
+![image-20220814214332040](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220814214332040.png)
+
+---
+
+
+
+这样就可以使用
+
+接口类型jdk已经实现好了，这里是找到java.sql.Driver文件，读取里面所有的实现类型
+
+~~~java
+ServiceLoader<接口类型> allImpls = ServiceLoader.load(接口类型.class);
+    Iterator<接口类型> iter = allImpls.iterator();
+    while(iter.hasNext()) {
+        iter.next();
+    }
+~~~
+
+来得到实现类，体现的是【面向接口编程+解耦】的思想，在下面一些框架中都运用了此思想：
+
+ JDBC 
+
+Servlet 初始化器 
+
+Spring 容器 
+
+Dubbo（对 SPI 进行了扩展）
+
+
+
+接着看 `ServiceLoader.load` 方法：
+
+~~~java
+public static <S> ServiceLoader<S> load(Class<S> service) {
+    // 获取线程上下文类加载器
+    ClassLoader cl = Thread.currentThread().getContextClassLoader();
+    return ServiceLoader.load(service, cl);
+}
+~~~
+
+线程上下文类加载器是当前线程使用的类加载器，默认就是应用程序类加载器
+
+它内部又是由 Class.forName 调用了线程上下文类加载器完成类加载，具体代码在 ServiceLoader 的内部类 LazyIterator 中：
+
+~~~java
+private S nextService() {
+            if (!hasNextService())
+                throw new NoSuchElementException();
+            String cn = nextName;
+            nextName = null;
+            Class<?> c = null;
+            try {
+                //这里的loader就是 线程上下文加载器所持有的加载器【App】
+                //通过应用类加载器，加载所有的实现类 cn是类名
+                c = Class.forName(cn, false, loader);
+            } catch (ClassNotFoundException x) {
+                fail(service,
+                     "Provider " + cn + " not found");
+            }
+            if (!service.isAssignableFrom(c)) {
+                fail(service,
+                     "Provider " + cn  + " not a subtype");
+            }
+            try {
+                S p = service.cast(c.newInstance());
+                providers.put(cn, p);
+                return p;
+            } catch (Throwable x) {
+                fail(service,
+                     "Provider " + cn + " could not be instantiated",
+                     x);
+            }
+            throw new Error();          // This cannot happen
+        }
+~~~
+
+
+
+### 5.5 自定义类加载器
+
+问问自己，什么时候需要自定义类加载器 
+
+1）想加载 非 `classpath `、非`jre/lib ` 、非 `jre/lib/ext`  随意路径中的类文件 
+
+2）都是通过接口来使用实现，希望解耦时，常用在框架设计 
+
+3）这些类希望予以隔离，不同应用的同名类都可以加载，不冲突，常见于 tomcat 容器【一个类有 新旧两个版本，但希望其能同时工作】
+
+
+
+步骤： 
+
+1.   继承 ClassLoader 父类
+2.  要**遵从双亲委派机制**，**重写 findClass 方法**    
+     注意  不是  重写` loadClass 方法`，否则不会走双亲委派机制
+3.  在findClass方法中 读取类文件的字节码，一般是字节数组
+4. 调用父类的 defineClass 方法来加载类
+5. 使用者调用该类加载器的 loadClass 方法
+
+
+
+类 HelloWorld
+
+~~~java
+public class HelloWorld {
+    static {
+        System.out.println("Hello World init.....");
+    }
+}
+~~~
+
+
+
+自定义类加载器
+
+~~~java
+class MyClassLoader extends ClassLoader {
+
+    @Override // name 就是类名称
+    protected Class<?> findClass(String name) throws ClassNotFoundException {
+        String path = "D:\\Temp\\" + name + ".class";
+
+        try {
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            //读取字节码文件成为流
+            Files.copy(Paths.get(path), os);
+
+            // 得到字节数组
+            byte[] bytes = os.toByteArray();
+
+            // byte[] -> *.class
+            return defineClass(name, bytes, 0, bytes.length);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new ClassNotFoundException("类文件未找到", e);
+        }
+    }
+}
+~~~
+
+
+
+调用自定义类加载器
+
+~~~java
+package cn.itcast.jvm.t3.load;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class Load7 {
+    public static void main(String[] args) throws Exception {
+        MyClassLoader classLoader = new MyClassLoader();
+        Class<?> c1 = classLoader.loadClass("HelloWorld");//当一个类被加载过一次后，它就会被缓存到类加载器中
+        Class<?> c2 = classLoader.loadClass("HelloWorld");//上面有缓存，所以是同一个对象
+        System.out.println(c1 == c2);//true
+
+        MyClassLoader classLoader2 = new MyClassLoader();//不同的类加载器对象
+        Class<?> c3 = classLoad er2.loadClass("HelloWorld");
+        System.out.println(c1 == c3);//false 只有当包名类名相同时，且是同一个类加载器对象时，类对象才相同
+
+        c1.newInstance();//反射调用无参构造
+    }
+}
+~~~
+
+~~~
+true
+false
+Hello World init.....
+~~~
 
 
 
 ## 6. 运行期优化
 
+### 6.1 即时编译 
+
+分层编译（TieredCompilation）
+
+
+
+先来个例子：
+
+~~~java
+package cn.itcast.jvm.t3.jit;
+
+public class JIT1 {
+
+    // -XX:+PrintCompilation -XX:-DoEscapeAnalysis
+    public static void main(String[] args) {
+        for (int i = 0; i < 200; i++) {
+            long start = System.nanoTime();
+            for (int j = 0; j < 1000; j++) {
+                new Object();
+            }
+            long end = System.nanoTime();
+            System.out.printf("%d\t%d\n",i,(end - start));
+        }
+    }
+}
+~~~
+
+~~~
+0	39099
+1	45099
+2	44200
+3	41500
+..........
+62	43399
+63	42700
+64	13899
+65	10001
+66	11300
+67	10199
+68	10901
+69	16100
+70	10901
+71	24100
+72	10800
+73	10400
+74	10399
+75	11200
+76	10299
+77	7900
+78	6700
+79	6401
+80	5699
+81	6400
+82	6700
+83	6601
+84	6000
+85	12200
+86	12400
+87	9701
+........
+114	9799
+115	8500
+116	9899
+117	10200
+118	11299
+119	9999
+120	11700
+121	10000
+122	8901
+123	7100
+124	10600
+125	9400
+126	11000
+127	11601
+128	13200
+129	11900
+130	8599
+131	8600
+132	9900
+133	9400
+134	13500
+135	12500
+136	12300
+137	12400
+138	12100
+........
+173	300
+174	200
+175	200
+176	300
+177	300
+178	300
+179	200
+180	600
+181	600
+182	600
+183	599
+184	600
+185	699
+186	600
+187	500
+188	600
+189	601
+190	599
+191	600
+192	700
+193	600
+194	601
+195	699
+196	600
+197	600
+198	600
+199	700
+~~~
+
+
+
+原因是什么呢？ 
+
+JVM 将执行状态分成了 5 个层次： 
+
+0 层，解释执行（Interpreter） 
+
+1 层，使用 C1 即时编译器编译执行（不带 profiling） 
+
+2 层，使用 C1 即时编译器编译执行（带基本的 profiling） 
+
+3 层，使用 C1 即时编译器编译执行（带完全的 profiling） 
+
+4 层，使用 C2 即时编译器编译执行 
+
+
+
+注意：profiling 是指在运行过程中收集一些程序执行状态的数据，例如【方法的调用次数】，【循环的 回边次数】等
 
 
 
 
 
+即时编译器（JIT）与解释器的区别 
+
+解释器是将字节码解释为机器码，下次即使遇到相同的字节码，仍会执行重复的解释 
+
+JIT 是将一些字节码编译为机器码，并存入` Code Cache`（代码缓存），下次遇到相同的代码，直接执行，无需 再编译 
+
+解释器是将字节码解释为针对所有  **平台都通用的机器码** 
+
+JIT 会根据平台类型，生成**平台特定的机器码** 
+
+
+
+对于占据大部分的不常用的代码，我们无需耗费时间将其编译成机器码，而是采取  **解释执行**  的方式运 行；
+
+另一方面，对于仅占据小部分的热点代码，我们则可以将其编译成机器码，以达到理想的运行速 度
+
+ 执行效率上简单比较一下` Interpreter < C1(5倍) < C2（10到100倍）`，**总的目标是发现热点代码**（hotspot名称的由 来），优化之
+
+
+
+刚才的一种优化手段称之为【逃逸分析】
+
+发现新建的对象是否逃逸出多次循环的作用范围（被这个循环外的方法或变量所引用），如果没有直接不进行该对象的创建
+
+可以使用 `-XX:- DoEscapeAnalysis `关闭逃逸分析，再运行刚才的示例观察结果
+
+~~~
+0	34800
+1	31000
+2	30300
+3	29900
+.........
+60	32300
+61	31700
+62	32100
+63	43001
+64	10700
+........
+101	49500
+102	10699
+103	8600
+104	9901
+105	10600
+106	10701
+107	31699
+108	11300
+109	11300
+110	11800
+111	8001
+112	10201
+113	7200
+114	6499
+115	5701
+116	6400
+117	6399
+118	11700
+119	10000
+120	6800
+121	6500
+136	5600
+137	5199
+138	6000
+........
+193	5801
+194	5100
+195	6099
+196	5601
+197	5800
+198	5400
+199	5400
+~~~
+
+最快也是千纳秒级别，关闭逃逸分析前最快可达百纳秒级别
+
+
+
+参考资料：
+
+[Java HotSpot Virtual Machine Performance Enhancements (oracle.com)](https://docs.oracle.com/en/java/javase/12/vm/java-hotspot-virtual-machine-performance-enhancements.html#GUID-D2E3DC58-D18B-4A6C-8167-4A1DFB4888E4)
 
 
 
 
 
+方法内联 （Inlining）
+
+~~~java
+private static int square(final int i) {
+    return i * i;
+}
+~~~
 
 
 
+~~~java
+System.out.println(square(9));
+~~~
 
 
 
+如果发现 square 是热点方法，并且长度不太长时，会进行内联，所谓的内联就是把方法内代码拷贝、 粘贴到调用者的位置：
+
+~~~java
+System.out.println(9 * 9);
+~~~
 
 
 
+还能够进行常量折叠（constant folding）的优化
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+~~~java
+System.out.println(81);3
+~~~
 
 
 
