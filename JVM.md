@@ -10100,7 +10100,7 @@ JIT 会根据平台类型，生成**平台特定的机器码**
 
 
 
-方法内联 （Inlining）
+**方法内联 （Inlining）**
 
 ~~~java
 private static int square(final int i) {
@@ -10136,37 +10136,393 @@ System.out.println(81);3
 
 
 
+例子：
+
+~~~java
+package cn.itcast.jvm.t3.jit;
+
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class JIT2 {
+    // -XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining -XX:CompileCommand=dontinline,*JIT2.square
+    // -XX:+PrintCompilation
+
+    public static void main(String[] args) {
+
+        int x = 0;
+        for (int i = 0; i < 500; i++) {
+            long start = System.nanoTime();
+            for (int j = 0; j < 1000; j++) {
+                x = square(9);
+
+            }
+            long end = System.nanoTime();
+            System.out.printf("%d\t%d\t%d\n",i,x,(end - start));
+        }
+    }
+
+    private static int square(final int i) {
+        return i * i;
+    }
+}
+
+~~~
+
+~~~
+0	81	22800
+1	81	28600
+56	81	27900
+57	81	28800
+58	81	29400
+59	81	26500
+60	81	32300
+61	81	22000
+62	81	24900
+63	81	29100
+64	81	22800
+65	81	8700
+101	81	8000
+102	81	3700
+103	81	3200
+104	81	1700
+105	81	1700
+106	81	1700
+107	81	2500
+108	81	3200
+109	81	1700
+110	81	2700
+111	81	1800
+112	81	1700
+113	81	1800
+114	81	1700
+115	81	4400
+116	81	3300
+117	81	3200
+118	81	4800
+119	81	2900
+120	81	3200
+121	81	3300
+122	81	1800
+123	81	1700
+150	81	4800
+151	81	2700
+152	81	1700
+153	81	1800
+154	81	1800
+155	81	1700
+156	81	1700
+157	81	1800
+158	81	3200
+159	81	4600
+160	81	3200
+161	81	3200
+162	81	3300
+163	81	3300
+164	81	3200
+165	81	3400
+166	81	3300
+167	81	50100
+168	81	15200
+169	81	0
+170	81	28400
+171	81	31600
+172	81	28900
+173	81	27900
+174	81	28300
+175	81	28600
+176	81	29000
+177	81	28300
+178	81	27300
+179	81	28800
+180	81	13100
+279	81	3400
+280	81	3400
+281	81	2900
+343	81	100
+344	81	0
+345	81	100
+346	81	0
+347	81	0
+348	81	100
+349	81	0
+350	81	0
+351	81	100
+352	81	0
+353	81	100
+354	81	0
+355	81	100
+356	81	0
+357	81	0
+358	81	0
+359	81	0
+392	81	0
+393	81	100
+394	81	0
+458	81	0
+459	81	100
+460	81	100
+461	81	0
+462	81	100
+463	81	0
+498	81	100
+499	81	0
+~~~
+
+
+
+
+
+添加虚拟机参数：打印所有内联方法的相关信息
+
+`-XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining`
+
+---
+
+![image-20220816221706017](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220816221706017.png)
+
+---
+
+
+
+
+
+禁止某个`inlining` 内联方法 ：
+
+`-XX:CompileCommand=dontinline,*JIT2.square`
+
+~~~
+0	81	27600
+1	81	27800
+2	81	23800
+3	81	22600
+4	81	22600
+5	81	22600
+23	81	22700
+43	81	20000
+62	81	23200
+63	81	22600
+64	81	24000
+65	81	28500
+66	81	8700
+67	81	2200
+68	81	2200
+69	81	3300
+70	81	4300
+71	81	4200
+72	81	4300
+73	81	4200
+74	81	2200
+75	81	2200
+76	81	2200
+77	81	6200
+78	81	4100
+79	81	2200
+80	81	2200
+81	81	2200
+82	81	4200
+83	81	2200
+84	81	2200
+85	81	3200
+86	81	2200
+319	81	2600
+320	81	2200
+321	81	2600
+322	81	2300
+323	81	2700
+324	81	1700
+370	81	2700
+371	81	2600
+372	81	2800
+373	81	2700
+374	81	2600
+375	81	2700
+376	81	2800
+377	81	2600
+378	81	2700
+416	81	1700
+417	81	1700
+418	81	1700
+419	81	1700
+420	81	1700
+421	81	1700
+422	81	1700
+423	81	1700
+424	81	1700
+425	81	1700
+426	81	1700
+427	81	1700
+428	81	1700
+468	81	1700
+495	81	1700
+496	81	1700
+497	81	1700
+498	81	1700
+499	81	1700
+~~~
+
+再快也没有到达 0纳秒 的级别
+
+
+
+
+
+**字段优化**
+
+JMH 基准测试请参考：http://openjdk.java.net/projects/code-tools/jmh/ 
+
+
+
+创建 maven 工程，添加依赖如下：
+
+~~~java
+<dependency>
+    <groupId>org.openjdk.jmh</groupId>
+    <artifactId>jmh-core</artifactId>
+    <version>${jmh.version}</version>
+</dependency>
+
+<dependency>
+    <groupId>org.openjdk.jmh</groupId>
+    <artifactId>jmh-generator-annprocess</artifactId>
+    <version>${jmh.version}</version>
+    <scope>provided</scope>
+</dependency>
+~~~
+
+
+
+编写基准测试代码：
+
+~~~java
+package test;
+
+import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
+import org.openjdk.jmh.runner.options.Options;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
+
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
+@Warmup(iterations = 2, time = 1)
+@Measurement(iterations = 5, time = 1)
+@State(Scope.Benchmark)
+public class Benchmark1 {
+
+    int[] elements = randomInts(1_000);
+
+    private static int[] randomInts(int size) {
+        Random random = ThreadLocalRandom.current();
+        int[] values = new int[size];
+        for (int i = 0; i < size; i++) {
+            values[i] = random.nextInt();
+        }
+        return values;
+    }
+
+    @Benchmark
+    public void test1() {
+        for (int i = 0; i < elements.length; i++) {
+            doSum(elements[i]);
+        }
+    }
 
+    @Benchmark
+    public void test2() {
+        int[] local = this.elements;
+        for (int i = 0; i < local.length; i++) {
+            doSum(local[i]);
+        }
+    }
 
+    @Benchmark
+    public void test3() {
+        for (int element : elements) {
+            doSum(element);
+        }
+    }
 
+    static int sum = 0;
 
+    @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+    static void doSum(int x) {
+        sum += x;
+    }
 
 
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(Benchmark1.class.getSimpleName())
+                .forks(1)
+                .build();
 
+        new Runner(opt).run();
+    }
+}
+~~~
 
+首先启用 doSum 的方法内联，测试结果如下（每秒吞吐量，分数越高的更好）：
 
+~~~
+Benchmark Mode Samples Score Score error Units
+t.Benchmark1.test1 thrpt 5 2420286.539 390747.467 ops/s
+t.Benchmark1.test2 thrpt 5 2544313.594 91304.136 ops/s
+t.Benchmark1.test3 thrpt 5 2469176.697 450570.647 ops/s
+~~~
 
 
 
+接下来禁用 doSum 方法内联:
 
+~~~java
+@CompilerControl(CompilerControl.Mode.DONT_INLINE)
+static void doSum(int x) {
+    sum += x;
+}
+~~~
 
 
 
+测试结果如下：
 
+~~~~
+Benchmark Mode Samples Score Score error Units
+t.Benchmark1.test1 thrpt 5 296141.478 63649.220 ops/s
+t.Benchmark1.test2 thrpt 5 371262.351 83890.984 ops/s
+t.Benchmark1.test3 thrpt 5 368960.847 60163.391 ops/s
+~~~~
 
 
 
+分析： 在刚才的示例中，doSum 方法是否内联会影响 elements 成员变量读取的优化： 
 
+如果 doSum 方法内联了，刚才的 test1 方法会被优化成下面的样子（伪代码）：
 
+~~~java
+@Benchmark
+public void test1() {
+    // elements 首次读取会缓存起来 -> int[] local
+    for (int i = 0; i < elements.length; i++) { // 假设有一千次， 后面的999 次 会直接从局部变量中获取
+        sum += elements[i]; // 1000 次取下标 i 的元素 【local】
+    }
+}
+~~~
 
+可以节省 999 次 Field 读取操作 但如果 doSum 方法没有内联，则不会进行上面的优化
 
 
 
+----
 
+![image-20220816224324061](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220816224324061.png)
 
+----
 
 
 
+ 练习：在内联情况下将 elements 添加 volatile 修饰符，观察测试结果
 
 
 
@@ -10174,71 +10530,350 @@ System.out.println(81);3
 
 
 
+### 6.2 反射优化
 
+例子：
 
+~~~java
+package cn.itcast.jvm.t3.reflect;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
+public class Reflect1 {
 
+    public static void foo() {
+        System.out.println("foo...");
+    }
 
+    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, IOException {
+        Method foo = Reflect1.class.getMethod("foo");
+        //foo.invoke 前面 0 ~ 15 次调用使用的是 MethodAccessor 的 NativeMethodAccessorImpl 实现
+        for (int i = 0; i <= 16; i++) {
+            System.out.printf("%d\t", i);
+            foo.invoke(null);
+        }
+        System.in.read();
+    }
+}
 
+~~~
 
 
 
+---
 
+![image-20220816225238884](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220816225238884.png)
 
+---
 
+![image-20220816225632323](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220816225632323.png)
 
+----
 
+![image-20220816230124824](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220816230124824.png)
 
+----
 
 
 
+~~~java
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
 
+package sun.reflect;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import sun.reflect.misc.ReflectUtil;
 
+class NativeMethodAccessorImpl extends MethodAccessorImpl {
+    private final Method method;
+    private DelegatingMethodAccessorImpl parent;
+    private int numInvocations;
 
+    NativeMethodAccessorImpl(Method var1) {
+        this.method = var1;
+    }
 
+    public Object invoke(Object var1, Object[] var2) throws IllegalArgumentException, InvocationTargetException {
+        // inflationThreshold 膨胀阈值，默认 15
 
+        if (++this.numInvocations > ReflectionFactory.inflationThreshold() && !ReflectUtil.isVMAnonymousClass(this.method.getDeclaringClass())) {
+            // 使用 ASM 动态生成的新实现代替本地实现，速度较本地实现快 20 倍左右
+            MethodAccessorImpl var3 = (MethodAccessorImpl)(new MethodAccessorGenerator()).generateMethod(this.method.getDeclaringClass(), this.method.getName(), this.method.getParameterTypes(), this.method.getReturnType(), this.method.getExceptionTypes(), this.method.getModifiers());
+            this.parent.setDelegate(var3);
+        }
+		// 调用本地实现
+        return invoke0(this.method, var1, var2);
+    }
 
+    void setParent(DelegatingMethodAccessorImpl var1) {
+        this.parent = var1;
+    }
 
+    private static native Object invoke0(Method var0, Object var1, Object[] var2);
+}
+~~~
 
 
 
+该方法 在运行期间动态 生成 **方法访问器**，一段字节码，没有源码
 
+~~~java
+MethodAccessorImpl var3 = (MethodAccessorImpl)(new MethodAccessorGenerator()).generateMethod(this.method.getDeclaringClass(), this.method.getName(), this.method.getParameterTypes(), this.method.getReturnType(), this.method.getExceptionTypes(), this.method.getModifiers());
+~~~
 
 
 
 
 
+当调用到第 16 次（从0开始算）时，会采用运行时生成的类代替掉最初的实现，可以通过 debug 得到 类名为：`sun.reflect.GeneratedMethodAccessor1`
 
+----
 
+![image-20220816231501589](C:/Users/fgcy/AppData/Roaming/Typora/typora-user-images/image-20220816231501589.png)
 
+---
 
 
 
+可以使用阿里的 arthas 工具：
 
+选择 4回车表示分析该进程
 
+----
 
+![image-20220816232157756](C:/Users/fgcy/AppData/Roaming/Typora/typora-user-images/image-20220816232157756.png)
 
+----
 
+![image-20220816232228938](C:/Users/fgcy/AppData/Roaming/Typora/typora-user-images/image-20220816232228938.png)
 
+---
 
+再输入【jad + 类名】来进行反编译
 
+![image-20220816232248723](C:/Users/fgcy/AppData/Roaming/Typora/typora-user-images/image-20220816232248723.png)
 
+---
 
+![image-20220816232305822](C:/Users/fgcy/AppData/Roaming/Typora/typora-user-images/image-20220816232305822.png)
 
+---
 
 
 
+~~~java
+ClassLoader:
++-sun.reflect.DelegatingClassLoader@60e53b93
+  +-sun.misc.Launcher$AppClassLoader@18b4aac2
+    +-sun.misc.Launcher$ExtClassLoader@12a3a380
 
+Location:
 
+/*
+ * Decompiled with CFR.
+ *
+ * Could not load the following classes:
+ *  cn.itcast.jvm.t3.reflect.Reflect1
+ */
+package sun.reflect;
 
+import cn.itcast.jvm.t3.reflect.Reflect1;
+import java.lang.reflect.InvocationTargetException;
+import sun.reflect.MethodAccessorImpl;
 
+public class GeneratedMethodAccessor1
+extends MethodAccessorImpl {
+    /*
+     * Loose catch block
+     */
+    public Object invoke(Object object, Object[] objectArray) throws InvocationTargetException {
+        // 比较奇葩的做法，如果有参数，那么抛非法参数异常
+        block4: {
+            if (objectArray == null || objectArray.length == 0) break block4;
+            throw new IllegalArgumentException();
+        }
+        try {
+            // 可以看到，已经是直接调用了😱😱😱
+            Reflect1.foo();
+            // 因为没有返回值
+            return null;
+        }
+        catch (Throwable throwable) {
+            throw new InvocationTargetException(throwable);
+        }
+        catch (ClassCastException | NullPointerException runtimeException) {
+            throw new IllegalArgumentException(super.toString());
+        }
+    }
+}
+~~~
 
+注意
 
+通过查看 `ReflectionFactory` 源码可知 
 
+`sun.reflect.noInflation `可以用来禁用膨胀（直接生成 GeneratedMethodAccessor1，但首 次生成比较耗时，如果仅反射调用一次，不划算） `sun.reflect.inflationThreshold` 可以修改膨胀阈值
 
 
+
+
+
+
+
+# 七、内存模型
+
+## 1. java 内存模型
+
+很多人将【`java 内存结构`】与【`java 内存模型`】傻傻分不清，【java 内存模型】是 Java Memory Model（JMM）的意思。 
+
+关于它的权威解释，请参考:
+
+ https://download.oracle.com/otn-pub/jcp/memory_model-1.0-pfdspec-oth-JSpec/memory_model-1_0-pfd-spec.pdf?AuthParam=1562811549_4d4994cbd5b59d964cd2907ea22ca08b
+
+
+
+ 简单的说，JMM 定义了一套在   **多线程读写共享数据**   时（**成员变量、数组）**时，对数据的  **可见性、有序 性、和原子性**  的**规则和保障**
+
+
+
+### 1.1 原子性
+
+原子性在学习线程时讲过，下面来个例子简单回顾一下： 
+
+问题提出，两个线程对初始值为 0 的静态变量一个做自增，一个做自减，各做 5000 次，结果是 0 吗？
+
+
+
+
+
+### 1.2 问题分析
+
+~~~java
+package cn.itcast.jvm.t4.avo;
+
+public class Demo4_1 {
+
+    static int i = 0;
+
+    static Object obj = new Object();
+
+    public static void main(String[] args) throws InterruptedException {
+        Thread t1 = new Thread(() -> {
+            for (int j = 0; j < 50000; j++) {
+                i++;
+            }
+        });
+
+        Thread t2 = new Thread(() -> {
+            for (int j = 0; j < 50000; j++) {
+                i--;
+            }
+        });
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
+        System.out.println(i);
+    }
+}
+~~~
+
+
+
+以上的结果可能是正数、负数、零。为什么呢？
+
+
+
+因为 Java 中对静态变量的自增，自减并不是原子操 作。 
+
+例如对于 i++ 而言（i 为静态变量），实际会产生如下的 JVM 字节码指令：
+
+~~~java
+getstatic i // 获取静态变量i的值
+iconst_1 // 准备常量1
+iadd // 加法  【在操作数栈中执行】                      //局部变量的自增是iinc：在槽位上自增
+putstatic i // 将修改后的值存入静态变量i
+~~~
+
+
+
+而对应 i-- 也是类似：
+
+~~~java
+getstatic i // 获取静态变量i的值
+iconst_1 // 准备常量1
+isub // 减法
+putstatic i // 将修改后的值存入静态变量i
+~~~
+
+
+
+而 Java 的内存模型如下，完成静态变量的自增，自减需要在主存和线程内存中进行数据交换：
+
+---
+
+![image-20220816235230885](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220816235230885.png)
+
+---
+
+如果是单线程以上 8 行代码是顺序执行（不会交错）没有问题：
+
+~~~java
+// 假设i的初始值为0
+getstatic i // 线程1-获取静态变量i的值 线程内i=0
+iconst_1 // 线程1-准备常量1
+iadd // 线程1-自增 线程内i=1
+putstatic i // 线程1-将修改后的值存入静态变量i 静态变量i=1
+getstatic i // 线程1-获取静态变量i的值 线程内i=1
+iconst_1 // 线程1-准备常量1
+isub // 线程1-自减 线程内i=0
+putstatic i // 线程1-将修改后的值存入静态变量i 静态变量i=0
+~~~
+
+
+
+但多线程下这 8 行代码可能交错运行（为什么会交错？思考一下）： 
+
+
+
+出现负数的情况：
+
+~~~java
+// 假设i的初始值为0
+getstatic i // 线程1-获取静态变量i的值 线程内i=0
+getstatic i // 线程2-获取静态变量i的值 线程内i=0
+iconst_1 // 线程1-准备常量1
+iadd // 线程1-自增 线程内i=1
+putstatic i // 线程1-将修改后的值存入静态变量i 静态变量i=1
+iconst_1 // 线程2-准备常量1
+isub // 线程2-自减 线程内i=-1
+putstatic i // 线程2-将修改后的值存入静态变量i 静态变量i=-1
+~~~
+
+
+
+出现正数的情况：
+
+~~~java
+// 假设i的初始值为0
+getstatic i // 线程1-获取静态变量i的值 线程内i=0
+getstatic i // 线程2-获取静态变量i的值 线程内i=0
+iconst_1 // 线程1-准备常量1
+iadd // 线程1-自增 线程内i=1
+iconst_1 // 线程2-准备常量1
+isub // 线程2-自减 线程内i=-1
+putstatic i // 线程2-将修改后的值存入静态变量i 静态变量i=-1
+putstatic i // 线程1-将修改后的值存入静态变量i 静态变量i=1
+~~~
+
+多线程下，由于指令交错产生的错误
 
 
 
