@@ -11355,66 +11355,252 @@ INSTANCE:Lcn/itcast/jvm/t4/Singleton;
 
 
 
+### 3.4 happens-before
 
+`happens-before `规定了  **哪些写操作**  对  其它线程的  **读操作可见**，它是**可见性与有序性**的一套规则总结
 
+抛开以下 `happens-before` 规则，JMM 并不能保证一个线程对共享变量的写，对于其它线程对该共享变 量的读可见 
 
 
 
 
 
+1、线程解锁 m 之前对变量的写，对于接下来对 m 加锁的其它线程对该变量的读可见：
 
+~~~java
+    static int x;
+    static Object m = new Object();
+        new Thread(()->{
+            synchronized(m) {
+            x = 10;
+        }
+    },"t1").start();
 
+    new Thread(()->{
+        synchronized(m) {
+            System.out.println(x);
+        }
+    },"t2").start();
+~~~
 
 
 
 
 
+2、线程对 volatile 变量的写，对接下来其它线程对该变量的读可见
 
+~~~java
+    volatile static int x;
+    new Thread(()->{
+        x = 10;
+    },"t1").start();
 
+    new Thread(()->{
+        System.out.println(x);
+    },"t2").start();
+~~~
 
 
 
+3、线程 start 前对变量的写，对该线程开始后对该变量的读可见
 
+~~~java
+    static int x;
+    x = 10;
+    new Thread(()->{
+        System.out.println(x);
+    },"t2").start();
+~~~
 
 
 
 
 
+4、线程结束前对变量的写，对其它线程得知它结束后的读可见（比如其它线程调用 t1.isAlive() 或 t1.join()等待它结束）
 
+~~~java
+    static int x;
+    Thread t1 = new Thread(()->{
+        x = 10;
+    },"t1");
 
+    t1.start();
+    t1.join();
+    System.out.println(x);
+~~~
 
 
 
+5、线程 t1 打断 t2（interrupt）前对变量的写，对于其他线程得知 t2 被打断后对变量的读可见（通 过t2.interrupted 或 t2.isInterrupted）
 
+~~~java
+static int x;
+public static void main(String[] args) {
+    Thread t2 = new Thread(()->{
+        while(true) {
+            if(Thread.currentThread().isInterrupted()) {
+                System.out.println(x);
+                break;
+            }
+        }
+    },"t2");
+    t2.start();
+    
+    new Thread(()->{
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        x = 10;
+        t2.interrupt();
+    },"t1").start();
+    
+    while(!t2.isInterrupted()) {
+        Thread.yield();
+    }
+    
+    System.out.println(x);
+}
+~~~
 
+对变量默认值（0，false，null）的写，优先于其它线程对该变量的读可见 
 
+具有传递性，如果 x hb-> y 并且 y hb-> z 那么有 x hb-> z 
 
+变量都是指成员变量或静态成员变量
 
 
 
 
 
+## 4. CAS 与 原子类
 
+### 4.1 CAS 
 
+CAS 即 Compare and Swap ，它体现的一种乐观锁的思想，比如多个线程要对一个共享的整型变量执 行 +1 操作：
 
+~~~java
+   int 共享变量 = 一个数；
+	// 需要不断尝试
+    while(true) {
+    int 旧值 = 共享变量 ; // 比如拿到了当前值 0
+    
+        
+    /*
+    这时候如果别的线程把共享变量改成了 5，本线程的正确结果 1 就作废了，这时候
+    compareAndSwap 返回 false，重新尝试，直到：
+    compareAndSwap 返回 true，表示我本线程做修改的同时，别的线程没有干扰
+    */
+    if( compareAndSwap ( 旧值 == 共享变量)) {
+        int 结果 = 旧值 + 1; // 在旧值 0 的基础上增加 1 ，正确结果是 1
+        return  结果;
+    // 成功，退出循环
+    }
+}
+~~~
+
+
+
+
+
+获取共享变量时，为了保证该变量的可见性，需要**使用 volatile 修饰**
 
+结合 CAS 和 volatile 可以实现无 锁并发，**适用于竞争不激烈、多核 CPU 的场景下**。
 
+原因：竞争激烈，可以想到重试必然频繁发生，反而效率会受影响 。CAS会不断地重试，直到成功，会一直占用cup资源，如果是单核cpu，当其他线程在运行时，他没办法不断重试，就达不到一种 ”锁“的状态；
 
+CAS是轻量级的锁，因为没有使用 synchronized，所以线程不会陷入阻塞，这是效率提升的因素之一 ；线程阻塞后涉及线程上下文的切换【将当前正在运行的线程状态保存下来，然后恢复另一个线程的状态】
 
 
 
+CAS 底层依赖于一个 Unsafe 类来直接调用操作系统底层的 CAS 指令，下面是直接使用 Unsafe 对象进 行线程安全保护的一个例子
 
 
 
+~~~java
+package cn.itcast.jvm.t5;
 
+import sun.misc.Unsafe;
 
+import java.lang.reflect.Field;
 
+public class TestCAS {
+    public static void main(String[] args) throws InterruptedException {
+        DataContainer dc = new DataContainer();
+        int count = 5;
+        Thread t1 = new Thread(() -> {
+            for (int i = 0; i < count; i++) {
+                dc.increase();
+            }
+        });
+        Thread t2 = new Thread(() -> {
+            for (int i = 0; i < count; i++) {
+                dc.decrease();
+            }
+        });
+        t1.start();
+        t2.start();
+        System.out.println(dc.getData());
+    }
+}
 
+class DataContainer {
+    private volatile int data;
+    static final Unsafe unsafe;
+    static final long DATA_OFFSET;
 
+    static {
+        try {
+            // Unsafe 对象不能直接调用，只能通过反射获得
+            Field theUnsafe = Unsafe.class.getDeclaredField("theUnsafe");
+            theUnsafe.setAccessible(true);
+            unsafe = (Unsafe) theUnsafe.get(null);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new Error(e);
+        }
+        try {
+            // data 属性在 DataContainer 对象中的偏移量，用于 Unsafe 直接访问该属性
+            DATA_OFFSET =
+                    unsafe.objectFieldOffset(DataContainer.class.getDeclaredField("data"));
+        } catch (NoSuchFieldException e) {
+            throw new Error(e);
+        }
+    }
 
+    public void increase() {
+        int oldValue;
+        while (true) {
+            // 获取共享变量旧值，可以在这一行加入断点，修改 data 调试来加深理解
+            oldValue = data;
+            // cas 尝试修改 data 为 旧值 + 1，如果期间旧值被别的线程改了，返回 false
+            if (unsafe.compareAndSwapInt(this, DATA_OFFSET, oldValue, oldValue +
+                    1)) {
+                return;
+            }
+        }
+    }
 
+    public void decrease() {
+        int oldValue;
+        while (true) {
+            oldValue = data;
+            if (unsafe.compareAndSwapInt(this, DATA_OFFSET, oldValue, oldValue -
+                    1)) {
+                return;
+            }
+        }
+    }
 
+    public int getData() {
+        return data;
+    }
+}
+~~~
 
+~~~
+0
+~~~
 
 
 
@@ -11422,8 +11608,11 @@ INSTANCE:Lcn/itcast/jvm/t4/Singleton;
 
 
 
+### 4.2 乐观锁与悲观锁 
 
+`CAS` 是基于**乐观锁**的思想：最乐观的估计，不怕别的线程来修改共享变量，就算改了也没关系， 我吃亏点再**重试**呗
 
+`synchronized `是基于**悲观锁**的思想：最悲观的估计，得防着其它线程来修改共享变量，我上了锁 你们都别想改，我改完了解开锁，你们才有机会竞争锁。
 
 
 
@@ -11431,1433 +11620,266 @@ INSTANCE:Lcn/itcast/jvm/t4/Singleton;
 
 
 
+### 4.3 原子操作类
 
+**juc**（java.util.concurrent）中提供了原子操作类，可以提供线程安全的操作
 
+例如：`AtomicInteger`、 `AtomicBoolean` 等，它们底层就是采用 **CAS 技术 + volatile** 来实现的
 
 
 
+可以使用 `AtomicInteger `改写之前的例子：
 
+~~~java
+package cn.itcast.jvm.t5;
 
+import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * @Author fgcy
+ * @Date 2022/8/18
+ */
+public class TestCAS2 {
+    // 创建原子整数对象
+    private static AtomicInteger i = new AtomicInteger(0);
 
+    public static void main(String[] args) throws InterruptedException {
+        Thread t1 = new Thread(() -> {
+            for (int j = 0; j < 5000; j++) {
+                i.getAndIncrement(); // 获取并且自增 i++
+                // i.incrementAndGet(); // 自增并且获取 ++i
+            }
+        });
+        Thread t2 = new Thread(() -> {
+            for (int j = 0; j < 5000; j++) {
+                i.getAndDecrement(); // 获取并且自减 i--
+            }
+        });
+        t1.start();
+        t2.start();
+        t1.join();//等待t1执行完毕，继续执行主线程
+        t2.join();//等待t2执行完毕，继续执行主线程
+        System.out.println(i);
+    }
+}
+~~~
 
 
 
+## 5. synchronized 优化
 
+Java HotSpot 虚拟机中，每个对象都有对象头（包括两个部分：` class 指针` 和 ` Mark Word`）
 
+Mark Word 平时存 储这个对象的 **哈希码** 、 **分代年龄** (GC时，从from区晋升到老年代时会用到)
 
+当加锁时，这些信息（hash码，分代年龄）就根据情况被**替换为 标记位**(轻量级锁，重量级锁，偏向锁) 、 线程锁记录指 针 、 重量级锁指针 、 线程ID 等内容
 
 
 
 
 
+### 5.1 轻量级锁 
 
+如果一个对象虽然有多线程访问，但  **多线程访问**  的  **时间是错开的**（也就是没有竞争），那么可以使用 **轻 量级锁来优化**
 
+这就好比： 
 
+学生（线程 A）用课本占座，上了半节课，出门了（CPU时间到），回来一看，发现课本没变，说明没 有竞争，继续上他的课。 如果这期间有其它学生（线程 B）来了，会告知（线程A）有并发访问，线程 A 随即升级为重量级锁， 进入重量级锁的流程
 
+而重量级锁就不是那么用课本占座那么简单了，可以想象线程 A 走之前，把座位用一个铁栅栏围起来 、
 
 
 
+假设有两个方法同步块，利用同一个对象加锁
 
+~~~java
+static Object obj = new Object();
+public static void method1() {
+    synchronized( obj ) {
+        // 同步块 A
+        method2();
+    }
+}
+    public static void method2() {
+        synchronized( obj ) {
+        // 同步块 B
+    }
+}
 
+~~~
 
 
 
 
 
+每个线程的**栈帧**都会包含 一个**锁记录的结构**，内部可以存储锁定对象的 Mark Word（八个字节），加锁之后，Mark Word的内容会被修改，所以会将原来Mark Word中的内容迁移到栈帧的锁结构中；将来解锁时，将栈帧中的锁结构中原来Mark Word中的信息，恢复到对象头的Mark Word中；
 
+---
 
+![image-20220818223436589](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220818223436589.png)
 
+![image-20220818223543229](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220818223543229.png)
 
+---
 
+加锁过程：
 
+查看锁对象的对象头中的某两位，若值为1则表示该锁对象还没有线程占有；此时将该锁对象的Mark Word中的信息，复制到当前栈帧中的锁结构中；
 
+并且通过CAS的方式，将当前锁结构的地址设置给锁对象的Mark Word中；锁对象的Mark Word中有锁结构的地址说明加锁成功；
 
+锁结构的数据结构采用栈，每次想要加锁就会将锁对象的Mark Word中的信息复制到栈中（可存储多个Mark Word的值），解锁就会出栈；
 
+### 5.2 锁膨胀
 
+如果在尝试加轻量级锁的过程中，CAS 操作无法成功，这时一种情况就是有其它线程为此对象加上了轻 量级锁（有竞争），这时需要进行锁膨胀，将轻量级锁变为重量级锁。
 
+~~~java
+static Object obj = new Object();
+public static void method1() {
+    synchronized( obj ) {
+        // 同步块
+    }
+}
+~~~
 
+---
 
+![image-20220819202104234](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220819202104234.png)
 
+![image-20220819202151365](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220819202151365.png)
 
+### 5.3 重量锁
 
+重量级锁竞争的时候，还可以使用自旋来进行优化，如果当前线程自旋成功（即这时候持锁线程已经退 出了同步块，释放了锁），这时当前线程就可以避免阻塞。 
 
+在 **Java 6 之后**   `自旋锁`是**自适应的**  **(没有固定的标准值)**，比如对象刚刚的一次自旋操作成功过，那么认为这次自旋成功的可能 性会高，就多自旋几次；反之，就少自旋甚至不自旋，总之，比较智能。
 
+自旋会占用 CPU 时间，单核 CPU 自旋就是浪费，**多核 CPU 自旋才能发挥优势**。 
 
+好比等红灯时汽车是不是熄火，不熄火相当于自旋（等待时间短了划算），熄火了相当于阻塞（等 待时间长了划算）
 
+Java 7 之后不能控制是否开启自旋功能 自旋重试成功的情况
 
 
 
+自旋重试成功的情况：
 
+---
 
+![image-20220819202444437](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220819202444437.png)
 
+---
 
+目的：（在一定范围内重试）尽可能减少线程上下文切换；
 
 
 
+自旋重试失败的情况：
 
+---
 
+![image-20220819202545653](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220819202545653.png)
 
+---
 
+一直自旋重试会严重消耗cpu资源，所以在等待时间较长的情况下，应该使用重锁。
 
+### 5.4 偏向锁
 
+轻量级锁在没有竞争时（就自己这个线程），每次重入仍然需要执行 CAS 操作。这会损耗性能。
 
+Java 6 中引入了偏向锁 来做进一步优化：只有  第一次   使用 CAS 将 **线程 ID** 设置到  **对象的 Mark Word 头**，之后发现这个线程 ID 是自己的就表示没有竞争，不用重新 CAS.
 
+撤销偏向需要将持锁线程升级为轻量级锁，这个过程中所有线程需要暂停（STW） 
 
+访问对象的 hashCode 也会撤销偏向锁 
 
+如果对象虽然被多个线程访问，但没有竞争，这时偏向了线程 T1 的对象仍有机会重新偏向 T2， **重偏向** 会重置对象的 Thread ID 
 
+撤销偏向和重偏向都是批量进行的，以类为单位 如果撤销偏向到达某个阈值，整个类的所有对象都会变为不可偏向的 
 
+可以主动使用 `-XX:-UseBiasedLocking` 禁用偏向锁
 
 
 
+可以参考这篇论文：https://www.oracle.com/technetwork/java/biasedlocking-oopsla2006-wp149958.pdf 
 
 
 
+假设有两个方法同步块，利用同一个对象加锁
 
+~~~java
+static Object obj = new Object();
+public static void method1() {
+    synchronized( obj ) {
+        // 同步块 A
+        method2();
+    }
+}
+public static void method2() {
+    synchronized( obj ) {
+        // 同步块 B
+    }
+}
+~~~
 
+---
 
+![image-20220819212647156](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220819212647156.png)
 
+---
 
 
 
 
 
+### 5.5 其它优化 
 
+1. 减少上锁时间 同步代码块中尽量短 
+2. 减少锁的粒度 将一个锁拆分为多个锁提高并发度，例如：
 
+- ConcurrentHashMap LongAdder 分为 base 和 cells 两部分。没有并发争用的时候或者是 cells 数组正在初始化的时 候，会使用 CAS 来累加值到 base，有并发争用，会初始化 cells 数组，数组有多少个 cell，就允 许有多少线程并行修改，最后将数组中每个 cell 累加，再加上 base 就是最终的值 
 
+- LinkedBlockingQueue 入队和出队使用不同的锁，相对于LinkedBlockingArray只有一个锁效率要 高
 
 
 
+3. 锁粗化 多次循环进入同步块不如同步块内多次循环 另外 JVM 可能会做如下优化，把多次 append 的加锁操作粗化为一次（因为都是对同一个对象加锁， 没必要重入多次）
 
+~~~java
+new StringBuffer().append("a").append("b").append("c")
+~~~
 
 
 
+4. 锁消除 
 
+​	JVM 会进行代码的逃逸分析，例如某个加锁对象是方法内局部变量，不会被其它线程所访问到，这时候 就会被即时编译器忽略掉所有同步操作。 
 
 
 
+5. 读写分离 
 
+- CopyOnWriteArrayList 
 
+- ConyOnWriteSet
 
 
 
 
 
+参考：
 
+ https://wiki.openjdk.java.net/display/HotSpot/Synchronization
 
+http://luojinping.com/2015/07/09/java锁优化/
 
+https://www.infoq.cn/article/java-se-16-synchronized 
 
+https://www.jianshu.com/p/9932047a89be 
 
+https://www.cnblogs.com/sheeva/p/6366782.html 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+https://stackoverflow.com/questions/46312817/does-java-ever-rebias-an-individual-lock
 
